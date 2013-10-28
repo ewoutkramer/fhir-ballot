@@ -16,6 +16,8 @@ local.properties
 .settings/
 .loadpath
 
+*.class
+
 # External tool builders
 .externalToolBuilders/
 
@@ -137,3 +139,13 @@ Desktop.ini
 
 /Doc/Analyse zoekmethoden.xlsx
 /Doc/Spark.eap
+/build/implementations/java/org.hl7.fhir.instance/src/org/hl7/fhir/instance/model/*.class
+
+/build/implementations/java/org.hl7.fhir.instance/src/org/hl7/fhir/instance/test/*.class
+
+/build/implementations/java/org.hl7.fhir.instance/src/org/hl7/fhir/instance/utils/*.class
+/build/temp
+
+/build/schema/*.xsd
+/build/schema/datatypes/fhir-all-xsd.zip
+/build/schema/datatypes/fhir-spec.zip
