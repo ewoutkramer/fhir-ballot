@@ -15,11 +15,12 @@ using Hl7.Fhir.Parsers;
 
 namespace Hl7.Fhir.Tests
 {
-    [TestClass]
+//    [TestClass]
     public class FhirClientTests
     {
         //Uri testEndpoint = new Uri("http://fhir.furore.com/fhir");
-        Uri testEndpoint = new Uri("http://hl7connect.healthintersections.com.au/svc/fhir");
+        //Uri testEndpoint = new Uri("http://hl7connect.healthintersections.com.au/svc/fhir");
+        Uri testEndpoint = new Uri("https://api.fhir.me");
 
         [TestMethod]
         public void FetchConformance()
@@ -161,7 +162,7 @@ namespace Hl7.Fhir.Tests
             };
 
             FhirClient client = new FhirClient(testEndpoint);
-            var tags = new List<Tag> { new Tag("http://nu.nl/testname", "TestCreateEditDelete") };
+            var tags = new List<Tag> { new Tag("http://nu.nl/testname", Tag.FHIRTAGNS, "TestCreateEditDelete") };
 
             var fe = client.Create(furore,tags);
 
@@ -256,42 +257,11 @@ namespace Hl7.Fhir.Tests
 
 
         [TestMethod]
-        public void ClientForPPT()
-        {
-            var client = new FhirClient(new Uri("http://hl7connect.healthintersections.com.au/svc/fhir/patient/"));
-
-            // Note patient is a ResourceEntry<Patient>, not a Patient
-            var patEntry = client.Read<Patient>("1");
-            var pat = patEntry.Resource;
-
-            pat.Name.Add(HumanName.ForFamily("Kramer").WithGiven("Ewout"));
-
-            client.Update<Patient>(patEntry);
-        }
-
-
-        [TestMethod]
-        public void ReadBundleForPPT()
-        {
-            Bundle result = new Bundle() { Title = "Demo bundle" };
-
-            result.Entries.Add(new ResourceEntry<Patient>() 
-                { LastUpdated=DateTimeOffset.Now, Resource = new Patient() });
-            result.Entries.Add(new DeletedEntry() 
-                { Id = new Uri("http://nu.nl/fhir"), When = DateTime.Now });
-
-            var bundleXml = FhirSerializer.SerializeBundleToXml(result);
-        }
-
-
-
-
-        [TestMethod]
         public void ReadTags()
         {
             FhirClient client = new FhirClient(testEndpoint);
 
-            var tags = new List<Tag>() { new Tag("http://readtag.nu.nl", "readTagTest") };
+            var tags = new List<Tag>() { new Tag("http://readtag.nu.nl", Tag.FHIRTAGNS, "readTagTest") };
 
             client.AffixTags(tags, ResourceType.Location, "1");
 

@@ -30,35 +30,32 @@ POSSIBILITY OF SUCH DAMAGE.
  */
 
 
-import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.io.StringWriter;
-import java.io.Writer;
-import java.math.BigDecimal;
-import java.nio.file.OpenOption;
-import java.text.SimpleDateFormat;
 
-import org.apache.commons.codec.binary.Base64;
-import org.hl7.fhir.instance.model.*;
-import org.hl7.fhir.instance.model.Boolean;
-import org.hl7.fhir.instance.model.Integer;
+import org.hl7.fhir.instance.model.AtomEntry;
+import org.hl7.fhir.instance.model.AtomFeed;
+import org.hl7.fhir.instance.model.Binary;
+import org.hl7.fhir.instance.model.Resource;
 import org.hl7.fhir.utilities.Utilities;
-import org.hl7.fhir.utilities.xhtml.*;
-import org.hl7.fhir.utilities.xml.*;
+import org.hl7.fhir.utilities.xhtml.XhtmlComposer;
+import org.hl7.fhir.utilities.xhtml.XhtmlNode;
+
+import com.google.gson.stream.JsonWriter;
 
 
 public abstract class JsonComposerBase extends XmlBase implements Composer {
 
 	protected JsonWriter json;
 	private boolean htmlPretty;
-	private boolean jsonPretty;
+	//private boolean jsonPretty;
 
 	public void compose(OutputStream stream, Resource resource, boolean pretty) throws Exception {
 		OutputStreamWriter osw = new OutputStreamWriter(stream, "UTF-8");
 		JsonWriter writer = new JsonWriter(osw);
-		writer.setPretty(pretty);
-		writer.object();
+
+        writer.setIndent(pretty ? "  ":"");
+		writer.beginObject();
 		compose(writer, resource);
 		writer.endObject();
 		osw.flush();
@@ -67,8 +64,8 @@ public abstract class JsonComposerBase extends XmlBase implements Composer {
 	public void compose(OutputStream stream, AtomFeed feed, boolean pretty) throws Exception {
 		OutputStreamWriter osw = new OutputStreamWriter(stream, "UTF-8");
 		JsonWriter writer = new JsonWriter(osw);
-		writer.setPretty(pretty);
-		writer.object();
+        writer.setIndent(pretty ? "  ":"");
+		writer.beginObject();
 		compose(writer, feed);
 		writer.endObject();
 		osw.flush();
@@ -95,7 +92,7 @@ public abstract class JsonComposerBase extends XmlBase implements Composer {
     if (feed.getLinks().size() > 0) {
       openArray("link");
       for (String n : feed.getLinks().keySet()) {
-        json.object();
+        json.beginObject();
         prop("rel", n);
         prop("href", feed.getLinks().get(n));
         json.endObject();
@@ -107,7 +104,7 @@ public abstract class JsonComposerBase extends XmlBase implements Composer {
 		if (feed.getTags().size() > 0) {
 			openArray("category");
 			for (String uri : feed.getTags().keySet()) {
-				json.object();
+				json.beginObject();
 				prop("scheme", "http://hl7.org/fhir/tag");
 				prop("term", uri);
 				String label = feed.getTags().get(uri);
@@ -121,7 +118,7 @@ public abstract class JsonComposerBase extends XmlBase implements Composer {
 
 		if (feed.getAuthorName() != null || feed.getAuthorUri() != null) {
 		  openArray("author");
-		  json.object();
+		  json.beginObject();
 		  if (feed.getAuthorName() != null)
 		    prop("name", feed.getAuthorName());
 		  if (feed.getAuthorUri() != null)
@@ -132,7 +129,7 @@ public abstract class JsonComposerBase extends XmlBase implements Composer {
 
 		if (feed.getEntryList().size() > 0) {
 			openArray("entry");
-			for (AtomEntry e : feed.getEntryList())
+			for (AtomEntry<? extends Resource> e : feed.getEntryList())
 				composeEntry(e);
 			closeArray();
 		}
@@ -140,14 +137,14 @@ public abstract class JsonComposerBase extends XmlBase implements Composer {
 
   // standard order for round-tripping examples succesfully:
   // title, id, links, updated, published, authors 
-	private void composeEntry(AtomEntry e) throws Exception {
-		json.object();
+	private <T extends Resource> void composeEntry(AtomEntry<T> e) throws Exception {
+		json.beginObject();
 		prop("title", e.getTitle());
 		prop("id", e.getId());
 		if (e.getLinks().size() > 0) {
 		  openArray("link");
 		  for (String n : e.getLinks().keySet()) {
-		    json.object();
+		    json.beginObject();
 		    prop("rel", n);
 		    prop("href", e.getLinks().get(n));
 		    json.endObject();
@@ -162,7 +159,7 @@ public abstract class JsonComposerBase extends XmlBase implements Composer {
 
     if (e.getAuthorName() != null || e.getAuthorUri() != null) {
       openArray("author");
-      json.object();
+      json.beginObject();
       if (e.getAuthorName() != null)
         prop("name", e.getAuthorName());
       if (e.getAuthorUri() != null)
@@ -175,7 +172,7 @@ public abstract class JsonComposerBase extends XmlBase implements Composer {
 		if (e.getTags().size() > 0) {
 			openArray("category");
 			for (String uri : e.getTags().keySet()) {
-				json.object();
+				json.beginObject();
 				prop("scheme", "http://hl7.org/fhir/tag");
 				prop("term", uri);
 				String label = e.getTags().get(uri);
@@ -205,19 +202,19 @@ public abstract class JsonComposerBase extends XmlBase implements Composer {
 //
 	protected void prop(String name, String value) throws Exception {
 		if (name != null)
-			json.key(name);
+			json.name(name);
 		json.value(value);
 	}
 
   protected void prop(String name, java.lang.Boolean value) throws Exception {
     if (name != null)
-      json.key(name);
+      json.name(name);
     json.value(value);
   }
 
   protected void prop(String name, java.lang.Integer value) throws Exception {
     if (name != null)
-      json.key(name);
+      json.name(name);
     json.value(value);
   }
 
@@ -482,8 +479,8 @@ public abstract class JsonComposerBase extends XmlBase implements Composer {
 
 	protected void open(String name) throws Exception {
 		if (name != null) 
-			json.key(name);
-		json.object();
+			json.name(name);
+		json.beginObject();
 	}
 
 	protected void close() throws Exception {
@@ -492,8 +489,8 @@ public abstract class JsonComposerBase extends XmlBase implements Composer {
 
 	protected void openArray(String name) throws Exception {
 		if (name != null) 
-			json.key(name);
-		json.array();
+			json.name(name);
+		json.beginArray();
 	}
 
 	protected void closeArray() throws Exception {
@@ -502,8 +499,8 @@ public abstract class JsonComposerBase extends XmlBase implements Composer {
 
 	protected void openObject(String name) throws Exception {
 		if (name != null) 
-			json.key(name);
-		json.object();
+			json.name(name);
+		json.beginObject();
 	}
 
 	protected void closeObject() throws Exception {

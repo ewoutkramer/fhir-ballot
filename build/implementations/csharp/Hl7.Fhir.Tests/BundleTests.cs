@@ -320,7 +320,7 @@ namespace Hl7.Fhir.Tests
            @"<title type=""text"">Updates to resource 233</title>" +
            @"<id>urn:uuid:0d0dcca9-23b9-4149-8619-65002224c3</id><updated>2012-11-02T14:17:21Z</updated>" +
            @"<author><name>Ewout Kramer</name></author>" +
-           @"<totalResults xmlns=""http://a9.com/-/spec/opensearch/1.1"">20</totalResults>" +
+           @"<totalResults xmlns=""http://a9.com/-/spec/opensearch/1.1/"">20</totalResults>" +
            @"<link rel=""self"" href=""http://test.com/fhir/patient/@233/history?format=json"" />" +
            @"<link rel=""last"" href=""http://test.com/fhir/patient/@233"" />" +
            testResourceEntryAsXml +
@@ -428,8 +428,7 @@ namespace Hl7.Fhir.Tests
             e1.AuthorName = "110.143.187.242";
             e1.Links.SelfLink = new Uri("http://test.com/fhir/patient/@233/history/@1");
             e1.Links.SearchLink = new Uri("http://test.com/fhir/patient/search?name=Kramer");
-            e1.Tags = new List<Tag>() { new Tag() { Uri = new Uri("http://test.com/tag/test"), Label = "YES" } };
-
+            e1.Tags = new List<Tag>() { new Tag("http://test.com/tag/test", Tag.FHIRTAGSCHEME, "YES") };
 
             e1.Resource = new Model.Patient()
             {

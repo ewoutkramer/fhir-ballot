@@ -157,8 +157,12 @@ public class JavaParserXmlGenerator extends JavaBaseGenerator {
     write("      xpp.next();\r\n");
     write("      nextNoWhitespace(xpp);\r\n");
     write("      res.getContained().add(parse(xpp));\r\n");
-    write("      xpp.next();\r\n");
-    write("      xpp.next();\r\n");
+    write("      if (xpp.getName() == null) {;\r\n");
+    write("        xpp.next();\r\n");
+    write("      };\r\n");
+    write("      if(xpp.getName() != null) {;\r\n");
+    write("        xpp.next();\r\n");
+    write("      };\r\n");
     write("      nextNoWhitespace(xpp);\r\n");
     write("    } else\r\n");
     write("      return false;\r\n");
@@ -228,6 +232,13 @@ public class JavaParserXmlGenerator extends JavaBaseGenerator {
     write("\r\n");
     write("public class XmlParser extends XmlParserBase {\r\n");
     write("\r\n");
+    write("  public XmlParser() {\r\n");
+    write("    super();\r\n");
+    write("  }\r\n\r\n");
+    write("  public XmlParser(boolean allowUnknownContent) {\r\n");
+    write("    super();\r\n");
+    write("    setAllowUnknownContent(allowUnknownContent);\r\n");
+    write("  }\r\n\r\n");
   }
 
 

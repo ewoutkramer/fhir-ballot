@@ -39,6 +39,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.Linq;
 
@@ -56,41 +57,46 @@ namespace Hl7.Fhir.Support
         {
             if (contentLength == 0) return null;
 
-            int bufferSize = contentLength < 4096 ? contentLength : 4096;
+            //int bufferSize = contentLength < 4096 ? contentLength : 4096;
+            int bufferSize = 4096;
 
             byte[] byteBuffer = new byte[bufferSize];
             MemoryStream buffer = new MemoryStream();
-            int readLen;
 
-            do
+            int readLen = s.Read(byteBuffer, 0, byteBuffer.Length);
+
+            while (readLen > 0)
             {
+                buffer.Write(byteBuffer, 0, readLen);
                 readLen = s.Read(byteBuffer, 0, byteBuffer.Length);
-                if (readLen > 0) buffer.Write(byteBuffer, 0, readLen);
-            } while (buffer.Length < contentLength);
+            }
+
+            //do
+            //{
+            //    readLen = s.Read(byteBuffer, 0, byteBuffer.Length);
+            //    if (readLen > 0) buffer.Write(byteBuffer, 0, readLen);
+            //} while (buffer.Length < contentLength);
 
             return buffer.ToArray();
         }
 
 
-        private const string TAGSCHEME = "\"" + Tag.FHIRTAGNS + "\"";
-
         public static IEnumerable<Tag> ParseCategoryHeader(string value)
         {
             if (String.IsNullOrEmpty(value)) return new List<Tag>();
 
-            var categories = value.Split(new string[] { "," },StringSplitOptions.RemoveEmptyEntries)
-                                .Select(c => c.Trim());
+            var result = new List<Tag>();
 
-            List<Tag> result = null;
+            var categories = Util.SplitNotInQuotes(',', value);
 
             foreach (var category in categories)
             {
-                var values = category.Split(new string[] { ";" }, StringSplitOptions.RemoveEmptyEntries)
-                                .Select(c => c.Trim());
+                var values = Util.SplitNotInQuotes(';', category);
 
-                if (values.Count() == 3)
+                if (values.Count() >= 1)
                 {
-                    var tagUri = values.First();
+                    var term = values.First();
+
                     var pars = values.Skip(1).Select( v =>
                         { 
                             var vsplit = v.Split('=');
@@ -99,23 +105,18 @@ namespace Hl7.Fhir.Support
                             return new Tuple<string,string>(item1,item2);
                         });
 
-                    if (pars.Any(t => t.Item1 == "scheme" && t.Item2 == TAGSCHEME))
-                    {
-                        if(result == null) result = new List<Tag>();
-
-                        var newTag = new Tag()
-                        {
-                            Label = pars.Where(t => t.Item1 == "label").Select(t => t.Item2).FirstOrDefault(),
-                            Uri = new Uri(tagUri, UriKind.RelativeOrAbsolute)
-                        };
-                        result.Add(newTag);
-                    }
+                    var scheme = new Uri(pars.Where(t => t.Item1 == "scheme").Select(t => t.Item2.Trim('\"')).FirstOrDefault(), UriKind.RelativeOrAbsolute);
+                    var label = pars.Where(t => t.Item1 == "label").Select(t => t.Item2.Trim('\"')).FirstOrDefault();
+                       
+                    result.Add(new Tag(term,scheme,label));
                 }
             }
 
             return result;
         }
 
+        
+       
         public static string BuildCategoryHeader(IEnumerable<Tag> tags)
         {
             var result = new List<string>();
@@ -123,21 +124,15 @@ namespace Hl7.Fhir.Support
             {                
                 StringBuilder sb = new StringBuilder();
 
-                if (Util.UriHasValue(tag.Uri))
+                if (!String.IsNullOrEmpty(tag.Term))
                 {
-                    var uri = tag.Uri.ToString();
-                    if (uri.Contains(",") || uri.Contains(";"))
+                    if (tag.Term.Contains(",") || tag.Term.Contains(";"))
                         throw new ArgumentException("Found tag containing ',' or ';' - this will produce an inparsable Category header");
-                    sb.Append(tag.Uri.ToString());
+                    sb.Append(tag.Term);
                 }
 
                 if (!String.IsNullOrEmpty(tag.Label))
-                {
-                    if (tag.Label.Contains(",") || tag.Label.Contains(";"))
-                        throw new ArgumentException("Found tag containing ',' or ';' - this will produce an inparsable Category header");
-
-                    sb.AppendFormat("; label={0}", tag.Label);
-                }
+                    sb.AppendFormat("; label=\"{0}\"", tag.Label);
 
                 sb.AppendFormat("; scheme=\"{0}\"", Tag.FHIRTAGNS);
                 result.Add(sb.ToString());
