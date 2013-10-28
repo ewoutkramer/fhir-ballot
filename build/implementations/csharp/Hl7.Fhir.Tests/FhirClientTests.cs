@@ -10,6 +10,8 @@ using System.Net;
 using Hl7.Fhir.Support;
 using Hl7.Fhir.Serializers;
 using Hl7.Fhir.Support.Search;
+using System.IO;
+using Hl7.Fhir.Parsers;
 
 namespace Hl7.Fhir.Tests
 {
@@ -19,13 +21,12 @@ namespace Hl7.Fhir.Tests
         //Uri testEndpoint = new Uri("http://fhir.furore.com/fhir");
         Uri testEndpoint = new Uri("http://hl7connect.healthintersections.com.au/svc/fhir");
 
-
         [TestMethod]
         public void FetchConformance()
         {
             FhirClient client = new FhirClient(testEndpoint);
 
-            Conformance c = client.Conformance().Content;
+            Conformance c = client.Conformance().Resource;
 
             Assert.IsNotNull(c);
             Assert.AreEqual("HL7Connect", c.Software.Name);
@@ -42,7 +43,7 @@ namespace Hl7.Fhir.Tests
 
             var loc = client.Read<Location>("1");
             Assert.IsNotNull(loc);
-            Assert.AreEqual("Utrecht", loc.Content.Address.City);
+            Assert.AreEqual("Den Burg", loc.Resource.Address.City);
 
             string version = new ResourceLocation(loc.SelfLink).VersionId;               
             Assert.AreEqual("1", version);
@@ -72,6 +73,15 @@ namespace Hl7.Fhir.Tests
 
         }
 
+
+        [TestMethod]
+        public void SearchDavid()
+        {
+            //Uri te = new Uri("http://hl7connect.healthintersections.com.au/svc/fhir");
+            //FhirClient client = new FhirClient(te);
+            //Bundle data = client.Search(testEndpoint,"name","int");
+            //Console.Out.WriteLine(data.Entries.Count);
+        }
 
         [TestMethod]
         public void Search()
@@ -165,7 +175,7 @@ namespace Hl7.Fhir.Tests
             Assert.AreEqual(fe.Tags.First(), tags[0]);
             createdTestOrganization = fe.Id;
 
-            fe.Content.Identifier.Add(new Identifier("http://hl7.org/test/2", "3141592"));
+            fe.Resource.Identifier.Add(new Identifier("http://hl7.org/test/2", "3141592"));
 
             var fe2 = client.Update(fe);
 
@@ -221,6 +231,60 @@ namespace Hl7.Fhir.Tests
             Assert.AreEqual(2, history.Entries.Where(entry => entry is ResourceEntry).Count());
             Assert.AreEqual(1, history.Entries.Where(entry => entry is DeletedEntry).Count());
         }
+
+
+        //[TestMethod]
+        //public void ParseForPPT()
+        //{
+        //    ErrorList errors = new ErrorList();
+
+        //    // Create a file-based reader for Xml
+        //    XmlReader xr = XmlReader.Create(
+        //        new StreamReader(@"publish\observation-example.xml"));
+
+        //    // Create a file-based reader for Xml
+        //    var obs = (Observation)FhirParser.ParseResource(xr, errors);
+
+        //    // Modify some fields of the observation
+        //    obs.Status = ObservationStatus.Amended;
+        //    obs.Value = new Quantity() { Value = 40, Units = "g" };
+
+        //    // Serialize the in-memory observation to Json
+        //    var jsonText = FhirSerializer.SerializeResourceToJson(obs);
+
+        //}
+
+
+        [TestMethod]
+        public void ClientForPPT()
+        {
+            var client = new FhirClient(new Uri("http://hl7connect.healthintersections.com.au/svc/fhir/patient/"));
+
+            // Note patient is a ResourceEntry<Patient>, not a Patient
+            var patEntry = client.Read<Patient>("1");
+            var pat = patEntry.Resource;
+
+            pat.Name.Add(HumanName.ForFamily("Kramer").WithGiven("Ewout"));
+
+            client.Update<Patient>(patEntry);
+        }
+
+
+        [TestMethod]
+        public void ReadBundleForPPT()
+        {
+            Bundle result = new Bundle() { Title = "Demo bundle" };
+
+            result.Entries.Add(new ResourceEntry<Patient>() 
+                { LastUpdated=DateTimeOffset.Now, Resource = new Patient() });
+            result.Entries.Add(new DeletedEntry() 
+                { Id = new Uri("http://nu.nl/fhir"), When = DateTime.Now });
+
+            var bundleXml = FhirSerializer.SerializeBundleToXml(result);
+        }
+
+
+
 
         [TestMethod]
         public void ReadTags()

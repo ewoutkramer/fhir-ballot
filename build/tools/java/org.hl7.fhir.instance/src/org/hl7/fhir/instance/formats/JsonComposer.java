@@ -29,7 +29,7 @@ package org.hl7.fhir.instance.formats;
   
 */
 
-// Generated on Mon, Aug 5, 2013 12:50+1000 for FHIR v0.10
+// Generated on Fri, Sep 6, 2013 22:32+1000 for FHIR v0.11
 
 import org.hl7.fhir.instance.model.*;
 import org.hl7.fhir.instance.model.Integer;
@@ -2804,6 +2804,18 @@ public class JsonComposer extends JsonComposerBase {
     }
   }
 
+  private void composeOther(String name, Other element) throws Exception {
+    if (element != null) {
+      open(name);
+      composeResourceElements(element);
+      composeCodeableConcept("code", element.getCode());
+      composeResourceReference("subject", element.getSubject());
+      composeResourceReference("author", element.getAuthor());
+      composeDate("created", element.getCreated());
+      close();
+    }
+  }
+
   private void composePatient(String name, Patient element) throws Exception {
     if (element != null) {
       open(name);
@@ -2899,33 +2911,6 @@ public class JsonComposer extends JsonComposerBase {
       composeCodeableConcept("species", element.getSpecies());
       composeCodeableConcept("breed", element.getBreed());
       composeCodeableConcept("genderStatus", element.getGenderStatus());
-      close();
-    }
-  }
-
-  private void composePicture(String name, Picture element) throws Exception {
-    if (element != null) {
-      open(name);
-      composeResourceElements(element);
-      composeResourceReference("subject", element.getSubject());
-      composeDateTime("dateTime", element.getDateTime());
-      composeResourceReference("operator", element.getOperator());
-      composeIdentifier("identifier", element.getIdentifier());
-      composeIdentifier("accessionNo", element.getAccessionNo());
-      composeIdentifier("studyId", element.getStudyId());
-      composeIdentifier("seriesId", element.getSeriesId());
-      composeCodeableConcept("method", element.getMethod());
-      composeResourceReference("requester", element.getRequester());
-      if (element.getModality() != null)
-        composeEnumeration("modality", element.getModality(), new Picture().new PictureTypeEnumFactory());
-      composeString("deviceName", element.getDeviceName());
-      composeInteger("height", element.getHeight());
-      composeInteger("width", element.getWidth());
-      composeInteger("bits", element.getBits());
-      composeInteger("frames", element.getFrames());
-      composeDuration("frameDelay", element.getFrameDelay());
-      composeCodeableConcept("view", element.getView());
-      composeAttachment("content", element.getContent());
       close();
     }
   }
@@ -4021,10 +4006,10 @@ public class JsonComposer extends JsonComposerBase {
       composeOrderResponse("OrderResponse", (OrderResponse)resource);
     else if (resource instanceof Organization)
       composeOrganization("Organization", (Organization)resource);
+    else if (resource instanceof Other)
+      composeOther("Other", (Other)resource);
     else if (resource instanceof Patient)
       composePatient("Patient", (Patient)resource);
-    else if (resource instanceof Picture)
-      composePicture("Picture", (Picture)resource);
     else if (resource instanceof Practitioner)
       composePractitioner("Practitioner", (Practitioner)resource);
     else if (resource instanceof Procedure)
@@ -4126,10 +4111,10 @@ public class JsonComposer extends JsonComposerBase {
       composeOrderResponse(name, (OrderResponse)resource);
     else if (resource instanceof Organization)
       composeOrganization(name, (Organization)resource);
+    else if (resource instanceof Other)
+      composeOther(name, (Other)resource);
     else if (resource instanceof Patient)
       composePatient(name, (Patient)resource);
-    else if (resource instanceof Picture)
-      composePicture(name, (Picture)resource);
     else if (resource instanceof Practitioner)
       composePractitioner(name, (Practitioner)resource);
     else if (resource instanceof Procedure)

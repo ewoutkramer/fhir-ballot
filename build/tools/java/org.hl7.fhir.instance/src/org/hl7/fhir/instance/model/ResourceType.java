@@ -16,6 +16,7 @@ public enum ResourceType {
     OperationOutcome,
     Conformance,
     Media,
+    Other,
     Profile,
     DocumentReference,
     Immunization,
@@ -35,7 +36,6 @@ public enum ResourceType {
     Encounter,
     SecurityEvent,
     List,
-    Picture,
     Document,
     Message,
     FamilyHistory,
@@ -86,6 +86,8 @@ public enum ResourceType {
       return "conformance";
     case Media:
       return "media";
+    case Other:
+      return "other";
     case Profile:
       return "profile";
     case DocumentReference:
@@ -124,8 +126,6 @@ public enum ResourceType {
       return "securityevent";
     case List:
       return "list";
-    case Picture:
-      return "picture";
     case Document:
       return "document";
     case Message:

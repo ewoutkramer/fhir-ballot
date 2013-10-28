@@ -282,8 +282,8 @@ namespace Hl7.Fhir.Tests
 
         private static void validateDiagReportAttributes(ErrorList errors, DiagnosticReport rep)
         {
-            Assert.IsNotNull(rep);
             Assert.IsTrue(errors.Count() == 0, errors.ToString());
+            Assert.IsNotNull(rep);
 
             Assert.AreEqual("2011-03-04T08:30:00+11:00", rep.DiagnosticTime.ToString());
             Assert.AreEqual(17, rep.Contained.Count);
@@ -354,5 +354,22 @@ namespace Hl7.Fhir.Tests
             Assert.IsTrue(errors.Count > 0);
 
         }
+
+        [TestMethod]
+        public void TestParseBinary()
+        {
+            var errors = new ErrorList();
+            Binary result = (Binary)FhirParser.ParseResourceFromXml(binaryXml, errors);
+            Assert.AreEqual(0, errors.Count, errors.ToString());
+            Assert.IsNotNull(result);
+
+            Assert.AreEqual("image/gif", result.ContentType);
+            Assert.AreEqual(Narrative.NarrativeStatus.Generated, result.Text.Status);
+            Assert.AreEqual(59, result.Content[0]);
+            Assert.AreEqual(993, result.Content.Length);
+        }
+
+        private const string binaryXml = @"<Binary contentType=""image/gif"" xmlns=""http://hl7.org/fhir""><text><status                       value=""generated""/><div xmlns=""http://www.w3.org/1999/xhtml"">Binary content of type image/gif</div></text>OwAAgMI0mkg0IzVTBIJCGXv02yWICAQrN+jsCxIFBAXoVtmU8gmAv8Mvl7DIIBFbqYRCsNtsiD4bBwHrYSCISC9kBYVC8XD9fDYHAdMrIXBdVo0MkQbB4IAcPCIRoQLAwGAgEA9GDgaBE2odCC8Go4HBswnQTCc3kgPDQXmADlYWCwDgcjkIcC4NBoCk0ZgkkkMhhscAUKjIcDweEIAC8SAQBiEPC4cDghEMMAcJhQDhkMC8EhMIgcFgoDAMCAMAvggAABEAEwAAAAAsAAEAAAEE+SH///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////+9//+1//+c9/+U9/9z9/+M7/9r7/9j7/9a7/857/8x7/8p7/8h7/8Y7/8Q7/8I7/8A7/9a5/9S5/8p5/8h5/8Q5/8I5/8A5/8Y3v8Q3v8I3v8A3v8A1v8Ate8AWu//AAAAAAAAAPcAEQATYTk4RklH</Binary>";
+
     }
 }
