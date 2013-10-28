@@ -18,17 +18,15 @@
         <status value="final"/>
         <issued value="2005-03-04T12:28:01"/>
         <patient>
-          <type value="Patient"/>
-          <reference value="patient/@7"/>
+          <reference value="Patient/7"/>
         </patient>
         <laboratory>
-          <type value="Organization"/>
-          <reference value="organization/@1.2.36.90146595217.4.1.1"/>
+          <reference value="Organization/1.2.36.90146595217.4.1.1"/>
           <display value="Acme Laboratory, Inc"/>
         </laboratory>
         <reportId>
           <system value="http://acme.com/lab/reports"/>
-          <key value="5234342"/>
+          <value value="5234342"/>
         </reportId>
         <reportName>
           <coding>
@@ -37,7 +35,7 @@
             <display value="AEROBIC WOUND CULTURE"/>
           </coding>
         </reportName>
-        <diagnosticTime value="2005-03-04T12:28:17"/>
+        <diagnosticDateTime value="2005-03-04T12:28:17"/>
         <resultGroup>
           <name>
             <text value="SERUM CHEMISTRY"/>
@@ -182,17 +180,15 @@ Is a result with multiple organisms and sensitivities without separate OBX�s  
         <status value="final"/>
         <issued value="2005-10-24T10:48:01"/>
         <patient>
-          <type value="Patient"/>
-          <reference value="patient/@example"/>
+          <reference value="Patient/example"/>
         </patient>
         <laboratory>
-          <type value="Organization"/>
-          <reference value="organization/@1.2.36.90146595217.4.1.1"/>
+          <reference value="Organization/1.2.36.90146595217.4.1.1"/>
           <display value="Acme Laboratory, Inc"/>
         </laboratory>
         <reportId>
           <system value="http://acme.com/lab/reports"/>
-          <key value="5234342"/>
+          <value value="5234342"/>
         </reportId>
         <reportName>
           <coding>
@@ -201,7 +197,7 @@ Is a result with multiple organisms and sensitivities without separate OBX�s  
             <display value="BLOOD CULTURE-AUTOMATED"/>
           </coding>
         </reportName>
-        <diagnosticTime value="2005-10-24T10:36:17"/>
+        <diagnosticDateTime value="2005-10-24T10:36:17"/>
         <resultGroup>
           <name>
             <text value="SERUM CHEMISTRY"/>
@@ -279,17 +275,15 @@ OBX5- SNOMED result
         <status value="final"/>
         <issued value="2006-01-23T08:36:01"/>
         <patient>
-          <type value="Patient"/>
-          <reference value="patient/@example"/>
+          <reference value="Patient/example"/>
         </patient>
         <laboratory>
-          <type value="Organization"/>
-          <reference value="organization/@1.2.36.90146595217.4.1.1"/>
+          <reference value="Organization/1.2.36.90146595217.4.1.1"/>
           <display value="Acme Laboratory, Inc"/>
         </laboratory>
         <reportId>
           <system value="http://acme.com/lab/reports"/>
-          <key value="5234342"/>
+          <value value="5234342"/>
         </reportId>
         <reportName>
           <coding>
@@ -298,7 +292,7 @@ OBX5- SNOMED result
             <display value="Blood Culture"/>
           </coding>
         </reportName>
-        <diagnosticTime value="2006-01-24T08:10:17"/>
+        <diagnosticDateTime value="2006-01-24T08:10:17"/>
         <resultGroup>
           <name>
             <text value="SERUM CHEMISTRY"/>
@@ -365,17 +359,15 @@ OBX3- test to be LOINC�d
         <status value="final"/>
         <issued value="2006-02-03T03:20:01"/>
         <patient>
-          <type value="Patient"/>
-          <reference value="patient/@example"/>
+          <reference value="Patient/example"/>
         </patient>
         <laboratory>
-          <type value="Organization"/>
-          <reference value="organization/@1.2.36.90146595217.4.1.1"/>
+          <reference value="Organization/1.2.36.90146595217.4.1.1"/>
           <display value="Acme Laboratory, Inc"/>
         </laboratory>
         <reportId>
           <system value="http://acme.com/lab/reports"/>
-          <key value="5234342"/>
+          <value value="5234342"/>
         </reportId>
         <reportName>
           <coding>
@@ -384,7 +376,7 @@ OBX3- test to be LOINC�d
             <display value="RESPCUL"/>
           </coding>
         </reportName>
-        <diagnosticTime value="2006-02-03T03:20:17"/>
+        <diagnosticDateTime value="2006-02-03T03:20:17"/>
         <resultGroup>
         </resultGroup>
         <!--
@@ -528,22 +520,20 @@ OBX3 does not have the antibiotic to be LOINC�d but OBX5 has antibiotic and se
         <status value="final"/>
         <issued value="2005-06-30T13:42:01"/>
         <patient>
-          <type value="Patient"/>
-          <reference value="patient/@example"/>
+          <reference value="Patient/example"/>
         </patient>
         <laboratory>
-          <type value="Organization"/>
-          <reference value="organization/@1.2.36.90146595217.4.1.1"/>
+          <reference value="Organization/1.2.36.90146595217.4.1.1"/>
           <display value="Acme Laboratory, Inc"/>
         </laboratory>
         <reportId>
           <system value="http://acme.com/lab/reports"/>
-          <key value="5234342"/>
+          <value value="5234342"/>
         </reportId>
         <reportName>
           <text value="MYCOLOGY"/>
         </reportName>
-        <diagnosticTime value="2005-06-30T14:00:17"/>
+        <diagnosticDateTime value="2005-06-30T14:00:17"/>
         <resultGroup>
         </resultGroup>
         <!--
@@ -607,17 +597,15 @@ Comments-   OBR 24 populated
         <status value="final"/>
         <issued value="2005-11-07T23:38:01"/>
         <patient>
-          <type value="Patient"/>
-          <reference value="patient/@example"/>
+          <reference value="Patient/example"/>
         </patient>
         <laboratory>
-          <type value="Organization"/>
-          <reference value="organization/@1.2.36.90146595217.4.1.1"/>
+          <reference value="Organization/1.2.36.90146595217.4.1.1"/>
           <display value="Acme Laboratory, Inc"/>
         </laboratory>
         <reportId>
           <system value="http://acme.com/lab/reports"/>
-          <key value="5234342"/>
+          <value value="5234342"/>
         </reportId>
         <reportName>
           <coding>
@@ -626,7 +614,7 @@ Comments-   OBR 24 populated
             <display value="URINE CULTURE"/>
           </coding>
         </reportName>
-        <diagnosticTime value="2005-11-07T21:44:17"/>
+        <diagnosticDateTime value="2005-11-07T21:44:17"/>
         <resultGroup>
         </resultGroup>
         <!--
@@ -684,17 +672,15 @@ OBX|16|ST|TOB^TOBRAMYCIN^^|1|<=1|||SS|||F||1|200511091026|M3^CEN     MICROBIOL|3
         <status value="final"/>
         <issued value="2005-11-03T00:00:01"/>
         <patient>
-          <type value="Patient"/>
-          <reference value="patient/@example"/>
+          <reference value="Patient/example"/>
         </patient>
         <laboratory>
-          <type value="Organization"/>
-          <reference value="organization/@1.2.36.90146595217.4.1.1"/>
+          <reference value="Organization/1.2.36.90146595217.4.1.1"/>
           <display value="Acme Laboratory, Inc"/>
         </laboratory>
         <reportId>
           <system value="http://acme.com/lab/reports"/>
-          <key value="5234342"/>
+          <value value="5234342"/>
         </reportId>
         <reportName>
           <coding>
@@ -703,7 +689,7 @@ OBX|16|ST|TOB^TOBRAMYCIN^^|1|<=1|||SS|||F||1|200511091026|M3^CEN     MICROBIOL|3
             <display value="RESPIRATORY CUL/SMR"/>
           </coding>
         </reportName>
-        <diagnosticTime value="2005-11-06T05:25:17"/>
+        <diagnosticDateTime value="2005-11-06T05:25:17"/>
         <resultGroup>
         </resultGroup>
         <!--
@@ -768,17 +754,15 @@ OBX|8|ST|TOB^TOBRAMYCIN^^|3|2|||SS|||F||3|200511091000|M3^CEN     MICROBIOL|2605
         <status value="final"/>
         <issued value="2005-11-22T11:31:01"/>
         <patient>
-          <type value="Patient"/>
-          <reference value="patient/@example"/>
+          <reference value="Patient/example"/>
         </patient>
         <laboratory>
-          <type value="Organization"/>
-          <reference value="organization/@1.2.36.90146595217.4.1.1"/>
+          <reference value="Organization/1.2.36.90146595217.4.1.1"/>
           <display value="Acme Laboratory, Inc"/>
         </laboratory>
         <reportId>
           <system value="http://acme.com/lab/reports"/>
-          <key value="5234342"/>
+          <value value="5234342"/>
         </reportId>
         <reportName>
           <coding>
@@ -787,7 +771,7 @@ OBX|8|ST|TOB^TOBRAMYCIN^^|3|2|||SS|||F||3|200511091000|M3^CEN     MICROBIOL|2605
             <display value="GIARDIA LAMBLIA AG"/>
           </coding>
         </reportName>
-        <diagnosticTime value="2005-11-22T03:00:17"/>
+        <diagnosticDateTime value="2005-11-22T03:00:17"/>
         <resultGroup>
         </resultGroup>
         <!--
@@ -825,17 +809,15 @@ NTE|2|L|Giardia antigen detected.
         <status value="final"/>
         <issued value="2005-11-22T07:55:01"/>
         <patient>
-          <type value="Patient"/>
-          <reference value="patient/@example"/>
+          <reference value="Patient/example"/>
         </patient>
         <laboratory>
-          <type value="Organization"/>
-          <reference value="organization/@1.2.36.90146595217.4.1.1"/>
+          <reference value="Organization/1.2.36.90146595217.4.1.1"/>
           <display value="Acme Laboratory, Inc"/>
         </laboratory>
         <reportId>
           <system value="http://acme.com/lab/reports"/>
-          <key value="5234342"/>
+          <value value="5234342"/>
         </reportId>
         <reportName>
           <coding>
@@ -844,7 +826,7 @@ NTE|2|L|Giardia antigen detected.
             <display value="Rubeola Antibodies, IgM"/>
           </coding>
         </reportName>
-        <diagnosticTime value="2005-11-22T01:00:17"/>
+        <diagnosticDateTime value="2005-11-22T01:00:17"/>
         <resultGroup>
         </resultGroup>
         <!--
@@ -886,17 +868,15 @@ NTE|7|L|is suspected.
         <status value="final"/>
         <issued value="2005-11-22T17:19:01"/>
         <patient>
-          <type value="Patient"/>
-          <reference value="patient/@example"/>
+          <reference value="Patient/example"/>
         </patient>
         <laboratory>
-          <type value="Organization"/>
-          <reference value="organization/@1.2.36.90146595217.4.1.1"/>
+          <reference value="Organization/1.2.36.90146595217.4.1.1"/>
           <display value="Acme Laboratory, Inc"/>
         </laboratory>
         <reportId>
           <system value="http://acme.com/lab/reports"/>
-          <key value="5234342"/>
+          <value value="5234342"/>
         </reportId>
         <reportName>
           <coding>
@@ -905,7 +885,7 @@ NTE|7|L|is suspected.
             <display value="CHLAMYDIA/GONOCOCCUS DNA PROBE"/>
           </coding>
         </reportName>
-        <diagnosticTime value="2005-11-22T16:55:17"/>
+        <diagnosticDateTime value="2005-11-22T16:55:17"/>
         <resultGroup>
         </resultGroup>
         <!--
@@ -944,17 +924,15 @@ NTE|3|L|**Verified by repeat analysis**
         <status value="final"/>
         <issued value="2005-11-22T10:57:01"/>
         <patient>
-          <type value="Patient"/>
-          <reference value="patient/@example"/>
+          <reference value="Patient/example"/>
         </patient>
         <laboratory>
-          <type value="Organization"/>
-          <reference value="organization/@1.2.36.90146595217.4.1.1"/>
+          <reference value="Organization/1.2.36.90146595217.4.1.1"/>
           <display value="Acme Laboratory, Inc"/>
         </laboratory>
         <reportId>
           <system value="http://acme.com/lab/reports"/>
-          <key value="5234342"/>
+          <value value="5234342"/>
         </reportId>
         <reportName>
           <coding>
@@ -963,7 +941,7 @@ NTE|3|L|**Verified by repeat analysis**
             <display value="HSV I/II, IGG/RFX TYPE II IGG"/>
           </coding>
         </reportName>
-        <diagnosticTime value="2005-11-22T11:10:17"/>
+        <diagnosticDateTime value="2005-11-22T11:10:17"/>
         <resultGroup>
         </resultGroup>
         <!--
@@ -1006,17 +984,15 @@ OBX|2|NM|21612-7^REPORTED PATIENT AGE^2.16.840.1.113883.6.1||20|d^Days^2.16.840.
         <status value="final"/>
         <issued value="2005-11-22T23:23:01"/>
         <patient>
-          <type value="Patient"/>
-          <reference value="patient/@example"/>
+          <reference value="Patient/example"/>
         </patient>
         <laboratory>
-          <type value="Organization"/>
-          <reference value="organization/@1.2.36.90146595217.4.1.1"/>
+          <reference value="Organization/1.2.36.90146595217.4.1.1"/>
           <display value="Acme Laboratory, Inc"/>
         </laboratory>
         <reportId>
           <system value="http://acme.com/lab/reports"/>
-          <key value="5234342"/>
+          <value value="5234342"/>
         </reportId>
         <reportName>
           <coding>
@@ -1025,7 +1001,7 @@ OBX|2|NM|21612-7^REPORTED PATIENT AGE^2.16.840.1.113883.6.1||20|d^Days^2.16.840.
             <display value="HEPATITIS A VIRUS AB"/>
           </coding>
         </reportName>
-        <diagnosticTime value="2005-11-22T09:40:17"/>
+        <diagnosticDateTime value="2005-11-22T09:40:17"/>
         <resultGroup>
         </resultGroup>
         <!--
@@ -1061,17 +1037,15 @@ NTE|1|L|POSITIVE
         <status value="final"/>
         <issued value="2005-11-22T23:27:01"/>
         <patient>
-          <type value="Patient"/>
-          <reference value="patient/@example"/>
+          <reference value="Patient/example"/>
         </patient>
         <laboratory>
-          <type value="Organization"/>
-          <reference value="organization/@1.2.36.90146595217.4.1.1"/>
+          <reference value="Organization/1.2.36.90146595217.4.1.1"/>
           <display value="Acme Laboratory, Inc"/>
         </laboratory>
         <reportId>
           <system value="http://acme.com/lab/reports"/>
-          <key value="5234342"/>
+          <value value="5234342"/>
         </reportId>
         <reportName>
           <coding>
@@ -1080,7 +1054,7 @@ NTE|1|L|POSITIVE
             <display value="HEPATITIS A VIRUS AB"/>
           </coding>
         </reportName>
-        <diagnosticTime value="2005-11-22T09:40:17"/>
+        <diagnosticDateTime value="2005-11-22T09:40:17"/>
         <resultGroup>
         </resultGroup>
         <!--
@@ -1116,17 +1090,15 @@ NTE|1|L|POSITIVE
         <status value="final"/>
         <issued value="2005-11-22T23:23:01"/>
         <patient>
-          <type value="Patient"/>
-          <reference value="patient/@example"/>
+          <reference value="Patient/example"/>
         </patient>
         <laboratory>
-          <type value="Organization"/>
-          <reference value="organization/@1.2.36.90146595217.4.1.1"/>
+          <reference value="Organization/1.2.36.90146595217.4.1.1"/>
           <display value="Acme Laboratory, Inc"/>
         </laboratory>
         <reportId>
           <system value="http://acme.com/lab/reports"/>
-          <key value="5234342"/>
+          <value value="5234342"/>
         </reportId>
         <reportName>
           <coding>
@@ -1135,7 +1107,7 @@ NTE|1|L|POSITIVE
             <display value="HEPATITIS A VIRUS AB"/>
           </coding>
         </reportName>
-        <diagnosticTime value="2005-11-22T09:40:17"/>
+        <diagnosticDateTime value="2005-11-22T09:40:17"/>
         <resultGroup>
         </resultGroup>
         <!--
@@ -1172,17 +1144,15 @@ NTE|1|L|POSITIVE
         <status value="final"/>
         <issued value="2005-11-23T09:01:01"/>
         <patient>
-          <type value="Patient"/>
-          <reference value="patient/@example"/>
+          <reference value="Patient/example"/>
         </patient>
         <laboratory>
-          <type value="Organization"/>
-          <reference value="organization/@1.2.36.90146595217.4.1.1"/>
+          <reference value="Organization/1.2.36.90146595217.4.1.1"/>
           <display value="Acme Laboratory, Inc"/>
         </laboratory>
         <reportId>
           <system value="http://acme.com/lab/reports"/>
-          <key value="5234342"/>
+          <value value="5234342"/>
         </reportId>
         <reportName>
           <coding>
@@ -1191,7 +1161,7 @@ NTE|1|L|POSITIVE
             <display value="CHLAMYDIA/GONOCOCCUS DNA PROBE"/>
           </coding>
         </reportName>
-        <diagnosticTime value="2005-11-23T02:00:17"/>
+        <diagnosticDateTime value="2005-11-23T02:00:17"/>
         <resultGroup>
         </resultGroup>
         <!--
@@ -1234,17 +1204,15 @@ NTE|4|L|      endocervical specimens only.
         <status value="final"/>
         <issued value="2005-11-23T09:29:01"/>
         <patient>
-          <type value="Patient"/>
-          <reference value="patient/@example"/>
+          <reference value="Patient/example"/>
         </patient>
         <laboratory>
-          <type value="Organization"/>
-          <reference value="organization/@1.2.36.90146595217.4.1.1"/>
+          <reference value="Organization/1.2.36.90146595217.4.1.1"/>
           <display value="Acme Laboratory, Inc"/>
         </laboratory>
         <reportId>
           <system value="http://acme.com/lab/reports"/>
-          <key value="5234342"/>
+          <value value="5234342"/>
         </reportId>
         <reportName>
           <coding>
@@ -1253,7 +1221,7 @@ NTE|4|L|      endocervical specimens only.
             <display value="REAGIN AB"/>
           </coding>
         </reportName>
-        <diagnosticTime value="2005-11-23T01:00:17"/>
+        <diagnosticDateTime value="2005-11-23T01:00:17"/>
         <resultGroup>
         </resultGroup>
         <!--
@@ -1291,17 +1259,15 @@ OBX|2|SN|11084-1^REAGIN AB^2.16.840.1.113883.6.1^006464^RPR, Quant.^L|1|^1^:^80|
         <status value="final"/>
         <issued value="2005-11-23T09:38:01"/>
         <patient>
-          <type value="Patient"/>
-          <reference value="patient/@example"/>
+          <reference value="Patient/example"/>
         </patient>
         <laboratory>
-          <type value="Organization"/>
-          <reference value="organization/@1.2.36.90146595217.4.1.1"/>
+          <reference value="Organization/1.2.36.90146595217.4.1.1"/>
           <display value="Acme Laboratory, Inc"/>
         </laboratory>
         <reportId>
           <system value="http://acme.com/lab/reports"/>
-          <key value="5234342"/>
+          <value value="5234342"/>
         </reportId>
         <reportName>
           <coding>
@@ -1310,7 +1276,7 @@ OBX|2|SN|11084-1^REAGIN AB^2.16.840.1.113883.6.1^006464^RPR, Quant.^L|1|^1^:^80|
             <display value="HIV 1 RNA"/>
           </coding>
         </reportName>
-        <diagnosticTime value="2005-11-23T01:00:17"/>
+        <diagnosticDateTime value="2005-11-23T01:00:17"/>
         <resultGroup>
         </resultGroup>
         <!--
@@ -1352,17 +1318,15 @@ NTE|1|L|Negative
         <status value="amended"/>
         <issued value="2005-11-22T01:33:01"/>
         <patient>
-          <type value="Patient"/>
-          <reference value="patient/@example"/>
+          <reference value="Patient/example"/>
         </patient>
         <laboratory>
-          <type value="Organization"/>
-          <reference value="organization/@1.2.36.90146595217.4.1.1"/>
+          <reference value="Organization/1.2.36.90146595217.4.1.1"/>
           <display value="Acme Laboratory, Inc"/>
         </laboratory>
         <reportId>
           <system value="http://acme.com/lab/reports"/>
-          <key value="5234342"/>
+          <value value="5234342"/>
         </reportId>
         <reportName>
           <coding>
@@ -1371,7 +1335,7 @@ NTE|1|L|Negative
             <display value="CHLAMYDIA/GONOCOCCUS DNA PROBE"/>
           </coding>
         </reportName>
-        <diagnosticTime value="2005-11-22T20:14:17"/>
+        <diagnosticDateTime value="2005-11-22T20:14:17"/>
         <resultGroup>
         </resultGroup>
         <!--
@@ -1410,17 +1374,15 @@ NTE|3|L|THIS IS A CORRECTED RESULT.
         <status value="final"/>
         <issued value="2005-11-22T01:33:01"/>
         <patient>
-          <type value="Patient"/>
-          <reference value="patient/@example"/>
+          <reference value="Patient/example"/>
         </patient>
         <laboratory>
-          <type value="Organization"/>
-          <reference value="organization/@1.2.36.90146595217.4.1.1"/>
+          <reference value="Organization/1.2.36.90146595217.4.1.1"/>
           <display value="Acme Laboratory, Inc"/>
         </laboratory>
         <reportId>
           <system value="http://acme.com/lab/reports"/>
-          <key value="5234342"/>
+          <value value="5234342"/>
         </reportId>
         <reportName>
           <coding>
@@ -1429,7 +1391,7 @@ NTE|3|L|THIS IS A CORRECTED RESULT.
             <display value="CHLAMYDIA/GONOCOCCUS DNA PROBE"/>
           </coding>
         </reportName>
-        <diagnosticTime value="2005-11-22T20:14:17"/>
+        <diagnosticDateTime value="2005-11-22T20:14:17"/>
         <resultGroup>
         </resultGroup>
         <!--
@@ -1466,17 +1428,15 @@ NTE|1|L|NEGATIVE UPON RETEST:
         <status value="final"/>
         <issued value="2005-11-20T11:33:01"/>
         <patient>
-          <type value="Patient"/>
-          <reference value="patient/@example"/>
+          <reference value="Patient/example"/>
         </patient>
         <laboratory>
-          <type value="Organization"/>
-          <reference value="organization/@1.2.36.90146595217.4.1.1"/>
+          <reference value="Organization/1.2.36.90146595217.4.1.1"/>
           <display value="Acme Laboratory, Inc"/>
         </laboratory>
         <reportId>
           <system value="http://acme.com/lab/reports"/>
-          <key value="5234342"/>
+          <value value="5234342"/>
         </reportId>
         <reportName>
           <coding>
@@ -1485,7 +1445,7 @@ NTE|1|L|NEGATIVE UPON RETEST:
             <display value="GIARDIA LAMBLIA AG"/>
           </coding>
         </reportName>
-        <diagnosticTime value="2005-11-22T03:00:17"/>
+        <diagnosticDateTime value="2005-11-22T03:00:17"/>
         <resultGroup>
         </resultGroup>
         <!--
@@ -1523,17 +1483,15 @@ NTE|2|L|Giardia antigen detected.
         <status value="final"/>
         <issued value="2005-11-23T09:01:01"/>
         <patient>
-          <type value="Patient"/>
-          <reference value="patient/@example"/>
+          <reference value="Patient/example"/>
         </patient>
         <laboratory>
-          <type value="Organization"/>
-          <reference value="organization/@1.2.36.90146595217.4.1.1"/>
+          <reference value="Organization/1.2.36.90146595217.4.1.1"/>
           <display value="Acme Laboratory, Inc"/>
         </laboratory>
         <reportId>
           <system value="http://acme.com/lab/reports"/>
-          <key value="5234342"/>
+          <value value="5234342"/>
         </reportId>
         <reportName>
           <coding>
@@ -1542,7 +1500,7 @@ NTE|2|L|Giardia antigen detected.
             <display value="CHLAMYDIA/GONOCOCCUS DNA PROBE"/>
           </coding>
         </reportName>
-        <diagnosticTime value="2005-11-23T02:00:17"/>
+        <diagnosticDateTime value="2005-11-23T02:00:17"/>
         <resultGroup>
         </resultGroup>
         <!--
@@ -1586,17 +1544,15 @@ NTE|4|L|                endocervical specimens only.
         <status value="final"/>
         <issued value="2005-11-23T09:06:01"/>
         <patient>
-          <type value="Patient"/>
-          <reference value="patient/@example"/>
+          <reference value="Patient/example"/>
         </patient>
         <laboratory>
-          <type value="Organization"/>
-          <reference value="organization/@1.2.36.90146595217.4.1.1"/>
+          <reference value="Organization/1.2.36.90146595217.4.1.1"/>
           <display value="Acme Laboratory, Inc"/>
         </laboratory>
         <reportId>
           <system value="http://acme.com/lab/reports"/>
-          <key value="5234342"/>
+          <value value="5234342"/>
         </reportId>
         <reportName>
           <coding>
@@ -1605,7 +1561,7 @@ NTE|4|L|                endocervical specimens only.
             <display value="HEPATITIS PANEL (5)"/>
           </coding>
         </reportName>
-        <diagnosticTime value="2005-11-23T01:00:17"/>
+        <diagnosticDateTime value="2005-11-23T01:00:17"/>
         <resultGroup>
         </resultGroup>
         <!--
@@ -1648,17 +1604,15 @@ NTE|1|L|POSITIVE
         <status value="final"/>
         <issued value="2005-11-23T09:38:01"/>
         <patient>
-          <type value="Patient"/>
-          <reference value="patient/@example"/>
+          <reference value="Patient/example"/>
         </patient>
         <laboratory>
-          <type value="Organization"/>
-          <reference value="organization/@1.2.36.90146595217.4.1.1"/>
+          <reference value="Organization/1.2.36.90146595217.4.1.1"/>
           <display value="Acme Laboratory, Inc"/>
         </laboratory>
         <reportId>
           <system value="http://acme.com/lab/reports"/>
-          <key value="5234342"/>
+          <value value="5234342"/>
         </reportId>
         <reportName>
           <coding>
@@ -1667,7 +1621,7 @@ NTE|1|L|POSITIVE
             <display value="QUANT, RNA PCR, NON-GRAPH"/>
           </coding>
         </reportName>
-        <diagnosticTime value="2005-11-23T01:00:17"/>
+        <diagnosticDateTime value="2005-11-23T01:00:17"/>
         <resultGroup>
         </resultGroup>
         <!--
@@ -1710,17 +1664,15 @@ NTE|1|L|Negative
         <status value="final"/>
         <issued value="2005-11-22T01:33:01"/>
         <patient>
-          <type value="Patient"/>
-          <reference value="patient/@example"/>
+          <reference value="Patient/example"/>
         </patient>
         <laboratory>
-          <type value="Organization"/>
-          <reference value="organization/@1.2.36.90146595217.4.1.1"/>
+          <reference value="Organization/1.2.36.90146595217.4.1.1"/>
           <display value="Acme Laboratory, Inc"/>
         </laboratory>
         <reportId>
           <system value="http://acme.com/lab/reports"/>
-          <key value="5234342"/>
+          <value value="5234342"/>
         </reportId>
         <reportName>
           <coding>
@@ -1729,7 +1681,7 @@ NTE|1|L|Negative
             <display value="CHLAMYDIA/GONOCOCCUS DNA PROBE"/>
           </coding>
         </reportName>
-        <diagnosticTime value="2005-11-22T20:14:17"/>
+        <diagnosticDateTime value="2005-11-22T20:14:17"/>
         <resultGroup>
         </resultGroup>
         <!--
@@ -1768,17 +1720,15 @@ NTE|3|L|THIS IS A CORRECTED RESULT.
         <status value="final"/>
         <issued value="2005-11-22T01:33:01"/>
         <patient>
-          <type value="Patient"/>
-          <reference value="patient/@example"/>
+          <reference value="Patient/example"/>
         </patient>
         <laboratory>
-          <type value="Organization"/>
-          <reference value="organization/@1.2.36.90146595217.4.1.1"/>
+          <reference value="Organization/1.2.36.90146595217.4.1.1"/>
           <display value="Acme Laboratory, Inc"/>
         </laboratory>
         <reportId>
           <system value="http://acme.com/lab/reports"/>
-          <key value="5234342"/>
+          <value value="5234342"/>
         </reportId>
         <reportName>
           <coding>
@@ -1787,7 +1737,7 @@ NTE|3|L|THIS IS A CORRECTED RESULT.
             <display value="CHLAMYDIA/GONOCOCCUS DNA PROBE"/>
           </coding>
         </reportName>
-        <diagnosticTime value="2005-11-22T20:13:17"/>
+        <diagnosticDateTime value="2005-11-22T20:13:17"/>
         <resultGroup>
         </resultGroup>
         <!--
@@ -1824,17 +1774,15 @@ NTE|1|L|NEGATIVE UPON RETEST:
         <status value="final"/>
         <issued value="2005-11-22T01:33:01"/>
         <patient>
-          <type value="Patient"/>
-          <reference value="patient/@example"/>
+          <reference value="Patient/example"/>
         </patient>
         <laboratory>
-          <type value="Organization"/>
-          <reference value="organization/@1.2.36.90146595217.4.1.1"/>
+          <reference value="Organization/1.2.36.90146595217.4.1.1"/>
           <display value="Acme Laboratory, Inc"/>
         </laboratory>
         <reportId>
           <system value="http://acme.com/lab/reports"/>
-          <key value="5234342"/>
+          <value value="5234342"/>
         </reportId>
         <reportName>
           <coding>
@@ -1843,7 +1791,7 @@ NTE|1|L|NEGATIVE UPON RETEST:
             <display value="CHLAMYDIA/GONOCOCCUS DNA PROBE"/>
           </coding>
         </reportName>
-        <diagnosticTime value="2005-11-22T20:14:17"/>
+        <diagnosticDateTime value="2005-11-22T20:14:17"/>
         <resultGroup>
         </resultGroup>
         <!--
@@ -1880,17 +1828,15 @@ NTE|1|L|NEGATIVE UPON RETEST:
         <status value="final"/>
         <issued value="2005-11-22T03:00:01"/>
         <patient>
-          <type value="Patient"/>
-          <reference value="patient/@example"/>
+          <reference value="Patient/example"/>
         </patient>
         <laboratory>
-          <type value="Organization"/>
-          <reference value="organization/@1.2.36.90146595217.4.1.1"/>
+          <reference value="Organization/1.2.36.90146595217.4.1.1"/>
           <display value="Acme Laboratory, Inc"/>
         </laboratory>
         <reportId>
           <system value="http://acme.com/lab/reports"/>
-          <key value="5234342"/>
+          <value value="5234342"/>
         </reportId>
         <reportName>
           <coding>
@@ -1899,7 +1845,7 @@ NTE|1|L|NEGATIVE UPON RETEST:
             <display value="GIARDIA LAMBLIA AG"/>
           </coding>
         </reportName>
-        <diagnosticTime value="2005-11-22T03:00:17"/>
+        <diagnosticDateTime value="2005-11-22T03:00:17"/>
         <resultGroup>
         </resultGroup>
         <!--
@@ -1937,17 +1883,15 @@ NTE|2|L|Giardia antigen detected.
         <status value="final"/>
         <issued value="2005-11-23T09:01:01"/>
         <patient>
-          <type value="Patient"/>
-          <reference value="patient/@example"/>
+          <reference value="Patient/example"/>
         </patient>
         <laboratory>
-          <type value="Organization"/>
-          <reference value="organization/@1.2.36.90146595217.4.1.1"/>
+          <reference value="Organization/1.2.36.90146595217.4.1.1"/>
           <display value="Acme Laboratory, Inc"/>
         </laboratory>
         <reportId>
           <system value="http://acme.com/lab/reports"/>
-          <key value="5234342"/>
+          <value value="5234342"/>
         </reportId>
         <reportName>
           <coding>
@@ -1956,7 +1900,7 @@ NTE|2|L|Giardia antigen detected.
             <display value="CHLAMYDIA/GONOCOCCUS DNA PROBE"/>
           </coding>
         </reportName>
-        <diagnosticTime value="2005-11-23T02:00:17"/>
+        <diagnosticDateTime value="2005-11-23T02:00:17"/>
         <resultGroup>
         </resultGroup>
         <!--
@@ -2000,17 +1944,15 @@ NTE|4|L|                endocervical specimens only.
         <status value="final"/>
         <issued value="2005-11-23T09:06:01"/>
         <patient>
-          <type value="Patient"/>
-          <reference value="patient/@example"/>
+          <reference value="Patient/example"/>
         </patient>
         <laboratory>
-          <type value="Organization"/>
-          <reference value="organization/@1.2.36.90146595217.4.1.1"/>
+          <reference value="Organization/1.2.36.90146595217.4.1.1"/>
           <display value="Acme Laboratory, Inc"/>
         </laboratory>
         <reportId>
           <system value="http://acme.com/lab/reports"/>
-          <key value="5234342"/>
+          <value value="5234342"/>
         </reportId>
         <reportName>
           <coding>
@@ -2019,7 +1961,7 @@ NTE|4|L|                endocervical specimens only.
             <display value="HEPATITIS PANEL (5)"/>
           </coding>
         </reportName>
-        <diagnosticTime value="2005-11-23T01:00:17"/>
+        <diagnosticDateTime value="2005-11-23T01:00:17"/>
         <resultGroup>
         </resultGroup>
         <!--
@@ -2062,17 +2004,15 @@ NTE|1|L|POSITIVE
         <status value="final"/>
         <issued value="2005-11-23T09:38:01"/>
         <patient>
-          <type value="Patient"/>
-          <reference value="patient/@example"/>
+          <reference value="Patient/example"/>
         </patient>
         <laboratory>
-          <type value="Organization"/>
-          <reference value="organization/@1.2.36.90146595217.4.1.1"/>
+          <reference value="Organization/1.2.36.90146595217.4.1.1"/>
           <display value="Acme Laboratory, Inc"/>
         </laboratory>
         <reportId>
           <system value="http://acme.com/lab/reports"/>
-          <key value="5234342"/>
+          <value value="5234342"/>
         </reportId>
         <reportName>
           <coding>
@@ -2081,7 +2021,7 @@ NTE|1|L|POSITIVE
             <display value="QUANT, RNA PCR, NON-GRAPH"/>
           </coding>
         </reportName>
-        <diagnosticTime value="2005-11-23T01:00:17"/>
+        <diagnosticDateTime value="2005-11-23T01:00:17"/>
         <resultGroup>
         </resultGroup>
         <!--
@@ -2124,17 +2064,15 @@ NTE|1|L|Negative
         <status value="final"/>
         <issued value="2001-12-30T04:36:01"/>
         <patient>
-          <type value="Patient"/>
-          <reference value="patient/@example"/>
+          <reference value="Patient/example"/>
         </patient>
         <laboratory>
-          <type value="Organization"/>
-          <reference value="organization/@1.2.36.90146595217.4.1.1"/>
+          <reference value="Organization/1.2.36.90146595217.4.1.1"/>
           <display value="Acme Laboratory, Inc"/>
         </laboratory>
         <reportId>
           <system value="http://acme.com/lab/reports"/>
-          <key value="5234342"/>
+          <value value="5234342"/>
         </reportId>
         <reportName>
           <coding>
@@ -2143,7 +2081,7 @@ NTE|1|L|Negative
             <display value="MICROORGANISM IDENTIFIED"/>
           </coding>
         </reportName>
-        <diagnosticTime value="2001-12-28T09:40:17"/>
+        <diagnosticDateTime value="2001-12-28T09:40:17"/>
         <resultGroup>
         </resultGroup>
         <!--
@@ -2184,17 +2122,15 @@ NTE|1|L|NEISSERIA MENINGITIDIS
         <status value="final"/>
         <issued value="2005-11-22T20:50:01"/>
         <patient>
-          <type value="Patient"/>
-          <reference value="patient/@example"/>
+          <reference value="Patient/example"/>
         </patient>
         <laboratory>
-          <type value="Organization"/>
-          <reference value="organization/@1.2.36.90146595217.4.1.1"/>
+          <reference value="Organization/1.2.36.90146595217.4.1.1"/>
           <display value="Acme Laboratory, Inc"/>
         </laboratory>
         <reportId>
           <system value="http://acme.com/lab/reports"/>
-          <key value="5234342"/>
+          <value value="5234342"/>
         </reportId>
         <reportName>
           <coding>
@@ -2203,7 +2139,7 @@ NTE|1|L|NEISSERIA MENINGITIDIS
             <display value="B PERTUSSIS IGG/IGM AB, QUANT"/>
           </coding>
         </reportName>
-        <diagnosticTime value="2005-11-22T11:45:17"/>
+        <diagnosticDateTime value="2005-11-22T11:45:17"/>
         <resultGroup>
         </resultGroup>
         <!--
@@ -2242,17 +2178,15 @@ NTE|3|L|                                           Positive          >11
         <status value="final"/>
         <issued value="2005-11-22T08:00:01"/>
         <patient>
-          <type value="Patient"/>
-          <reference value="patient/@example"/>
+          <reference value="Patient/example"/>
         </patient>
         <laboratory>
-          <type value="Organization"/>
-          <reference value="organization/@1.2.36.90146595217.4.1.1"/>
+          <reference value="Organization/1.2.36.90146595217.4.1.1"/>
           <display value="Acme Laboratory, Inc"/>
         </laboratory>
         <reportId>
           <system value="http://acme.com/lab/reports"/>
-          <key value="5234342"/>
+          <value value="5234342"/>
         </reportId>
         <reportName>
           <coding>
@@ -2261,7 +2195,7 @@ NTE|3|L|                                           Positive          >11
             <display value="STOOL CULTURE"/>
           </coding>
         </reportName>
-        <diagnosticTime value="2005-11-22T12:00:17"/>
+        <diagnosticDateTime value="2005-11-22T12:00:17"/>
         <resultGroup>
         </resultGroup>
         <!--
@@ -2300,17 +2234,15 @@ NTE|3|L|    .
         <status value="amended"/>
         <issued value="2005-11-22T23:10:01"/>
         <patient>
-          <type value="Patient"/>
-          <reference value="patient/@example"/>
+          <reference value="Patient/example"/>
         </patient>
         <laboratory>
-          <type value="Organization"/>
-          <reference value="organization/@1.2.36.90146595217.4.1.1"/>
+          <reference value="Organization/1.2.36.90146595217.4.1.1"/>
           <display value="Acme Laboratory, Inc"/>
         </laboratory>
         <reportId>
           <system value="http://acme.com/lab/reports"/>
-          <key value="5234342"/>
+          <value value="5234342"/>
         </reportId>
         <reportName>
           <coding>
@@ -2319,7 +2251,7 @@ NTE|3|L|    .
             <display value="HEPATITIS B VIRUS SURFACE AG"/>
           </coding>
         </reportName>
-        <diagnosticTime value="2005-11-22T09:35:17"/>
+        <diagnosticDateTime value="2005-11-22T09:35:17"/>
         <resultGroup>
         </resultGroup>
         <!--

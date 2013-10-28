@@ -29,7 +29,7 @@ package org.hl7.fhir.instance.model;
   
 */
 
-// Generated on Mon, Aug 5, 2013 12:50+1000 for FHIR v0.10
+// Generated on Mon, Oct 28, 2013 15:39+1100 for FHIR v0.12
 
 import java.util.*;
 
@@ -48,28 +48,35 @@ public class CodeableConcept extends Type {
      */
     protected String_ text;
 
-    /**
-     * Indicates which of the codes in the codings was chosen by a user, if one was chosen directly.
-     */
-    protected String_ primary;
+    public CodeableConcept() {
+      super();
+    }
 
     public List<Coding> getCoding() { 
       return this.coding;
+    }
+
+    // syntactic sugar
+    public Coding addCoding() { 
+      Coding t = new Coding();
+      this.coding.add(t);
+      return t;
     }
 
     public String_ getText() { 
       return this.text;
     }
 
-    public void setText(String_ value) { 
+    public CodeableConcept setText(String_ value) { 
       this.text = value;
+      return this;
     }
 
     public String getTextSimple() { 
       return this.text == null ? null : this.text.getValue();
     }
 
-    public void setTextSimple(String value) { 
+    public CodeableConcept setTextSimple(String value) { 
       if (value == null)
         this.text = null;
       else {
@@ -77,29 +84,14 @@ public class CodeableConcept extends Type {
           this.text = new String_();
         this.text.setValue(value);
       }
+      return this;
     }
 
-    public String_ getPrimary() { 
-      return this.primary;
-    }
-
-    public void setPrimary(String_ value) { 
-      this.primary = value;
-    }
-
-    public String getPrimarySimple() { 
-      return this.primary == null ? null : this.primary.getValue();
-    }
-
-    public void setPrimarySimple(String value) { 
-      if (value == null)
-        this.primary = null;
-      else {
-        if (this.primary == null)
-          this.primary = new String_();
-        this.primary.setValue(value);
+      protected void listChildren(List<Property> childrenList) {
+        super.listChildren(childrenList);
+        childrenList.add(new Property("coding", "Coding", "A reference to a code defined by a terminology system.", 0, java.lang.Integer.MAX_VALUE, coding));
+        childrenList.add(new Property("text", "string", "A human language representation of the concept as seen/selected/uttered by the user who entered the data and/or which represents the intended meaning of the user or concept.", 0, java.lang.Integer.MAX_VALUE, text));
       }
-    }
 
       public CodeableConcept copy() {
         CodeableConcept dst = new CodeableConcept();
@@ -107,7 +99,6 @@ public class CodeableConcept extends Type {
         for (Coding i : coding)
           dst.coding.add(i.copy());
         dst.text = text == null ? null : text.copy();
-        dst.primary = primary == null ? null : primary.copy();
         return dst;
       }
 

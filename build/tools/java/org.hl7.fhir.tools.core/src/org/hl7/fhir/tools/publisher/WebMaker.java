@@ -84,7 +84,7 @@ public class WebMaker {
 
     String[] files = new CSFile(folders.dstDir).list();
     for (String f : files) {
-      if (f.endsWith(".htm")) {
+      if (f.endsWith(".html")) {
         String src = TextFile.fileToString(folders.dstDir+f);
         if (src.contains("<!--archive-->")) {
           src = src.replace("<!--archive-->", makeArchives());
@@ -102,7 +102,7 @@ public class WebMaker {
           insertTargetImages(doc, null, f);
           new XhtmlComposer().compose(new FileOutputStream(folders.rootDir+"temp"+File.separator+"hl7"+File.separator+"web"+File.separator+f), doc);
         } catch (Exception e) {
-          TextFile.stringToFile(src, "c:\\temp\\test.htm");
+          TextFile.stringToFile(src, "c:\\temp\\test.html");
           throw new Exception("exception processing: "+src+": "+e.getMessage());
         }
       } else if (f.endsWith(".chm") || f.endsWith(".eap") || f.endsWith(".zip")) 
@@ -115,6 +115,8 @@ public class WebMaker {
       }
     }
 
+    folderList.add("dist");
+    folderList.add("assets");
     folderList.add("vs");
     folderList.add("cs");
     for (String n : definitions.getBindings().keySet()) {
@@ -123,11 +125,11 @@ public class WebMaker {
         String ref = bs.getReference().startsWith("#") ? bs.getReference().substring(1) : bs.getReference();
         String dn = folders.rootDir+"temp"+File.separator+"hl7"+File.separator+"web"+File.separator+ref;
         folderList.add(ref);
-        buildRedirect(n, ref+".htm", dn);
+        buildRedirect(n, ref+".html", dn);
         dn = folders.rootDir+"temp"+File.separator+"hl7"+File.separator+"web"+File.separator+"cs"+File.separator+ref;
-        buildRedirect(n, ref+".htm", dn);
+        buildRedirect(n, ref+".html", dn);
         dn = folders.rootDir+"temp"+File.separator+"hl7"+File.separator+"web"+File.separator+"vs"+File.separator+ref;
-        buildRedirect(n, ref+".htm", dn);
+        buildRedirect(n, ref+".html", dn);
       }
     }
 
@@ -136,7 +138,7 @@ public class WebMaker {
       if ((bs.getBinding() == Binding.ValueSet) && bs.getReference().startsWith("valueset-")) {
         String ref = bs.getReference().substring(9);
         String dn = folders.rootDir+"temp"+File.separator+"hl7"+File.separator+"web"+File.separator+"vs"+File.separator+ref;
-        buildRedirect(n, ref+".htm", dn);
+        buildRedirect(n, ref+".html", dn);
       }
     }
 
@@ -146,15 +148,15 @@ public class WebMaker {
       folderList.add(n); 
     }
     zip = new ZipGenerator(fw.getAbsolutePath());
-    zip.addFiles(folders.rootDir+"temp"+File.separator+"hl7"+File.separator+"web"+File.separator, "", null);
+    zip.addFiles(folders.rootDir+"temp"+File.separator+"hl7"+File.separator+"web"+File.separator, "", null, null);
     for (String v : past)
-      zip.addFiles(folders.rootDir+"temp"+File.separator+"hl7"+File.separator+"web"+File.separator+"v"+v+File.separator, "v"+v+File.separator, null);
+      zip.addFiles(folders.rootDir+"temp"+File.separator+"hl7"+File.separator+"web"+File.separator+"v"+v+File.separator, "v"+v+File.separator, null, null);
     for (String n : folderList) 
-      zip.addFolder(folders.rootDir+"temp"+File.separator+"hl7"+File.separator+"web"+File.separator+n+File.separator, n+File.separator);
-    zip.addFolder(folders.rootDir+"temp"+File.separator+"hl7"+File.separator+"web"+File.separator+"v2"+File.separator, "v2"+File.separator); 
-    zip.addFolder(folders.rootDir+"temp"+File.separator+"hl7"+File.separator+"web"+File.separator+"v3"+File.separator, "v3"+File.separator); 
+      zip.addFolder(folders.rootDir+"temp"+File.separator+"hl7"+File.separator+"web"+File.separator+n+File.separator, n+File.separator, false);
+    zip.addFolder(folders.rootDir+"temp"+File.separator+"hl7"+File.separator+"web"+File.separator+"v2"+File.separator, "v2"+File.separator, false); 
+    zip.addFolder(folders.rootDir+"temp"+File.separator+"hl7"+File.separator+"web"+File.separator+"v3"+File.separator, "v3"+File.separator, false); 
     ZipGenerator zipd = new ZipGenerator(fd.getAbsolutePath());
-    zipd.addFiles(folders.rootDir+"temp"+File.separator+"hl7"+File.separator+"dload"+File.separator, "", null);
+    zipd.addFiles(folders.rootDir+"temp"+File.separator+"hl7"+File.separator+"dload"+File.separator, "", null, null);
     zipd.close();    
   }
 
@@ -165,7 +167,7 @@ public class WebMaker {
        "\"></HEAD>\r\n</head>\r\n<body>\r\nThis page is a redirect to http://hl7.org/implement/standards/fhir/"+
        d+
        "\r\n</body>\r\n</html>\r\n";
-    TextFile.stringToFile(p, dn+File.separator+"index.htm");
+    TextFile.stringToFile(p, dn+File.separator+"index.html");
   }
 
   private void insertTargetImages(XhtmlNode node, XhtmlNode parent, String pagename) {
@@ -189,7 +191,7 @@ public class WebMaker {
   }
 
   private String googleSearch() {
-    return "<h2>Search FHIR</h2>\r\n"+
+    return "<h3>Search the FHIR Specification:</h3>\r\n"+
         "<div id=\"cse\" style=\"width: 100%;\">Loading</div>\r\n"+
         "<script src=\"http://www.google.com/jsapi\" type=\"text/javascript\"> </script>\r\n"+
         "<script type=\"text/javascript\"> \r\n"+
@@ -210,8 +212,8 @@ public class WebMaker {
     s.append("<p>These archives only keep the more significant past versions of FHIR, and only the book form, and are provided for purposes of supporting html diff tools. A full archive history of everything is available <a href=\"http://wiki.hl7.org/index.php?title=FHIR\">through the HL7 gForge archives</a>.</p>");
     s.append("<ul>");
     for (String v : ini.getPropertyNames("Archives")) {
-      s.append("<li><a href=\"v"+v+"/index.htm\">Version "+v+"</a>, "+ini.getStringProperty("Archives", v)+". (<a " +
-      		"href=\"http://www.w3.org/2007/10/htmldiff?doc1=http://www.hl7.org/implement/standards/FHIR/v"+v+"/fhir-book.htm&amp;doc2=http://www.hl7.org/implement/standards/FHIR/fhir-book.htm\">Diff with current</a>) </li>");
+      s.append("<li><a href=\"v"+v+"/index.html\">Version "+v+"</a>, "+ini.getStringProperty("Archives", v)+". (<a " +
+      		"href=\"http://www.w3.org/2007/10/htmldiff?doc1=http://www.hl7.org/implement/standards/FHIR/v"+v+"/fhir-book.html&amp;doc2=http://www.hl7.org/implement/standards/FHIR/fhir-book.html\">Diff with current</a>) </li>");
       if (!past.contains(v))
         past.add(v);
       extractZip(folders.archiveDir+"v"+v+".zip", folders.rootDir+"temp"+File.separator+"hl7"+File.separator+"web"+File.separator+"v"+v+File.separator);
@@ -229,7 +231,7 @@ public class WebMaker {
 		  for (Enumeration<? extends ZipEntry> e = zf.entries(); e.hasMoreElements();) {
 			  ZipEntry ze = e.nextElement();
 			  String name = ze.getName();
-			  if (name.endsWith(".htm") || name.endsWith(".png") || name.endsWith(".css")) {
+			  if (name.endsWith(".html") || name.endsWith(".png") || name.endsWith(".css")) {
 				  InputStream in = zf.getInputStream(ze);
 				  OutputStream out = new FileOutputStream(dest+name);
 
@@ -276,7 +278,7 @@ public class WebMaker {
   }
 
   public void addPage(String filename) throws Exception {
-    zip.addFileName(filename, folders.dstDir+filename);
+    zip.addFileName(filename, folders.dstDir+filename, false);
     zip.close();  
     
   }

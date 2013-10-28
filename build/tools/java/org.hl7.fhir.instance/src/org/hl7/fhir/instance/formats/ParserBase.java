@@ -1,7 +1,6 @@
 package org.hl7.fhir.instance.formats;
 
 import java.math.BigDecimal;
-import java.net.URI;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -10,7 +9,6 @@ import org.apache.commons.codec.binary.Base64;
 import org.hl7.fhir.instance.model.AtomFeed;
 import org.hl7.fhir.instance.model.Resource;
 import org.hl7.fhir.utilities.Utilities;
-import org.xmlpull.v1.XmlPullParser;
 
 public abstract class ParserBase extends XmlBase {
 
@@ -68,7 +66,11 @@ public abstract class ParserBase extends XmlBase {
     return value;
   }
 
-  protected boolean parseBooleanPrimitive(String value) {
+  protected Boolean parseBooleanPrimitive(String value) {
+    return java.lang.Boolean.valueOf(value);
+  }
+  
+  protected Boolean parseBooleanPrimitive(Boolean value) {
     return java.lang.Boolean.valueOf(value);
   }
   

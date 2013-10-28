@@ -10,8 +10,7 @@
   </text>
 
   <patient>
-    <type value="Patient" />
-    <reference value="patient/@f201" />
+    <reference value="Patient/f201" />
   </patient>
   
   <relationship>

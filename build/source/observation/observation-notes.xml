@@ -18,9 +18,9 @@
     Chest X-ray), this represent the start and end time of the observation process.
   </li>
   <li>
-    At its simplest, these resource instances can consist of only a type and a value.  
+    At its simplest, resource instances can consist of only a type and a value, with a reliability and status flag.  
     The relevance of other properties will vary based on the type of observation.  
-	Normal range may be useful for systolic blood pressure, but has little 
+	Normal range may be useful for lab tests and other measures like systolic blood pressure, but will have little 
 	relevance for something like "pregnancy status"
   </li>
   <li>
@@ -30,6 +30,19 @@
 	be broken into numerous components and sub-components to provide additional
     information relevant in certain circumstances.  As with other resources, 
 	extensions can be used to introduce this additional complexity.
+ </li>
+ <li>
+   Although the search parameter value is labelled as a token, it can be used 
+   to search against multiple different parameter types:
+   <table class="grid">
+    <tr> <td>CodeableConcept</td> <td>Use normal token based matching</td> </tr>
+    <tr> <td>string</td> <td>Interpreted as a code with no system namespace</td> </tr>
+    <tr> <td>Quantity</td> <td>If the value of the parameter is a number (potentially with &lt; etc), it is a search on the value (todo: units, canonical?)</td> </tr>
+    <tr> <td>Attachment</td> <td>Not included in search results</td> </tr>
+    <tr> <td>Ratio</td> <td>Not included in search results</td> </tr>
+    <tr> <td>Period</td> <td>Not included in search results</td> </tr>
+    <tr> <td>SampledData</td> <td>Not included in search results</td> </tr>
+   </table>
  </li>
 </ul>
 

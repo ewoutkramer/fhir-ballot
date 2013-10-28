@@ -37,6 +37,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.Linq;
 
@@ -113,6 +114,14 @@ namespace Hl7.Fhir.Support
             return String.IsNullOrEmpty(value) ? (DateTimeOffset?)null : Util.ParseIsoDateTime(value);
         }
 
+        public static IEnumerable<string> SplitNotInQuotes(char c, string value)
+        {
+            var categories = Regex.Split(value, c + "(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)")
+                                .Select(s => s.Trim())
+                                .Where(s => !String.IsNullOrEmpty(s));
+            return categories;
+        }
+
         
         public static XmlReader XmlReaderFromString(string xml)
         {
@@ -171,6 +180,24 @@ namespace Hl7.Fhir.Support
         public static DateTimeOffset RemoveMiliseconds(DateTimeOffset dt)
         {
             return new DateTimeOffset(dt.Year, dt.Month, dt.Day, dt.Hour, dt.Minute, dt.Second, dt.Offset);
+        }
+
+
+        public static Binary MakeBinary(byte[] data, string contentType)
+        {
+            var binary = new Binary();
+
+            binary.Content = data;
+            binary.ContentType = contentType;
+            //Note: binaries don't have Text narrative
+            //binary.Text = new Narrative()
+            //{
+            //    Status = Narrative.NarrativeStatus.Generated,
+            //    Div = new XElement(XNamespace.Get(XHTMLNS) + "div",
+            //                "Binary content of type " + contentType).ToString()
+            //};
+
+            return binary;
         }
 
 

@@ -29,7 +29,7 @@ package org.hl7.fhir.instance.model;
   
 */
 
-// Generated on Mon, Aug 5, 2013 12:50+1000 for FHIR v0.10
+// Generated on Mon, Oct 28, 2013 15:39+1100 for FHIR v0.12
 
 import java.util.*;
 
@@ -38,7 +38,7 @@ import java.util.*;
  */
 public class Practitioner extends Resource {
 
-    public class PractitionerQualificationComponent extends Element {
+    public static class PractitionerQualificationComponent extends BackboneElement {
         /**
          * Coded representation of the qualification.
          */
@@ -54,32 +54,51 @@ public class Practitioner extends Resource {
          */
         protected ResourceReference issuer;
 
+      public PractitionerQualificationComponent() {
+        super();
+      }
+
+      public PractitionerQualificationComponent(CodeableConcept code) {
+        super();
+        this.code = code;
+      }
+
         public CodeableConcept getCode() { 
           return this.code;
         }
 
-        public void setCode(CodeableConcept value) { 
+        public PractitionerQualificationComponent setCode(CodeableConcept value) { 
           this.code = value;
+          return this;
         }
 
         public Period getPeriod() { 
           return this.period;
         }
 
-        public void setPeriod(Period value) { 
+        public PractitionerQualificationComponent setPeriod(Period value) { 
           this.period = value;
+          return this;
         }
 
         public ResourceReference getIssuer() { 
           return this.issuer;
         }
 
-        public void setIssuer(ResourceReference value) { 
+        public PractitionerQualificationComponent setIssuer(ResourceReference value) { 
           this.issuer = value;
+          return this;
+        }
+
+        protected void listChildren(List<Property> childrenList) {
+          super.listChildren(childrenList);
+          childrenList.add(new Property("code", "CodeableConcept", "Coded representation of the qualification.", 0, java.lang.Integer.MAX_VALUE, code));
+          childrenList.add(new Property("period", "Period", "Period during which the qualification is valid.", 0, java.lang.Integer.MAX_VALUE, period));
+          childrenList.add(new Property("issuer", "Resource(Organization)", "Organization that regulates and issues the qualification.", 0, java.lang.Integer.MAX_VALUE, issuer));
         }
 
       public PractitionerQualificationComponent copy(Practitioner e) {
-        PractitionerQualificationComponent dst = e.new PractitionerQualificationComponent();
+        PractitionerQualificationComponent dst = new PractitionerQualificationComponent();
         dst.code = code == null ? null : code.copy();
         dst.period = period == null ? null : period.copy();
         dst.issuer = issuer == null ? null : issuer.copy();
@@ -153,51 +172,73 @@ public class Practitioner extends Resource {
      */
     protected List<CodeableConcept> communication = new ArrayList<CodeableConcept>();
 
+    public Practitioner() {
+      super();
+    }
+
     public List<Identifier> getIdentifier() { 
       return this.identifier;
+    }
+
+    // syntactic sugar
+    public Identifier addIdentifier() { 
+      Identifier t = new Identifier();
+      this.identifier.add(t);
+      return t;
     }
 
     public HumanName getName() { 
       return this.name;
     }
 
-    public void setName(HumanName value) { 
+    public Practitioner setName(HumanName value) { 
       this.name = value;
+      return this;
     }
 
     public List<Contact> getTelecom() { 
       return this.telecom;
     }
 
+    // syntactic sugar
+    public Contact addTelecom() { 
+      Contact t = new Contact();
+      this.telecom.add(t);
+      return t;
+    }
+
     public Address getAddress() { 
       return this.address;
     }
 
-    public void setAddress(Address value) { 
+    public Practitioner setAddress(Address value) { 
       this.address = value;
+      return this;
     }
 
     public CodeableConcept getGender() { 
       return this.gender;
     }
 
-    public void setGender(CodeableConcept value) { 
+    public Practitioner setGender(CodeableConcept value) { 
       this.gender = value;
+      return this;
     }
 
     public DateTime getBirthDate() { 
       return this.birthDate;
     }
 
-    public void setBirthDate(DateTime value) { 
+    public Practitioner setBirthDate(DateTime value) { 
       this.birthDate = value;
+      return this;
     }
 
     public String getBirthDateSimple() { 
       return this.birthDate == null ? null : this.birthDate.getValue();
     }
 
-    public void setBirthDateSimple(String value) { 
+    public Practitioner setBirthDateSimple(String value) { 
       if (value == null)
         this.birthDate = null;
       else {
@@ -205,43 +246,98 @@ public class Practitioner extends Resource {
           this.birthDate = new DateTime();
         this.birthDate.setValue(value);
       }
+      return this;
     }
 
     public List<Attachment> getPhoto() { 
       return this.photo;
     }
 
+    // syntactic sugar
+    public Attachment addPhoto() { 
+      Attachment t = new Attachment();
+      this.photo.add(t);
+      return t;
+    }
+
     public ResourceReference getOrganization() { 
       return this.organization;
     }
 
-    public void setOrganization(ResourceReference value) { 
+    public Practitioner setOrganization(ResourceReference value) { 
       this.organization = value;
+      return this;
     }
 
     public List<CodeableConcept> getRole() { 
       return this.role;
     }
 
+    // syntactic sugar
+    public CodeableConcept addRole() { 
+      CodeableConcept t = new CodeableConcept();
+      this.role.add(t);
+      return t;
+    }
+
     public List<CodeableConcept> getSpecialty() { 
       return this.specialty;
+    }
+
+    // syntactic sugar
+    public CodeableConcept addSpecialty() { 
+      CodeableConcept t = new CodeableConcept();
+      this.specialty.add(t);
+      return t;
     }
 
     public Period getPeriod() { 
       return this.period;
     }
 
-    public void setPeriod(Period value) { 
+    public Practitioner setPeriod(Period value) { 
       this.period = value;
+      return this;
     }
 
     public List<PractitionerQualificationComponent> getQualification() { 
       return this.qualification;
     }
 
+    // syntactic sugar
+    public PractitionerQualificationComponent addQualification() { 
+      PractitionerQualificationComponent t = new PractitionerQualificationComponent();
+      this.qualification.add(t);
+      return t;
+    }
+
     public List<CodeableConcept> getCommunication() { 
       return this.communication;
     }
+
+    // syntactic sugar
+    public CodeableConcept addCommunication() { 
+      CodeableConcept t = new CodeableConcept();
+      this.communication.add(t);
+      return t;
+    }
+
+      protected void listChildren(List<Property> childrenList) {
+        super.listChildren(childrenList);
+        childrenList.add(new Property("identifier", "Identifier", "An identifier that applies to this person in this role.", 0, java.lang.Integer.MAX_VALUE, identifier));
+        childrenList.add(new Property("name", "HumanName", "A name associated with the person.", 0, java.lang.Integer.MAX_VALUE, name));
+        childrenList.add(new Property("telecom", "Contact", "A contact detail for the practitioner, e.g. a telephone number or an email address.", 0, java.lang.Integer.MAX_VALUE, telecom));
+        childrenList.add(new Property("address", "Address", "One or more addresses where the practitioner can be found or visited.", 0, java.lang.Integer.MAX_VALUE, address));
+        childrenList.add(new Property("gender", "CodeableConcept", "Administrative Gender - the gender that the person is considered to have for administration and record keeping purposes.", 0, java.lang.Integer.MAX_VALUE, gender));
+        childrenList.add(new Property("birthDate", "dateTime", "The date and time of birth for the practitioner.", 0, java.lang.Integer.MAX_VALUE, birthDate));
+        childrenList.add(new Property("photo", "Attachment", "Image of the person.", 0, java.lang.Integer.MAX_VALUE, photo));
+        childrenList.add(new Property("organization", "Resource(Organization)", "The organization that the practitioner represents.", 0, java.lang.Integer.MAX_VALUE, organization));
+        childrenList.add(new Property("role", "CodeableConcept", "The way in which the person represents the organization - what role do they have?.", 0, java.lang.Integer.MAX_VALUE, role));
+        childrenList.add(new Property("specialty", "CodeableConcept", "Specific specialty of the practitioner.", 0, java.lang.Integer.MAX_VALUE, specialty));
+        childrenList.add(new Property("period", "Period", "The period during which the person is authorized to perform the service.", 0, java.lang.Integer.MAX_VALUE, period));
+        childrenList.add(new Property("qualification", "", "Qualifications relevant to the provided service.", 0, java.lang.Integer.MAX_VALUE, qualification));
+        childrenList.add(new Property("communication", "CodeableConcept", "A language the practitioner is able to use in patient communication.", 0, java.lang.Integer.MAX_VALUE, communication));
+      }
 
       public Practitioner copy() {
         Practitioner dst = new Practitioner();

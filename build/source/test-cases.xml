@@ -51,7 +51,7 @@ for servers to handle as part of a batch post
 	</entry>
 	<entry>
 		<title>test person provenance</title>
-		<id>http://www.healthintersections.com.au/fhir/trash/provenance/@1</id>
+		<id>http://www.healthintersections.com.au/fhir/trash/Provenance/1</id>
 		<link rel="self" href="http://www.hl7.org/fhir/test-cases.xml#2"/>
 		<updated>2012-11-12T18:12:00Z</updated>
 		<author>
@@ -65,8 +65,7 @@ for servers to handle as part of a batch post
 				<div xmlns="http://www.w3.org/1999/xhtml">Authored on 12-Nov 2011 by Grahame Grieve</div>
 			  </text>
 			  <target>
-				<type value="Patient"/>
-				<key value="http://www.healthintersections.com.au/fhir/trash/person/@1"/>
+				<value value="http://www.healthintersections.com.au/fhir/trash/person/@1"/>
 			  </target>
 			  <!-- nominal activity: editing the standard -->
 			  <activity>
@@ -78,7 +77,7 @@ for servers to handle as part of a batch post
 				  <system value="http://hl7.org/fhir/provenance-participant-type"/>
 				  <code value="person"/>
 				</type>
-				<key value="mailto:grahame@healthintersections.com.au"/>
+				<value value="mailto:grahame@healthintersections.com.au"/>
 				<role>
 				  <system value="http://hl7.org/fhir/provenance-participant-role"/>
 				  <code value="author"/>
@@ -100,7 +99,7 @@ for servers to handle as part of a batch post
 		  <link rel="self" href=""/>
 		  <entry>
 			<title>Resource "1"</title>
-			<link rel="self" href="http://localhost:9556/svc/fhir/@1/history/@1"/>
+			<link rel="self" href="http://localhost:9556/svc/fhir/@1/history/1"/>
 			<source>
 			  <id>http://www.healthintersections.com.au/fhir/trash/person/@1</id>
 			</source>
@@ -140,9 +139,9 @@ for servers to handle as part of a batch post
 		  </entry>
 		  <entry>
 			<title>Resource "1"</title>
-			<link rel="self" href="http://localhost:9556/svc/fhir/@1/history/@1"/>
+			<link rel="self" href="http://localhost:9556/svc/fhir/@1/history/1"/>
 			<source>
-			  <id>http://www.healthintersections.com.au/fhir/trash/provenance/@1</id>
+			  <id>http://www.healthintersections.com.au/fhir/trash/Provenance/1</id>
 			</source>
 			<id>http://localhost:9556/svc/fhir/@1</id>
 			<updated>2012-11-12T10:29:55+11:00</updated>

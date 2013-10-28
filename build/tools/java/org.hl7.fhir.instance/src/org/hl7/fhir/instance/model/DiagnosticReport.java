@@ -29,7 +29,7 @@ package org.hl7.fhir.instance.model;
   
 */
 
-// Generated on Mon, Aug 5, 2013 12:50+1000 for FHIR v0.10
+// Generated on Mon, Oct 28, 2013 15:39+1100 for FHIR v0.12
 
 import java.util.*;
 
@@ -76,7 +76,7 @@ public class DiagnosticReport extends Resource {
         }
     }
 
-  public class ObservationStatusEnumFactory implements EnumFactory {
+  public static class ObservationStatusEnumFactory implements EnumFactory {
     public Enum<?> fromCode(String codeString) throws Exception {
       if (codeString == null || "".equals(codeString))
             if (codeString == null || "".equals(codeString))
@@ -112,7 +112,7 @@ public class DiagnosticReport extends Resource {
       }
     }
 
-    public class DiagnosticReportRequestDetailComponent extends Element {
+    public static class DiagnosticReportRequestDetailComponent extends BackboneElement {
         /**
          * The encounter that this diagnostic investigation is associated with.
          */
@@ -148,63 +148,80 @@ public class DiagnosticReport extends Resource {
          */
         protected String_ clinicalInfo;
 
+      public DiagnosticReportRequestDetailComponent() {
+        super();
+      }
+
         public ResourceReference getEncounter() { 
           return this.encounter;
         }
 
-        public void setEncounter(ResourceReference value) { 
+        public DiagnosticReportRequestDetailComponent setEncounter(ResourceReference value) { 
           this.encounter = value;
+          return this;
         }
 
         public Identifier getRequestOrderId() { 
           return this.requestOrderId;
         }
 
-        public void setRequestOrderId(Identifier value) { 
+        public DiagnosticReportRequestDetailComponent setRequestOrderId(Identifier value) { 
           this.requestOrderId = value;
+          return this;
         }
 
         public Identifier getReceiverOrderId() { 
           return this.receiverOrderId;
         }
 
-        public void setReceiverOrderId(Identifier value) { 
+        public DiagnosticReportRequestDetailComponent setReceiverOrderId(Identifier value) { 
           this.receiverOrderId = value;
+          return this;
         }
 
         public List<CodeableConcept> getRequestTest() { 
           return this.requestTest;
         }
 
+    // syntactic sugar
+        public CodeableConcept addRequestTest() { 
+          CodeableConcept t = new CodeableConcept();
+          this.requestTest.add(t);
+          return t;
+        }
+
         public CodeableConcept getBodySite() { 
           return this.bodySite;
         }
 
-        public void setBodySite(CodeableConcept value) { 
+        public DiagnosticReportRequestDetailComponent setBodySite(CodeableConcept value) { 
           this.bodySite = value;
+          return this;
         }
 
         public ResourceReference getRequester() { 
           return this.requester;
         }
 
-        public void setRequester(ResourceReference value) { 
+        public DiagnosticReportRequestDetailComponent setRequester(ResourceReference value) { 
           this.requester = value;
+          return this;
         }
 
         public String_ getClinicalInfo() { 
           return this.clinicalInfo;
         }
 
-        public void setClinicalInfo(String_ value) { 
+        public DiagnosticReportRequestDetailComponent setClinicalInfo(String_ value) { 
           this.clinicalInfo = value;
+          return this;
         }
 
         public String getClinicalInfoSimple() { 
           return this.clinicalInfo == null ? null : this.clinicalInfo.getValue();
         }
 
-        public void setClinicalInfoSimple(String value) { 
+        public DiagnosticReportRequestDetailComponent setClinicalInfoSimple(String value) { 
           if (value == null)
             this.clinicalInfo = null;
           else {
@@ -212,10 +229,22 @@ public class DiagnosticReport extends Resource {
               this.clinicalInfo = new String_();
             this.clinicalInfo.setValue(value);
           }
+          return this;
+        }
+
+        protected void listChildren(List<Property> childrenList) {
+          super.listChildren(childrenList);
+          childrenList.add(new Property("encounter", "Resource(Encounter)", "The encounter that this diagnostic investigation is associated with.", 0, java.lang.Integer.MAX_VALUE, encounter));
+          childrenList.add(new Property("requestOrderId", "Identifier", "The local ID assigned to the order by the order requester.", 0, java.lang.Integer.MAX_VALUE, requestOrderId));
+          childrenList.add(new Property("receiverOrderId", "Identifier", "The local ID assigned to the test order by the diagnostic service provider.", 0, java.lang.Integer.MAX_VALUE, receiverOrderId));
+          childrenList.add(new Property("requestTest", "CodeableConcept", "Identification of pathology test requested,.", 0, java.lang.Integer.MAX_VALUE, requestTest));
+          childrenList.add(new Property("bodySite", "CodeableConcept", "Anatomical location where the request test should be performed.", 0, java.lang.Integer.MAX_VALUE, bodySite));
+          childrenList.add(new Property("requester", "Resource(Organization|Practitioner)", "Details of the clinician or organization requesting the diagnostic service.", 0, java.lang.Integer.MAX_VALUE, requester));
+          childrenList.add(new Property("clinicalInfo", "string", "Details of the clinical information provided to the diagnostic service along with the original request.", 0, java.lang.Integer.MAX_VALUE, clinicalInfo));
         }
 
       public DiagnosticReportRequestDetailComponent copy(DiagnosticReport e) {
-        DiagnosticReportRequestDetailComponent dst = e.new DiagnosticReportRequestDetailComponent();
+        DiagnosticReportRequestDetailComponent dst = new DiagnosticReportRequestDetailComponent();
         dst.encounter = encounter == null ? null : encounter.copy();
         dst.requestOrderId = requestOrderId == null ? null : requestOrderId.copy();
         dst.receiverOrderId = receiverOrderId == null ? null : receiverOrderId.copy();
@@ -230,7 +259,7 @@ public class DiagnosticReport extends Resource {
 
   }
 
-    public class ResultGroupComponent extends Element {
+    public static class ResultGroupComponent extends BackboneElement {
         /**
          * A code or name that describes this group of results. For the base group, this is the report name.
          */
@@ -251,32 +280,65 @@ public class DiagnosticReport extends Resource {
          */
         protected List<ResourceReference> result = new ArrayList<ResourceReference>();
 
+      public ResultGroupComponent() {
+        super();
+      }
+
+      public ResultGroupComponent(CodeableConcept name) {
+        super();
+        this.name = name;
+      }
+
         public CodeableConcept getName() { 
           return this.name;
         }
 
-        public void setName(CodeableConcept value) { 
+        public ResultGroupComponent setName(CodeableConcept value) { 
           this.name = value;
+          return this;
         }
 
         public ResourceReference getSpecimen() { 
           return this.specimen;
         }
 
-        public void setSpecimen(ResourceReference value) { 
+        public ResultGroupComponent setSpecimen(ResourceReference value) { 
           this.specimen = value;
+          return this;
         }
 
         public List<ResultGroupComponent> getGroup() { 
           return this.group;
         }
 
+    // syntactic sugar
+        public ResultGroupComponent addGroup() { 
+          ResultGroupComponent t = new ResultGroupComponent();
+          this.group.add(t);
+          return t;
+        }
+
         public List<ResourceReference> getResult() { 
           return this.result;
         }
 
+    // syntactic sugar
+        public ResourceReference addResult() { 
+          ResourceReference t = new ResourceReference();
+          this.result.add(t);
+          return t;
+        }
+
+        protected void listChildren(List<Property> childrenList) {
+          super.listChildren(childrenList);
+          childrenList.add(new Property("name", "CodeableConcept", "A code or name that describes this group of results. For the base group, this is the report name.", 0, java.lang.Integer.MAX_VALUE, name));
+          childrenList.add(new Property("specimen", "Resource(Specimen)", "Details about the individual specimen to which these 'Result group' test results refer.", 0, java.lang.Integer.MAX_VALUE, specimen));
+          childrenList.add(new Property("group", "@DiagnosticReport.results", "A sub-group in a report group. Sub groups can be grouped in arbitrary ways. The group.name defines the purpose and interpretation of the grouping.", 0, java.lang.Integer.MAX_VALUE, group));
+          childrenList.add(new Property("result", "Resource(Observation)", "Specific detailed result, including both the value of the result item and additional information that may be useful for clinical interpretation. Results include whatever specific data items pathology labs report as part of the clinical service; it is not confined to measurements.", 0, java.lang.Integer.MAX_VALUE, result));
+        }
+
       public ResultGroupComponent copy(DiagnosticReport e) {
-        ResultGroupComponent dst = e.new ResultGroupComponent();
+        ResultGroupComponent dst = new ResultGroupComponent();
         dst.name = name == null ? null : name.copy();
         dst.specimen = specimen == null ? null : specimen.copy();
         dst.group = new ArrayList<ResultGroupComponent>();
@@ -326,9 +388,9 @@ public class DiagnosticReport extends Resource {
     protected CodeableConcept serviceCategory;
 
     /**
-     * The diagnostically relevant time for this report.
+     * The diagnostically relevant time for this report - that is, the point in time at which the observations that are reported in this diagnostic report relate to the patient.
      */
-    protected DateTime diagnosticTime;
+    protected Type diagnostic;
 
     /**
      * A group of results. Results may be grouped by specimen, or by some value in DiagnosticReport.resultGroup.name to describe what binds all the results together.
@@ -351,125 +413,154 @@ public class DiagnosticReport extends Resource {
     protected List<CodeableConcept> codedDiagnosis = new ArrayList<CodeableConcept>();
 
     /**
-     * Rich text representation of the entire result as issued by the diagnostic service. Multiple formats are allowed but they must be semantically equivalent.
+     * Rich text representation of the entire result as issued by the diagnostic service. Multiple formats are allowed but they SHALL be semantically equivalent.
      */
     protected List<Attachment> representation = new ArrayList<Attachment>();
+
+    public DiagnosticReport() {
+      super();
+    }
+
+    public DiagnosticReport(Enumeration<ObservationStatus> status, DateTime issued, ResourceReference subject, ResourceReference performer, Type diagnostic, ResultGroupComponent results) {
+      super();
+      this.status = status;
+      this.issued = issued;
+      this.subject = subject;
+      this.performer = performer;
+      this.diagnostic = diagnostic;
+      this.results = results;
+    }
 
     public Enumeration<ObservationStatus> getStatus() { 
       return this.status;
     }
 
-    public void setStatus(Enumeration<ObservationStatus> value) { 
+    public DiagnosticReport setStatus(Enumeration<ObservationStatus> value) { 
       this.status = value;
+      return this;
     }
 
     public ObservationStatus getStatusSimple() { 
       return this.status == null ? null : this.status.getValue();
     }
 
-    public void setStatusSimple(ObservationStatus value) { 
+    public DiagnosticReport setStatusSimple(ObservationStatus value) { 
         if (this.status == null)
           this.status = new Enumeration<ObservationStatus>();
         this.status.setValue(value);
+      return this;
     }
 
     public DateTime getIssued() { 
       return this.issued;
     }
 
-    public void setIssued(DateTime value) { 
+    public DiagnosticReport setIssued(DateTime value) { 
       this.issued = value;
+      return this;
     }
 
     public String getIssuedSimple() { 
       return this.issued == null ? null : this.issued.getValue();
     }
 
-    public void setIssuedSimple(String value) { 
+    public DiagnosticReport setIssuedSimple(String value) { 
         if (this.issued == null)
           this.issued = new DateTime();
         this.issued.setValue(value);
+      return this;
     }
 
     public ResourceReference getSubject() { 
       return this.subject;
     }
 
-    public void setSubject(ResourceReference value) { 
+    public DiagnosticReport setSubject(ResourceReference value) { 
       this.subject = value;
+      return this;
     }
 
     public ResourceReference getPerformer() { 
       return this.performer;
     }
 
-    public void setPerformer(ResourceReference value) { 
+    public DiagnosticReport setPerformer(ResourceReference value) { 
       this.performer = value;
+      return this;
     }
 
     public Identifier getReportId() { 
       return this.reportId;
     }
 
-    public void setReportId(Identifier value) { 
+    public DiagnosticReport setReportId(Identifier value) { 
       this.reportId = value;
+      return this;
     }
 
     public List<DiagnosticReportRequestDetailComponent> getRequestDetail() { 
       return this.requestDetail;
     }
 
+    // syntactic sugar
+    public DiagnosticReportRequestDetailComponent addRequestDetail() { 
+      DiagnosticReportRequestDetailComponent t = new DiagnosticReportRequestDetailComponent();
+      this.requestDetail.add(t);
+      return t;
+    }
+
     public CodeableConcept getServiceCategory() { 
       return this.serviceCategory;
     }
 
-    public void setServiceCategory(CodeableConcept value) { 
+    public DiagnosticReport setServiceCategory(CodeableConcept value) { 
       this.serviceCategory = value;
+      return this;
     }
 
-    public DateTime getDiagnosticTime() { 
-      return this.diagnosticTime;
+    public Type getDiagnostic() { 
+      return this.diagnostic;
     }
 
-    public void setDiagnosticTime(DateTime value) { 
-      this.diagnosticTime = value;
-    }
-
-    public String getDiagnosticTimeSimple() { 
-      return this.diagnosticTime == null ? null : this.diagnosticTime.getValue();
-    }
-
-    public void setDiagnosticTimeSimple(String value) { 
-        if (this.diagnosticTime == null)
-          this.diagnosticTime = new DateTime();
-        this.diagnosticTime.setValue(value);
+    public DiagnosticReport setDiagnostic(Type value) { 
+      this.diagnostic = value;
+      return this;
     }
 
     public ResultGroupComponent getResults() { 
       return this.results;
     }
 
-    public void setResults(ResultGroupComponent value) { 
+    public DiagnosticReport setResults(ResultGroupComponent value) { 
       this.results = value;
+      return this;
     }
 
     public List<ResourceReference> getImage() { 
       return this.image;
     }
 
+    // syntactic sugar
+    public ResourceReference addImage() { 
+      ResourceReference t = new ResourceReference();
+      this.image.add(t);
+      return t;
+    }
+
     public String_ getConclusion() { 
       return this.conclusion;
     }
 
-    public void setConclusion(String_ value) { 
+    public DiagnosticReport setConclusion(String_ value) { 
       this.conclusion = value;
+      return this;
     }
 
     public String getConclusionSimple() { 
       return this.conclusion == null ? null : this.conclusion.getValue();
     }
 
-    public void setConclusionSimple(String value) { 
+    public DiagnosticReport setConclusionSimple(String value) { 
       if (value == null)
         this.conclusion = null;
       else {
@@ -477,15 +568,47 @@ public class DiagnosticReport extends Resource {
           this.conclusion = new String_();
         this.conclusion.setValue(value);
       }
+      return this;
     }
 
     public List<CodeableConcept> getCodedDiagnosis() { 
       return this.codedDiagnosis;
     }
 
+    // syntactic sugar
+    public CodeableConcept addCodedDiagnosis() { 
+      CodeableConcept t = new CodeableConcept();
+      this.codedDiagnosis.add(t);
+      return t;
+    }
+
     public List<Attachment> getRepresentation() { 
       return this.representation;
     }
+
+    // syntactic sugar
+    public Attachment addRepresentation() { 
+      Attachment t = new Attachment();
+      this.representation.add(t);
+      return t;
+    }
+
+      protected void listChildren(List<Property> childrenList) {
+        super.listChildren(childrenList);
+        childrenList.add(new Property("status", "code", "The status of the diagnostic report as a whole.", 0, java.lang.Integer.MAX_VALUE, status));
+        childrenList.add(new Property("issued", "dateTime", "The date and/or time that this version of the report was released from the source diagnostic service.", 0, java.lang.Integer.MAX_VALUE, issued));
+        childrenList.add(new Property("subject", "Resource(Patient|Group|Device|Location)", "The subject of the report. Usually, but not always, this is a patient. However diagnostic services also perform analyses on specimens collected from a variety of other sources.", 0, java.lang.Integer.MAX_VALUE, subject));
+        childrenList.add(new Property("performer", "Resource(Organization)", "The diagnostic service that is responsible for issuing the report.", 0, java.lang.Integer.MAX_VALUE, performer));
+        childrenList.add(new Property("reportId", "Identifier", "The local ID assigned to the report by the order filler, usually by the Information System of the diagnostic service provider.", 0, java.lang.Integer.MAX_VALUE, reportId));
+        childrenList.add(new Property("requestDetail", "", "Details concerning a single pathology test requested.", 0, java.lang.Integer.MAX_VALUE, requestDetail));
+        childrenList.add(new Property("serviceCategory", "CodeableConcept", "The section of the diagnostic service that performs the examination e.g. biochemistry, haematology, MRI.", 0, java.lang.Integer.MAX_VALUE, serviceCategory));
+        childrenList.add(new Property("diagnostic[x]", "dateTime|Period", "The diagnostically relevant time for this report - that is, the point in time at which the observations that are reported in this diagnostic report relate to the patient.", 0, java.lang.Integer.MAX_VALUE, diagnostic));
+        childrenList.add(new Property("results", "", "A group of results. Results may be grouped by specimen, or by some value in DiagnosticReport.resultGroup.name to describe what binds all the results together.", 0, java.lang.Integer.MAX_VALUE, results));
+        childrenList.add(new Property("image", "Resource(Media|ImagingStudy)", "A list of key images associated with this report. The images are generally created during the diagnostic process, and maybe directly of the patient, or of treated specimens (i.e. slides of interest).", 0, java.lang.Integer.MAX_VALUE, image));
+        childrenList.add(new Property("conclusion", "string", "Concise and clinically contextualised narrative interpretation of the diagnostic report.", 0, java.lang.Integer.MAX_VALUE, conclusion));
+        childrenList.add(new Property("codedDiagnosis", "CodeableConcept", "Codes for the conclusion.", 0, java.lang.Integer.MAX_VALUE, codedDiagnosis));
+        childrenList.add(new Property("representation", "Attachment", "Rich text representation of the entire result as issued by the diagnostic service. Multiple formats are allowed but they SHALL be semantically equivalent.", 0, java.lang.Integer.MAX_VALUE, representation));
+      }
 
       public DiagnosticReport copy() {
         DiagnosticReport dst = new DiagnosticReport();
@@ -498,7 +621,7 @@ public class DiagnosticReport extends Resource {
         for (DiagnosticReportRequestDetailComponent i : requestDetail)
           dst.requestDetail.add(i.copy(dst));
         dst.serviceCategory = serviceCategory == null ? null : serviceCategory.copy();
-        dst.diagnosticTime = diagnosticTime == null ? null : diagnosticTime.copy();
+        dst.diagnostic = diagnostic == null ? null : diagnostic.copy();
         dst.results = results == null ? null : results.copy(dst);
         dst.image = new ArrayList<ResourceReference>();
         for (ResourceReference i : image)

@@ -46,8 +46,11 @@ import org.hl7.fhir.definitions.model.Definitions;
 import org.hl7.fhir.definitions.model.ElementDefn;
 import org.hl7.fhir.definitions.model.ResourceDefn;
 import org.hl7.fhir.definitions.model.SearchParameter;
+import org.hl7.fhir.definitions.model.SearchParameter.SearchType;
 import org.hl7.fhir.definitions.model.TypeRef;
 import org.hl7.fhir.instance.model.AtomEntry;
+import org.hl7.fhir.instance.model.Resource;
+import org.hl7.fhir.instance.model.ValueSet;
 import org.hl7.fhir.instance.validation.BaseValidator;
 import org.hl7.fhir.instance.validation.ValidationMessage;
 import org.hl7.fhir.instance.validation.ValidationMessage.Source;
@@ -63,7 +66,8 @@ import org.w3c.dom.Element;
  *
  */
 public class ResourceValidator extends BaseValidator {
-
+  
+  
   public class Usage {
     public Set<SearchParameter.SearchType> usage= new HashSet<SearchParameter.SearchType>();
   }
@@ -73,16 +77,17 @@ public class ResourceValidator extends BaseValidator {
   private Definitions definitions;
 	private Map<String, Usage> usages = new HashMap<String, Usage>();
   private Element translations;
-  private Map<String, AtomEntry> codeSystems = new HashMap<String, AtomEntry>();
+  private Map<String, AtomEntry<ValueSet>> codeSystems = new HashMap<String, AtomEntry<ValueSet>>();
+//  private Map<String, Integer> typeCounter = new HashMap<String, Integer>();
   
   
 
-	public ResourceValidator(Definitions definitions, Element translations, Map<String, AtomEntry> codeSystems) {
+	public ResourceValidator(Definitions definitions, Element translations, Map<String, AtomEntry<ValueSet>> map) {
 		super();
     source = Source.ResourceValidator;
 		this.definitions = definitions;
 		this.translations = translations;
-		this.codeSystems = codeSystems;
+		this.codeSystems = map;
 	}
 
 	// public void setConceptDomains(List<ConceptDomain> conceptDomains) {
@@ -102,7 +107,7 @@ public class ResourceValidator extends BaseValidator {
 
   public void checkStucture(List<ValidationMessage> errors, String name, ElementDefn structure) {
     rule(errors, "structure", structure.getName(), name.toLowerCase().substring(0, 1) != name.substring(0, 1), "Resource Name must start with an uppercase alpha character");
-    checkElement(errors, structure.getName(), structure, null, null);
+    checkElement(errors, structure.getName(), structure, null, null, true);
     
   }
   public List<ValidationMessage> checkStucture(String name, ElementDefn structure) {
@@ -115,7 +120,7 @@ public class ResourceValidator extends BaseValidator {
   public void check(List<ValidationMessage> errors, String name, ResourceDefn parent) {
     rule(errors, "structure", parent.getName(), !name.equals("Metadata"), "The name 'Metadata' is not a legal name for a resource");
     rule(errors, "structure", parent.getName(), !name.equals("History"), "The name 'History' is not a legal name for a resource");
-    rule(errors, "structure", parent.getName(), !name.equals("Tag"), "The name 'Tag  ' is not a legal name for a resource");
+    rule(errors, "structure", parent.getName(), !name.equals("Tag"), "The name 'Tag' is not a legal name for a resource");
     rule(errors, "structure", parent.getName(), !name.equals("Tags"), "The name 'Tags' is not a legal name for a resource");
     rule(errors, "structure", parent.getName(), !name.equals("MailBox"), "The name 'MailBox' is not a legal name for a resource");
     rule(errors, "structure", parent.getName(), !name.equals("Validation"), "The name 'Validation' is not a legal name for a resource");
@@ -124,9 +129,20 @@ public class ResourceValidator extends BaseValidator {
 
     rule(errors, "required",  parent.getName(), parent.getRoot().getElements().size() > 0, "A resource must have at least one element in it before the build can proceed"); // too many downstream issues in the parsers, and it would only happen as a transient thing when designing the resources
     
-    checkElement(errors, parent.getName(), parent.getRoot(), parent, null);
+    String s = parent.getRoot().getMapping(ElementDefn.RIM_MAPPING);
+    warning(errors, "required", parent.getName(), !Utilities.noString(s), "RIM Mapping is required");
+
+    checkElement(errors, parent.getName(), parent.getRoot(), parent, null, s == null || !s.equals("n/a"));
+    
+    if (!resourceIsTechnical(name)) { // these are exempt because identification is tightly managed
+      ElementDefn id = parent.getRoot().getElementByName("identifier");
+      if (id == null)
+        warning(errors, "structure", parent.getName(), false, "All resources should have an identifier");
+      else 
+        rule(errors, "structure", parent.getName(), id.typeCode().equals("Identifier"), "If a resource has an element named identifier, it must have a type 'Identifier'");
+    }
     rule(errors, "structure", parent.getName(), parent.getRoot().getElementByName("text") == null, "Element named \"text\" not allowed");
-    rule(errors, "structure", parent.getName(), parent.getRoot().getElementByName("contained") == null, "Element named \"contaned\" not allowed");
+    rule(errors, "structure", parent.getName(), parent.getRoot().getElementByName("contained") == null, "Element named \"contained\" not allowed");
     if (parent.getRoot().getElementByName("subject") != null && parent.getRoot().getElementByName("subject").typeCode().startsWith("Resource"))
       rule(errors, "structure", parent.getName(), parent.getSearchParams().containsKey("subject"), "A resource that contains a subject reference must have a search parameter 'subject'");
     if (parent.getRoot().getElementByName("patient") != null && parent.getRoot().getElementByName("patient").typeCode().startsWith("Resource"))
@@ -138,11 +154,22 @@ public class ResourceValidator extends BaseValidator {
       rule(errors, "structure", parent.getName(), !p.getCode().contains("."), "Search Parameter Names cannot contain a '.' (\""+p.getCode()+"\")");
       rule(errors, "structure", parent.getName(), !p.getCode().equalsIgnoreCase("id"), "Search Parameter Names cannot be named 'id' (\""+p.getCode()+"\")");
       rule(errors, "structure", parent.getName(), p.getCode().equals(p.getCode().toLowerCase()), "Search Parameter Names should be all lowercase (\""+p.getCode()+"\")");
+      rule(errors, "structure", parent.getName(), Character.isUpperCase(p.getDescription().charAt(0)) || p.getDescription().contains("|"), "Search Parameter descriptions should start with uppercase (\""+p.getDescription()+"\")");
     }
-//    rule(errors, parent.getName(), !parent.getSearchParams().containsKey("id"), "A resource cannot have a search parameter 'id'");
     for (Compartment c : definitions.getCompartments()) 
       rule(errors, "structure", parent.getName(), c.getResources().containsKey(parent), "Resource not entered in resource map for compartment '"+c.getTitle()+"' (compartments.xml)");
 	}
+
+  private boolean resourceIsTechnical(String name) {
+    return 
+        name.equals("ConceptMap") || 
+        name.equals("Conformance") || 
+        name.equals("Message") || 
+        name.equals("Profile") || 
+        name.equals("Query") || 
+        name.equals("ValueSet") ||         
+        name.equals("OperationOutcome");         
+  }
 
   private boolean hasTranslationsEntry(String name) {
     Element child = XMLUtil.getFirstChild(translations);
@@ -163,11 +190,18 @@ public class ResourceValidator extends BaseValidator {
   
 	//todo: check that primitives *in datatypes* don't repeat
 	
-	private void checkElement(List<ValidationMessage> errors, String path, ElementDefn e, ResourceDefn parent, String parentName) {
-		rule(errors, "structure", path, e.unbounded() || e.getMaxCardinality() == 1,	"Max Cardinality must be 1 or unbounded");
+	private void checkElement(List<ValidationMessage> errors, String path, ElementDefn e, ResourceDefn parent, String parentName, boolean needsRimMapping) {
+//	  for (TypeRef t : e.getTypes()) {
+//  	  if (!typeCounter.containsKey(t.getName()))
+//	      typeCounter.put(t.getName(), 1);
+//  	  else
+//  	    typeCounter.put(t.getName(), typeCounter.get(t.getName())+1);
+//	  }
+	  
+	  rule(errors, "structure", path, e.unbounded() || e.getMaxCardinality() == 1,	"Max Cardinality must be 1 or unbounded");
 		rule(errors, "structure", path, e.getMinCardinality() == 0 || e.getMinCardinality() == 1, "Min Cardinality must be 0 or 1");
 		hint(errors, "structure", path, !nameOverlaps(e.getName(), parentName), "Name of child ("+e.getName()+") overlaps with name of parent ("+parentName+")");
-		rule(errors, "structure", path, e.hasShortDefn(), "Must have a short defn");
+    checkDefinitions(errors, path, e);
     warning(errors, "structure", path, !Utilities.isPlural(e.getName()) || !e.unbounded(), "Element names should be singular");
     rule(errors, "structure", path, !e.getName().equals("id"), "Element named \"id\" not allowed");
     rule(errors, "structure", path, !e.getName().equals("extension"), "Element named \"extension\" not allowed");
@@ -177,7 +211,12 @@ public class ResourceValidator extends BaseValidator {
 // this isn't a real hint, just a way to gather information   hint(errors, path, !e.isModifier(), "isModifier, minimum cardinality = "+e.getMinCardinality().toString());
     rule(errors, "structure", path, !e.getDefinition().toLowerCase().startsWith("this is"), "Definition should not start with 'this is'");
     rule(errors, "structure", path, e.getDefinition().endsWith("."), "Definition should end with '.', but is '"+e.getDefinition()+"'");
+    if (e.usesType("string") && e.usesType("CodeableConcept"))
+      rule(errors, "structure", path, e.getComments().contains("string") && e.getComments().contains("CodeableConcept"), "Element type cannot have both string and CodeableConcept unless the difference between their usage is explained in the comments");
     
+//    if (needsRimMapping)
+//      warning(errors, "required", path, !Utilities.noString(e.getMapping(ElementDefn.RIM_MAPPING)), "RIM Mapping is required");
+
     if( e.getShortDefn().length() > 0)
 		{
 			rule(errors, "structure", path, e.getShortDefn().contains("|") || Character.isUpperCase(e.getShortDefn().charAt(0)) || !Character.isLetter(e.getShortDefn().charAt(0)), "Short Description must start with an uppercase character ('"+e.getShortDefn()+"')");
@@ -206,6 +245,7 @@ public class ResourceValidator extends BaseValidator {
 		if (e.hasBinding()) {
 		  rule(errors, "structure", path, e.typeCode().equals("code") || e.typeCode().contains("Coding") 
 				  || e.typeCode().contains("CodeableConcept"), "Can only specify bindings for coded data types");
+      rule(errors, "structure", path, !e.getBindingName().toLowerCase().contains("code"), "Binding name " + e.getBindingName()+" is invalid - contains 'code'");
 			BindingSpecification cd = definitions.getBindingByName(e.getBindingName());
 			rule(errors, "structure", path, cd != null, "Unable to resolve binding name " + e.getBindingName());
 			
@@ -224,10 +264,59 @@ public class ResourceValidator extends BaseValidator {
 			}
 		}
 		for (ElementDefn c : e.getElements()) {
-			checkElement(errors, path + "." + c.getName(), c, parent, e.getName());
+			checkElement(errors, path + "." + c.getName(), c, parent, e.getName(), needsRimMapping);
 		}
 
 	}
+
+  private void checkDefinitions(List<ValidationMessage> errors, String path, ElementDefn e) {
+    rule(errors, "structure", path, e.hasDefinition(), "A Definition is required");
+    
+    if (!e.hasShortDefn()) 
+      return;
+    
+    warning(errors, "structure", path, !e.getShortDefn().equals(e.getDefinition()), "Element needs a definition of it's own");
+    warning(errors, "structure", path, !e.getShortDefn().equals(e.getName()), "Short description can't be the same as the name");
+    Set<String> defn = new HashSet<String>();
+    for (String w : splitByCamelCase(e.getName()).toLowerCase().split(" ")) 
+      defn.add(Utilities.pluralizeMe(w));
+    for (String w : path.split("\\.")) 
+      for (String n : splitByCamelCase(w).split(" ")) 
+        defn.add(Utilities.pluralizeMe(n.toLowerCase()));
+    
+    Set<String> provided = new HashSet<String>();
+    for (String w : stripPunctuation(splitByCamelCase(e.getShortDefn())).split(" "))
+      if (!Utilities.noString(w) && !grammarWord(w.toLowerCase()))
+        provided.add(Utilities.pluralizeMe(w.toLowerCase()));
+    boolean ok = false;
+    for (String s : provided)
+      if (!defn.contains(s))
+        ok = true;
+    warning(errors, "structure", path, ok, "Short description doesn't add any new content: '"+e.getShortDefn()+"'");
+  }
+
+  private String splitByCamelCase(String s) {
+    StringBuilder b = new StringBuilder();
+    for (char c : s.toCharArray()) {
+      if (Character.isUpperCase(c))
+        b.append(' ');
+      b.append(c);
+    }
+    return b.toString();
+  }
+
+  private boolean grammarWord(String w) {
+    return w.equals("and") || w.equals("or") || w.equals("a") || w.equals("the") || w.equals("for") || w.equals("this") || w.equals("of") || w.equals("and") || w.equals("and");
+  }
+
+  private String stripPunctuation(String s) {
+    StringBuilder b = new StringBuilder();
+    for (char c : s.toCharArray()) {
+      if (Character.isAlphabetic(c) || c == ' ')
+        b.append(c);
+    }
+    return b.toString();
+  }
 
   private boolean nameOverlaps(String name, String parentName) {
 	  if (Utilities.noString(parentName))
@@ -344,5 +433,12 @@ public class ResourceValidator extends BaseValidator {
     for (String s : usages.keySet()) {
       System.out.println(s+": "+usages.get(s).usage.toString());
     }
+  }
+
+  public void report() {
+    // for dumping of ad-hoc summaries from the checking phase
+//    for (String t : typeCounter.keySet()) {
+//      System.out.println(t+": "+typeCounter.get(t).toString());
+//    }
   }
 }

@@ -7,8 +7,7 @@
   </text>
 
   <subject>
-    <type value="Patient"/>
-    <reference value="patient/@xcda"/>
+    <reference value="Patient/xcda"/>
   </subject>
 
   <!-- the date this image was created -->

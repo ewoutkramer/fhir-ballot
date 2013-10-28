@@ -33,7 +33,7 @@ import org.hl7.fhir.instance.model.Substance;
 import org.hl7.fhir.instance.model.Encounter;
 import org.w3c.dom.Element;
 
-public class CcdaConverter {
+public class CCDAConverter {
 
 	private CDAUtilities cda;
 	private Element doc; 
@@ -55,11 +55,11 @@ public class CcdaConverter {
 		
 		// process the header
 		makeDocument();
-		document.setSubject(Factory.makeResourceReference("Patient", makeSubject()));
+		document.setSubject(Factory.makeResourceReference(makeSubject()));
 		for (Element e : cda.getChildren(doc, "author"))
-			document.getAuthor().add(Factory.makeResourceReference("Provider", makeAuthor(e)));
+			document.getAuthor().add(Factory.makeResourceReference(makeAuthor(e)));
 		// todo: data enterer & informant goes in provenance
-		document.setCustodian(Factory.makeResourceReference("Organization", makeOrganization(
+		document.setCustodian(Factory.makeResourceReference(makeOrganization(
 				 cda.getDescendent(doc, "custodian/assignedCustodian/representedCustodianOrganization"), "Custodian")));
 		// todo: informationRecipient		
 		for (Element e : cda.getChildren(doc, "legalAuthenticator"))
@@ -113,11 +113,12 @@ public class CcdaConverter {
 			Encounter visit = new Encounter();
 			for (Element e : cda.getChildren(ee, "id"))
 				visit.getIdentifier().add(convert.makeIdentifierFromII(e));
+			visit.setHospitalization(new Encounter.EncounterHospitalizationComponent());
 			visit.getHospitalization().setPeriod(convert.makePeriodFromIVL(cda.getChild(ee, "effectiveTime")));
-			document.setEvent(document.new DocumentEventComponent());
+			document.setEvent(new Document.DocumentEventComponent());
 			document.getEvent().getCode().add(convert.makeCodeableConceptFromCD(cda.getChild(ee, "code")));
 			document.getEvent().setPeriod(visit.getHospitalization().getPeriod());
-			document.getEvent().getDetail().add(Factory.makeResourceReference("Visit", addResource(visit, "Encounter", UUID.randomUUID().toString())));			
+			document.getEvent().getDetail().add(Factory.makeResourceReference(addResource(visit, "Encounter", UUID.randomUUID().toString())));			
 		}
 		
 		// main todo: fill out the narrative, but before we can do that, we have to convert everything else
@@ -146,7 +147,7 @@ public class CcdaConverter {
 		pat.getExtensions().add(Factory.newExtension(CcdaExtensions.NAME_ETHNICITY, convert.makeCodeableConceptFromCD(cda.getChild(p, "ethnicGroupCode")), false));
 		pat.getExtensions().add(Factory.newExtension(CcdaExtensions.NAME_BIRTHPLACE, convert.makeAddressFromAD(cda.getChild(p, new String[] {"birthplace", "place", "addr"})), false));
 		
-		Patient.ContactComponent guardian = pat.new ContactComponent();
+		Patient.ContactComponent guardian = new Patient.ContactComponent();
 		pat.getContact().add(guardian);
 		guardian.getRelationship().add(Factory.newCodeableConcept("GUARD", "urn:oid:2.16.840.1.113883.5.110", "guardian"));
 		Element g = cda.getChild(p, "guardian");
@@ -170,7 +171,7 @@ public class CcdaConverter {
 		// todo: this got broken.... lang.setMode(convert.makeCodeableConceptFromCD(cda.getChild(l, "modeCode")));
 		cc.getExtensions().add(Factory.newExtension(CcdaExtensions.NAME_LANG_PROF, convert.makeCodeableConceptFromCD(cda.getChild(l, "modeCode")), false));
 		pat.getExtensions().add(Factory.newExtension(CcdaExtensions.NAME_RELIGION, convert.makeCodeableConceptFromCD(cda.getChild(p, "religiousAffiliationCode")), false));
-		pat.setProvider(Factory.makeResourceReference("Organization", makeOrganization(cda.getChild(pr, "providerOrganization"), "Provider")));
+		pat.setProvider(Factory.makeResourceReference(makeOrganization(cda.getChild(pr, "providerOrganization"), "Provider")));
 		return addResource(pat, "Subject", UUID.randomUUID().toString());
 	}
 
@@ -225,10 +226,10 @@ public class CcdaConverter {
   			pr.setName(convert.makeNameFromEN(e));
 		
 
-		DocumentAttesterComponent att = document.new DocumentAttesterComponent();
+		DocumentAttesterComponent att = new Document.DocumentAttesterComponent();
 		att.setModeSimple(mode);
 		att.setTime(convert.makeDateTimeFromTS(cda.getChild(a1,"time")));
-	  att.setParty(Factory.makeResourceReference("Practitioner", addResource(pr, title, UUID.randomUUID().toString())));
+	  att.setParty(Factory.makeResourceReference(addResource(pr, title, UUID.randomUUID().toString())));
 	  return att;
   }
 
@@ -261,11 +262,11 @@ public class CcdaConverter {
 			AllergyIntolerance ai = new AllergyIntolerance();
 			list.getContained().add(ai); 
 			ai.setXmlId("a"+i.toString());
-			ListEntryComponent item = list.new ListEntryComponent();
+			ListEntryComponent item = new List_.ListEntryComponent();
 			list.getEntry().add(item);
-			item.setItem(Factory.makeResourceReference("AllergyIntolerance", "#a"+i.toString()));
+			item.setItem(Factory.makeResourceReference("#a"+i.toString()));
 			for (Element e : cda.getChildren(concern, "id"))
-				ai.setIdentifier(convert.makeIdentifierFromII(e));
+				ai.getIdentifier().add(convert.makeIdentifierFromII(e));
 			String s = cda.getStatus(concern);
 			if ("active".equals(s))
   			ai.setStatusSimple(Sensitivitystatus.confirmed);
@@ -297,16 +298,16 @@ public class CcdaConverter {
 			subst.setType(convert.makeCodeableConceptFromCD(cda.getDescendent(obs, "participant/participantRole/playingEntity/code"))); 
 			subst.setXmlId("s1");
 		  ai.getContained().add(subst);
-			ai.setSubstance(Factory.makeResourceReference("Substance", "#s1"));
+			ai.setSubstance(Factory.makeResourceReference("#s1"));
 			
 		}
 		
 		
 		// todo: text
-		SectionComponent s = document.new SectionComponent();
+		SectionComponent s = new Document.SectionComponent();
 		s.setCode(convert.makeCodeableConceptFromCD(cda.getChild(section,  "code")));
 		// todo: check subject
-		s.setContent(Factory.makeResourceReference("List", addResource(list, "Allergies, Adverse Reactions, Alerts", UUID.randomUUID().toString())));
+		s.setContent(Factory.makeResourceReference(addResource(list, "Allergies, Adverse Reactions, Alerts", UUID.randomUUID().toString())));
 		return s;
   }
 

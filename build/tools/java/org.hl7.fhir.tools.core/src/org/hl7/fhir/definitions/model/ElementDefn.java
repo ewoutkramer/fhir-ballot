@@ -38,7 +38,8 @@ import org.hl7.fhir.utilities.Utilities;
 
 public class ElementDefn {
 	
-	public static final String RIM_MAPPING = "http://hl7.org/v3";
+  public static final String RIM_MAPPING = "http://hl7.org/v3";
+  public static final String CDA_MAPPING = "http://hl7.org/v3/cda";
 	public static final String v2_MAPPING = "http://hl7.org/v2";
 	public static final String DICOM_MAPPING = "http://nema.org/dicom";
   public static final String vCard_MAPPING = "http://w3.org/vcard";
@@ -741,6 +742,31 @@ public class ElementDefn {
     return svgWidth;
   }
 
+  public static List<String> getAllMappingUris() {
+    List<String> results = new ArrayList<String>();
+    results.add(RIM_MAPPING);
+    results.add(CDA_MAPPING);
+    results.add(v2_MAPPING);
+    results.add(DICOM_MAPPING);
+    results.add(vCard_MAPPING);
+    results.add(XDS_MAPPING);
+    results.add(LOINC_MAPPING);
+    results.add(SNOMED_MAPPING);
+    results.add(PROV_MAPPING);
+    return results;
+  }
+
+  public boolean usesType(String name) {
+    for (TypeRef t : getTypes()) {
+      if (t.summary().equals(name))
+        return true;
+    }
+    return false;
+  }
+
+  public boolean isMandatory() {
+    return (minCardinality != null && maxCardinality != null && minCardinality == 1 && maxCardinality == 1);    
+  }
 	
 	
 }

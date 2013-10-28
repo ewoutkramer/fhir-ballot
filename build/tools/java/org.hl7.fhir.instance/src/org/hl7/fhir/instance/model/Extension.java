@@ -29,7 +29,9 @@ package org.hl7.fhir.instance.model;
   
 */
 
-// Generated on Mon, Aug 5, 2013 12:50+1000 for FHIR v0.10
+// Generated on Mon, Oct 28, 2013 15:39+1100 for FHIR v0.12
+
+import java.util.*;
 
 /**
  * Optional Extensions Element - found in all resources.
@@ -42,67 +44,57 @@ public class Extension extends Element {
     protected Uri url;
 
     /**
-     * This value should be set to true if the value of the extension qualifies or negates data in other content.
-     */
-    protected Boolean isModifier;
-
-    /**
      * Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).
      */
     protected org.hl7.fhir.instance.model.Type value;
+
+    public Extension() {
+      super();
+    }
+
+    public Extension(Uri url) {
+      super();
+      this.url = url;
+    }
 
     public Uri getUrl() { 
       return this.url;
     }
 
-    public void setUrl(Uri value) { 
+    public Extension setUrl(Uri value) { 
       this.url = value;
+      return this;
     }
 
     public String getUrlSimple() { 
       return this.url == null ? null : this.url.getValue();
     }
 
-    public void setUrlSimple(String value) { 
+    public Extension setUrlSimple(String value) { 
         if (this.url == null)
           this.url = new Uri();
         this.url.setValue(value);
-    }
-
-    public Boolean getIsModifier() { 
-      return this.isModifier;
-    }
-
-    public void setIsModifier(Boolean value) { 
-      this.isModifier = value;
-    }
-
-    public boolean getIsModifierSimple() { 
-      return this.isModifier == null ? null : this.isModifier.getValue();
-    }
-
-    public void setIsModifierSimple(boolean value) { 
-      if (value == false)
-        this.isModifier = null;
-      else {
-        if (this.isModifier == null)
-          this.isModifier = new Boolean();
-        this.isModifier.setValue(value);
-      }
+      return this;
     }
 
     public org.hl7.fhir.instance.model.Type getValue() { 
       return this.value;
     }
 
-    public void setValue(org.hl7.fhir.instance.model.Type value) { 
+    public Extension setValue(org.hl7.fhir.instance.model.Type value) { 
       this.value = value;
+      return this;
     }
+
+      protected void listChildren(List<Property> childrenList) {
+        super.listChildren(childrenList);
+        childrenList.add(new Property("url", "uri", "Source of the definition for the extension code - a logical name or a URL.", 0, java.lang.Integer.MAX_VALUE, url));
+        childrenList.add(new Property("value[x]", "*", "Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).", 0, java.lang.Integer.MAX_VALUE, value));
+      }
 
       public Extension copy() {
         Extension dst = new Extension();
         dst.url = url == null ? null : url.copy();
-        dst.isModifier = isModifier == null ? null : isModifier.copy();
         dst.value = value == null ? null : value.copy();
         return dst;
       }

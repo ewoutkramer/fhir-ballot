@@ -465,4 +465,30 @@ public class Utilities {
 	public static String stripBOM(String string) {
 	  return string.replace("\uFEFF", "");
   }
+
+
+  public static String oidTail(String id) {
+    if (id == null || !id.contains("."))
+      return id;
+    return id.substring(id.lastIndexOf(".")+1);
+  }
+
+
+  public static String escapeJava(String doco) {
+    if (doco == null)
+      return "";
+    
+    StringBuilder b = new StringBuilder();
+    for (char c : doco.toCharArray()) {
+      if (c == '\r')
+        b.append("\\r");
+      else if (c == '\n')
+        b.append("\\n");
+      else if (c == '"')
+        b.append("'");
+      else 
+        b.append(c);
+    }   
+    return b.toString();
+  }
 }

@@ -352,7 +352,7 @@ public class SpreadsheetParser {
               if (t == SearchType.reference) {
                 if (e == null)
                   throw new Exception("Search Param "+root2.getName()+"/"+n+" of type reference has wrong path "+ getLocation(row));
-                if (!e.typeCode().startsWith("Resource("))
+                if (!e.typeCode().startsWith("Resource(") && !e.typeCode().startsWith("uri|Resource("))
                   throw new Exception("Search Param "+root2.getName()+"/"+n+" wrong type. The search type is reference, but the element type is "+e.typeCode());
               } else if (e != null && e.typeCode().startsWith("Resource("))
                 throw new Exception("Search Param "+root2.getName()+"/"+n+" wrong type. The search type is "+t.toString()+", but the element type is "+e.typeCode());
@@ -371,12 +371,10 @@ public class SpreadsheetParser {
 	}
 
 	private SearchType readSearchType(String s, int row) throws Exception {
-		if ("integer".equals(s))
-			return SearchType.integer;
+		if ("number".equals(s))
+			return SearchType.number;
 		if ("string".equals(s))
 			return SearchType.string;
-		if ("text".equals(s))
-			return SearchType.text;
 		if ("date".equals(s))
 			return SearchType.date;
 		if ("reference".equals(s))
@@ -415,6 +413,8 @@ public class SpreadsheetParser {
       cd.setWebSite(sheet.getColumn(row, "Website"));
       cd.setEmail(sheet.getColumn(row, "Email"));
       cd.setCopyright(sheet.getColumn(row, "Copyright"));
+      cd.setV2Map(sheet.getColumn(row, "v2"));
+      cd.setV3Map(sheet.getColumn(row, "v3"));
 
 			if (cd.getBinding() == BindingSpecification.Binding.CodeList) {
 				Sheet codes = xls.getSheets().get(
@@ -484,6 +484,8 @@ public class SpreadsheetParser {
 			c.setDefinition(Utilities.appendPeriod(sheet.getColumn(row, "Definition")));
       c.setComment(sheet.getColumn(row, "Comment"));
       c.setParent(sheet.getColumn(row, "Parent"));
+      c.setV2Map(sheet.getColumn(row, "v2"));
+      c.setV3Map(sheet.getColumn(row, "v3"));
       if (Utilities.noString(c.getId()) && Utilities.noString(c.getSystem()))
         throw new Exception("code has no id or system ("+sheet.title+") "+getLocation(row));
 			codes.add(c);
@@ -532,7 +534,8 @@ public class SpreadsheetParser {
     sheet = loadSheet("Extensions");
     if (sheet != null) {
       for (int row = 0; row < sheet.rows.size(); row++) {
-        p.getExtensions().add(processExtension(null,
+        if (!sheet.getColumn(row, "Code").startsWith("!"))
+          p.getExtensions().add(processExtension(null,
             sheet, row, definitions,
             p.metadata("extension.uri")));
       }
@@ -561,7 +564,8 @@ public class SpreadsheetParser {
     sheet = loadSheet(n + "-Extensions");
     if (sheet != null) {
       for (int row = 0; row < sheet.rows.size(); row++) {
-        p.getExtensions().add(processExtension(
+        if (!sheet.getColumn(row, "Code").startsWith("!"))
+          p.getExtensions().add(processExtension(
             resource.getRoot().getElementByName("extensions"),
             sheet, row, definitions,
             p.metadata("extension.uri")));
@@ -768,7 +772,8 @@ public class SpreadsheetParser {
 		
 		e.setRequirements(Utilities.appendPeriod(sheet.getColumn(row, "Requirements")));
 		e.setComments(Utilities.appendPeriod(sheet.getColumn(row, "Comments")));
-		e.addMapping(ElementDefn.RIM_MAPPING, sheet.getColumn(row, "RIM Mapping"));
+    e.addMapping(ElementDefn.RIM_MAPPING, sheet.getColumn(row, "RIM Mapping"));
+    e.addMapping(ElementDefn.CDA_MAPPING, sheet.getColumn(row, "CDA Mapping"));
 		e.addMapping(ElementDefn.v2_MAPPING, sheet.getColumn(row, "v2 Mapping"));
 		e.addMapping(ElementDefn.DICOM_MAPPING, sheet.getColumn(row, "DICOM Mapping"));
     e.addMapping(ElementDefn.vCard_MAPPING, sheet.getColumn(row, "vCard Mapping"));
@@ -819,6 +824,7 @@ public class SpreadsheetParser {
     exe.setRequirements(Utilities.appendPeriod(sheet.getColumn(row, "Requirements")));
     exe.setComments(Utilities.appendPeriod(sheet.getColumn(row, "Comments")));
     exe.addMapping(ElementDefn.RIM_MAPPING, sheet.getColumn(row, "RIM Mapping"));
+    exe.addMapping(ElementDefn.CDA_MAPPING, sheet.getColumn(row, "CDA Mapping"));
     exe.addMapping(ElementDefn.v2_MAPPING, sheet.getColumn(row, "v2 Mapping"));
     exe.addMapping(ElementDefn.DICOM_MAPPING, sheet.getColumn(row, "DICOM Mapping"));
     exe.addMapping(ElementDefn.vCard_MAPPING, sheet.getColumn(row, "vCard Mapping"));

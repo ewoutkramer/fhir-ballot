@@ -29,7 +29,7 @@ package org.hl7.fhir.instance.model;
   
 */
 
-// Generated on Mon, Aug 5, 2013 12:50+1000 for FHIR v0.10
+// Generated on Mon, Oct 28, 2013 15:39+1100 for FHIR v0.12
 
 import java.util.*;
 
@@ -68,55 +68,96 @@ public class DeviceObservation extends Resource {
      */
     protected List<ResourceReference> measurement = new ArrayList<ResourceReference>();
 
+    public DeviceObservation() {
+      super();
+    }
+
+    public DeviceObservation(CodeableConcept code, Instant issued, ResourceReference subject, ResourceReference device) {
+      super();
+      this.code = code;
+      this.issued = issued;
+      this.subject = subject;
+      this.device = device;
+    }
+
     public CodeableConcept getCode() { 
       return this.code;
     }
 
-    public void setCode(CodeableConcept value) { 
+    public DeviceObservation setCode(CodeableConcept value) { 
       this.code = value;
+      return this;
     }
 
     public List<Identifier> getIdentifier() { 
       return this.identifier;
     }
 
+    // syntactic sugar
+    public Identifier addIdentifier() { 
+      Identifier t = new Identifier();
+      this.identifier.add(t);
+      return t;
+    }
+
     public Instant getIssued() { 
       return this.issued;
     }
 
-    public void setIssued(Instant value) { 
+    public DeviceObservation setIssued(Instant value) { 
       this.issued = value;
+      return this;
     }
 
     public Calendar getIssuedSimple() { 
       return this.issued == null ? null : this.issued.getValue();
     }
 
-    public void setIssuedSimple(Calendar value) { 
+    public DeviceObservation setIssuedSimple(Calendar value) { 
         if (this.issued == null)
           this.issued = new Instant();
         this.issued.setValue(value);
+      return this;
     }
 
     public ResourceReference getSubject() { 
       return this.subject;
     }
 
-    public void setSubject(ResourceReference value) { 
+    public DeviceObservation setSubject(ResourceReference value) { 
       this.subject = value;
+      return this;
     }
 
     public ResourceReference getDevice() { 
       return this.device;
     }
 
-    public void setDevice(ResourceReference value) { 
+    public DeviceObservation setDevice(ResourceReference value) { 
       this.device = value;
+      return this;
     }
 
     public List<ResourceReference> getMeasurement() { 
       return this.measurement;
     }
+
+    // syntactic sugar
+    public ResourceReference addMeasurement() { 
+      ResourceReference t = new ResourceReference();
+      this.measurement.add(t);
+      return t;
+    }
+
+      protected void listChildren(List<Property> childrenList) {
+        super.listChildren(childrenList);
+        childrenList.add(new Property("code", "CodeableConcept", "A code that identifies what type of device observation this is.", 0, java.lang.Integer.MAX_VALUE, code));
+        childrenList.add(new Property("identifier", "Identifier", "Identifiers assigned to this observation.", 0, java.lang.Integer.MAX_VALUE, identifier));
+        childrenList.add(new Property("issued", "instant", "Date the measurements were made.", 0, java.lang.Integer.MAX_VALUE, issued));
+        childrenList.add(new Property("subject", "Resource(Patient|Group|Device)", "The subject of the measurements. Usually, but not always, this is a patient. However devices are also used to make measurements on other things as well.", 0, java.lang.Integer.MAX_VALUE, subject));
+        childrenList.add(new Property("device", "Resource(Device)", "Device that produced the results.", 0, java.lang.Integer.MAX_VALUE, device));
+        childrenList.add(new Property("measurement", "Resource(Observation)", "The actual measurements that the device produced.", 0, java.lang.Integer.MAX_VALUE, measurement));
+      }
 
       public DeviceObservation copy() {
         DeviceObservation dst = new DeviceObservation();

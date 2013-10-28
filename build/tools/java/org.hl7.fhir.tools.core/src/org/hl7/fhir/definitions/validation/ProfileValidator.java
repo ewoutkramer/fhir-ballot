@@ -144,7 +144,7 @@ public class ProfileValidator extends BaseValidator {
         String mn = m.getName();
 //        if (mn.contains("[x]") || tn.contains("[x]"))
 //          System.out.println("Unsure how to compare mn and tn: '"+mn+"' / '"+tn+"'");
-        if (!mn.equals(tn) && !(tn.contains("[x]") && mn.substring(0, tn.indexOf("[x]")).equals(tn.substring(0, tn.indexOf("[x]"))))) {
+        if (!mn.equals(tn) && !(tn.contains("[x]") && mn.substring(0, Math.min(mn.length(), tn.indexOf("[x]"))).equals(tn.substring(0, tn.indexOf("[x]"))))) {
           m = null;
         }
       }
@@ -185,7 +185,7 @@ public class ProfileValidator extends BaseValidator {
     n.setName(terminalName(e));
     n.setInherited(true);
     n.setComments(e.getDefinition().getComments() == null ? null : e.getDefinition().getComments().getValue());
-    n.setBindingName(e.getDefinition().getBinding() == null ? null : e.getDefinition().getBinding().getValue());
+    n.setBindingName(e.getDefinition().getBinding() == null ? null : e.getDefinition().getBinding().getNameSimple());
     n.setShortDefn(e.getDefinition().getShort().getValue());
     n.setDefinition(e.getDefinition().getFormal().getValue());
     n.setMaxCardinality("*".equals(e.getDefinition().getMax().getValue()) ? null : Integer.parseInt(e.getDefinition().getMax().getValue()));
@@ -272,7 +272,7 @@ public class ProfileValidator extends BaseValidator {
     if (!target.hasComments())
       target.setComments(source.getDefinition().getComments() == null ? null : source.getDefinition().getComments().getValue());
     if (!target.hasBindingName())
-      target.setBindingName(source.getDefinition().getBinding() == null ? null : source.getDefinition().getBinding().getValue());
+      target.setBindingName(source.getDefinition().getBinding() == null ? null : source.getDefinition().getBinding().getNameSimple());
     if (!target.hasShortDefn())
       target.setShortDefn(source.getDefinition().getShort().getValue());
     if (!target.hasDefinition())

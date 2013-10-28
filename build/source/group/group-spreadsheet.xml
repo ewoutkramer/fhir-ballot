@@ -229,7 +229,7 @@
     <Cell ss:StyleID="s67"/>
     <Cell ss:StyleID="s67"/>
     <Cell><Data ss:Type="String">CodeableConcept</Data></Cell>
-    <Cell ss:StyleID="s67"><Data ss:Type="String">GroupCode</Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="String">GroupKind</Data></Cell>
     <Cell><Data ss:Type="String">Kind of Group members</Data></Cell>
     <Cell><Data ss:Type="String">Provides a specific type of resource the group includes.  E.g. &quot;cow&quot;, &quot;syringe&quot;, etc.</Data></Cell>
     <Cell ss:Index="11"><Data ss:Type="String">y</Data></Cell>
@@ -311,7 +311,7 @@
     <Cell ss:StyleID="s67"/>
     <Cell ss:StyleID="s67"/>
     <Cell ss:StyleID="s67"/>
-    <Cell><Data ss:Type="String">CodeableConcept|string|boolean|Quantity|Range</Data></Cell>
+    <Cell><Data ss:Type="String">CodeableConcept|boolean|Quantity|Range</Data></Cell>
     <Cell ss:StyleID="s67"><Data ss:Type="String">GroupCharacteristicValue</Data></Cell>
     <Cell><Data ss:Type="String">Value held by characteristic</Data></Cell>
     <Cell><Data ss:Type="String">The value of the trait that holds (or does not hold - see 'exclude') for members of the group</Data></Cell>
@@ -333,7 +333,7 @@
     <Cell><Data ss:Type="String">Group includes or excludes</Data></Cell>
     <Cell><Data ss:Type="String">If true, indicates the characteristic is one that is NOT held by members of the group</Data></Cell>
     <Cell ss:Index="12" ss:StyleID="s67"><Data ss:Type="String">Sometimes group membership is determined by characteristics not possessed</Data></Cell>
-    <Cell><Data ss:Type="String">This is labelled as &quot;Is Modifier&quot; because applications cannot wrongly include excluded members as included or vice versa</Data></Cell>
+    <Cell><Data ss:Type="String">This is labeled as &quot;Is Modifier&quot; because applications cannot wrongly include excluded members as included or vice versa</Data></Cell>
     <Cell ss:StyleID="s67"><Data ss:Type="String">./valueNegationInd</Data></Cell>
     <Cell ss:StyleID="s67"/>
     <Cell ss:StyleID="s67"/>
@@ -389,8 +389,8 @@
     </Pane>
     <Pane>
      <Number>0</Number>
-     <ActiveRow>13</ActiveRow>
-     <ActiveCol>10</ActiveCol>
+     <ActiveRow>11</ActiveRow>
+     <ActiveCol>5</ActiveCol>
     </Pane>
    </Panes>
    <ProtectObjects>False</ProtectObjects>
@@ -426,7 +426,7 @@
     <Cell ss:StyleID="s67"><Data ss:Type="Number">3</Data></Cell>
     <Cell ss:StyleID="s67"><Data ss:Type="String">Group member type agreement</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">Group.member</Data></Cell>
-    <Cell ss:StyleID="s67"><Data ss:Type="String">Member resource types must agree with group type</Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="String">Member resource types SHALL agree with group type</Data></Cell>
     <Cell ss:StyleID="s67"/>
     <Cell ss:StyleID="s67"><Data ss:Type="String">lower-case(f:type/@value)=parent::f:Group/f:type/@value or (f:type/@value='Patient' and parent::f:Group/f:type/@value=('animal','person'))</Data></Cell>
    </Row>
@@ -761,7 +761,7 @@
     <Cell ss:StyleID="s65"><Data ss:Type="String">Description</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
-    <Cell ss:StyleID="s67"><Data ss:Type="String">GroupCode</Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="String">GroupKind</Data></Cell>
     <Cell ss:StyleID="s63"><Data ss:Type="String">Kind of particular resource</Data></Cell>
     <Cell ss:StyleID="s71"><Data ss:Type="String">unbound</Data></Cell>
     <Cell ss:StyleID="s73"/>
@@ -814,8 +814,8 @@
     </Pane>
     <Pane>
      <Number>0</Number>
-     <ActiveRow>3</ActiveRow>
-     <ActiveCol>3</ActiveCol>
+     <ActiveRow>2</ActiveRow>
+     <ActiveCol>0</ActiveCol>
     </Pane>
    </Panes>
    <ProtectObjects>False</ProtectObjects>

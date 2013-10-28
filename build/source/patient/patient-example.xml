@@ -32,7 +32,7 @@
     <use value="usual"/>
     <label value="MRN"/>
     <system value="urn:oid:1.2.36.146.595.217.0.1"/>
-    <key value="12345"/>
+    <value value="12345"/>
     <period>
       <start value="2001-05-06"/>
     </period>
@@ -94,7 +94,7 @@
       <family value="du">
         <!-- the "du" part is a family name prefix (VV in iso 21090) -->
         <extension>
-          <url value="http://hl7.org/fhir/profile/@iso-21090#qualifier"/>
+          <url value="http://hl7.org/fhir/Profileiso-21090#qualifier"/>
           <valueCode value="VV"/>
         </extension>
       </family>
@@ -108,10 +108,9 @@
     </telecom>
   </contact>
 
-  <provider>
-    <type value="Organization"/>
-    <reference value="organization/@1"/>
-  </provider>
+  <managingOrganization>
+    <reference value="Organization/1"/>
+  </managingOrganization>
 
   <active value="true"/>
 

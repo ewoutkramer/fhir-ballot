@@ -34,9 +34,8 @@ POSSIBILITY OF SUCH DAMAGE.
 public class SearchParameter {
   public enum SearchType {
     composite, // search parameter is a composite of others
-    integer,  // search parameter must be a simple name 
+    number,  // search parameter must be a simple name 
     string,   // search parameter is a simple string, like a name part
-    text,     // search parameter is into a long string - text filter
     date,     // search parameter is onto a date
     quantity, // search parameter is onto a quantity (= token + -lower & -upper, and canonical)
     reference,// search parameter refers to a resource reference
@@ -48,6 +47,10 @@ public class SearchParameter {
   private SearchType type;
   private List<String> paths = new ArrayList<String>();
   private List<String> composites = new ArrayList<String>();
+  
+  // operational tracking
+  private String xPath;
+  private boolean works; // marked by the testing routines if this search parameter yields results for any of the examples
   
   public String getCode() {
     return code;
@@ -86,6 +89,22 @@ public class SearchParameter {
       b.append(", "+s);
     }
     return b.length() == 0 ? "" : b.toString().substring(2);
+  }
+
+  public boolean isWorks() {
+    return works;
+  }
+
+  public void setWorks(boolean works) {
+    this.works = works;
+  }
+
+  public String getXPath() {
+    return xPath;
+  }
+
+  public void setXPath(String xPath) {
+    this.xPath = xPath;
   }
   
   

@@ -30,7 +30,7 @@
 
   <identifier>
     <system value="http://nema.org/examples/patients"/>
-    <key value="MINT1234"/>
+    <value value="MINT1234"/>
   </identifier>
   <name>
     <family value="MINT_TEST"/>
@@ -48,10 +48,9 @@
   </gender>
 
 
-  <provider>
-    <type value="Organization"/>
-    <reference value="organization/@1"/>
-  </provider>
+  <managingOrganization>
+    <reference value="Organization/1"/>
+  </managingOrganization>
 
   <active value="true"/>
 </Patient>

@@ -8,11 +8,11 @@
   </text>
 	<identifier>
 	  <system value="http://healthintersections.com.au/test"/>
-	  <key value="1"/>
+	  <value value="1"/>
 	</identifier>
 	<versionIdentifier>
 	  <system value="urn:ietf:rfc:3986"/>
-	  <key value="urn:uuid:72391709-b9ae-4053-b888-4bee268bf5da"/> 
+	  <value value="urn:uuid:72391709-b9ae-4053-b888-4bee268bf5da"/> 
 	</versionIdentifier>
 	<created value="2012-01-04T09:10:14Z"/>
 	<type>
@@ -29,26 +29,22 @@
 	  <display value="Clinical-Staff"/>
 	</confidentiality>
 	<subject>
-	  <type value="Patient"/>
-	  <reference value="patient/@xcda"/>
+	  <reference value="Patient/xcda"/>
 	  <display value="Henry Levin the 7th"/>
 	</subject>
 	<author>
-	  <type value="Practitioner"/>
-	  <reference value="practitioner/@xcda-author"/>
+	  <reference value="Practitioner/xcda-author"/>
 	  <display value="Robert Dolin MD"/>
 	</author>
 	<attester>
 	  <mode value="legal"/>
 	  <party>
-		<type value="Practitioner"/>
-		<reference value="practitioner/@xcda-author"/>
+		<reference value="Practitioner/xcda-author"/>
 		<display value="Robert Dolin MD"/>
 	  </party>
 	</attester>
 	<custodian>
-	  <type value="Organization"/>
-	  <reference value="organization/@2.16.840.1.113883.19.5"/>
+	  <reference value="Organization/2.16.840.1.113883.19.5"/>
 	  <display value="Good Health Clinic"/>
 	</custodian>
   <section>
@@ -59,8 +55,7 @@
       </coding>
     </code>
     <content>
-      <type value="MedicationAdministration"/> 
-      <reference value="medicationadministration/@example"/>
+      <reference value="MedicationAdministration/example"/>
     </content>
   </section>
 </Document>

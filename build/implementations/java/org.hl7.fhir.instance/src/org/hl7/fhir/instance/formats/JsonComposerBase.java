@@ -30,34 +30,35 @@ POSSIBILITY OF SUCH DAMAGE.
  */
 
 
-import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.io.StringWriter;
-import java.io.Writer;
-import java.math.BigDecimal;
-import java.text.SimpleDateFormat;
+import java.util.List;
 
-import org.apache.commons.codec.binary.Base64;
-import org.hl7.fhir.instance.model.*;
-import org.hl7.fhir.instance.model.Boolean;
-import org.hl7.fhir.instance.model.Integer;
+import org.hl7.fhir.instance.model.AtomCategory;
+import org.hl7.fhir.instance.model.AtomEntry;
+import org.hl7.fhir.instance.model.AtomFeed;
+import org.hl7.fhir.instance.model.Binary;
+import org.hl7.fhir.instance.model.Element;
+import org.hl7.fhir.instance.model.Resource;
 import org.hl7.fhir.utilities.Utilities;
-import org.hl7.fhir.utilities.xhtml.*;
-import org.hl7.fhir.utilities.xml.*;
+import org.hl7.fhir.utilities.xhtml.XhtmlComposer;
+import org.hl7.fhir.utilities.xhtml.XhtmlNode;
+
+import com.google.gson.stream.JsonWriter;
 
 
-public abstract class JsonComposerBase extends XmlBase {
+public abstract class JsonComposerBase extends XmlBase implements Composer {
 
 	protected JsonWriter json;
 	private boolean htmlPretty;
-	private boolean jsonPretty;
+	//private boolean jsonPretty;
 
 	public void compose(OutputStream stream, Resource resource, boolean pretty) throws Exception {
 		OutputStreamWriter osw = new OutputStreamWriter(stream, "UTF-8");
 		JsonWriter writer = new JsonWriter(osw);
-		writer.setPretty(pretty);
-		writer.object();
+
+        writer.setIndent(pretty ? "  ":"");
+		writer.beginObject();
 		compose(writer, resource);
 		writer.endObject();
 		osw.flush();
@@ -66,8 +67,8 @@ public abstract class JsonComposerBase extends XmlBase {
 	public void compose(OutputStream stream, AtomFeed feed, boolean pretty) throws Exception {
 		OutputStreamWriter osw = new OutputStreamWriter(stream, "UTF-8");
 		JsonWriter writer = new JsonWriter(osw);
-		writer.setPretty(pretty);
-		writer.object();
+        writer.setIndent(pretty ? "  ":"");
+		writer.beginObject();
 		compose(writer, feed);
 		writer.endObject();
 		osw.flush();
@@ -80,7 +81,9 @@ public abstract class JsonComposerBase extends XmlBase {
 
 	public void compose(JsonWriter writer, AtomFeed feed) throws Exception {
 		json = writer;
+		openObject("feed");
 		composeFeed(feed);
+		closeObject();
 	}
 
   // standard order for round-tripping examples succesfully:
@@ -90,9 +93,9 @@ public abstract class JsonComposerBase extends XmlBase {
 	  prop("title", feed.getTitle());
     prop("id", feed.getId());
     if (feed.getLinks().size() > 0) {
-      openArray("links");
+      openArray("link");
       for (String n : feed.getLinks().keySet()) {
-        json.object();
+        json.beginObject();
         prop("rel", n);
         prop("href", feed.getLinks().get(n));
         json.endObject();
@@ -101,10 +104,23 @@ public abstract class JsonComposerBase extends XmlBase {
     }
 		if (feed.getUpdated() != null)
 			prop("updated", dateToXml(feed.getUpdated()));
+		if (feed.getTags().size() > 0) {
+			openArray("category");
+			for (AtomCategory cat : feed.getTags()) {
+				json.beginObject();
+				prop("scheme", cat.getScheme());
+				prop("term", cat.getTerm());
+				if (!Utilities.noString(cat.getLabel()))
+					prop("label", cat.getLabel());
+				json.endObject();
+			}
+			closeArray();
+		}
+
 
 		if (feed.getAuthorName() != null || feed.getAuthorUri() != null) {
-		  openArray("authors");
-		  json.object();
+		  openArray("author");
+		  json.beginObject();
 		  if (feed.getAuthorName() != null)
 		    prop("name", feed.getAuthorName());
 		  if (feed.getAuthorUri() != null)
@@ -114,8 +130,8 @@ public abstract class JsonComposerBase extends XmlBase {
 		}
 
 		if (feed.getEntryList().size() > 0) {
-			openArray("entries");
-			for (AtomEntry e : feed.getEntryList())
+			openArray("entry");
+			for (AtomEntry<? extends Resource> e : feed.getEntryList())
 				composeEntry(e);
 			closeArray();
 		}
@@ -123,14 +139,14 @@ public abstract class JsonComposerBase extends XmlBase {
 
   // standard order for round-tripping examples succesfully:
   // title, id, links, updated, published, authors 
-	private void composeEntry(AtomEntry e) throws Exception {
-		json.object();
+	private <T extends Resource> void composeEntry(AtomEntry<T> e) throws Exception {
+		json.beginObject();
 		prop("title", e.getTitle());
 		prop("id", e.getId());
 		if (e.getLinks().size() > 0) {
-		  openArray("links");
+		  openArray("link");
 		  for (String n : e.getLinks().keySet()) {
-		    json.object();
+		    json.beginObject();
 		    prop("rel", n);
 		    prop("href", e.getLinks().get(n));
 		    json.endObject();
@@ -144,8 +160,8 @@ public abstract class JsonComposerBase extends XmlBase {
 			prop("published", dateToXml(e.getPublished()));
 
     if (e.getAuthorName() != null || e.getAuthorUri() != null) {
-      openArray("authors");
-      json.object();
+      openArray("author");
+      json.beginObject();
       if (e.getAuthorName() != null)
         prop("name", e.getAuthorName());
       if (e.getAuthorUri() != null)
@@ -156,14 +172,13 @@ public abstract class JsonComposerBase extends XmlBase {
 
 
 		if (e.getTags().size() > 0) {
-			openArray("categories");
-			for (String uri : e.getTags().keySet()) {
-				json.object();
-				prop("scheme", "http://hl7.org/fhir/tag");
-				prop("term", uri);
-				String label = e.getTags().get(uri);
-				if (!Utilities.noString(label))
-					prop("label", label);
+			openArray("category");
+			for (AtomCategory cat : e.getTags()) {
+				json.beginObject();
+				prop("scheme", cat.getScheme());
+				prop("term", cat.getTerm());
+				if (!Utilities.noString(cat.getLabel()))
+					prop("label", cat.getLabel());
 				json.endObject();
 			}
 			closeArray();
@@ -186,21 +201,24 @@ public abstract class JsonComposerBase extends XmlBase {
 //			prop("_id", element.getXmlId());
 //	}
 //
+	protected void writeNull(String name) throws Exception {
+		json.nullValue();
+	}
 	protected void prop(String name, String value) throws Exception {
 		if (name != null)
-			json.key(name);
+			json.name(name);
 		json.value(value);
 	}
 
   protected void prop(String name, java.lang.Boolean value) throws Exception {
     if (name != null)
-      json.key(name);
+      json.name(name);
     json.value(value);
   }
 
   protected void prop(String name, java.lang.Integer value) throws Exception {
     if (name != null)
-      json.key(name);
+      json.name(name);
     json.value(value);
   }
 
@@ -465,8 +483,8 @@ public abstract class JsonComposerBase extends XmlBase {
 
 	protected void open(String name) throws Exception {
 		if (name != null) 
-			json.key(name);
-		json.object();
+			json.name(name);
+		json.beginObject();
 	}
 
 	protected void close() throws Exception {
@@ -475,12 +493,22 @@ public abstract class JsonComposerBase extends XmlBase {
 
 	protected void openArray(String name) throws Exception {
 		if (name != null) 
-			json.key(name);
-		json.array();
+			json.name(name);
+		json.beginArray();
 	}
 
 	protected void closeArray() throws Exception {
 		json.endArray();
+	}
+
+	protected void openObject(String name) throws Exception {
+		if (name != null) 
+			json.name(name);
+		json.beginObject();
+	}
+
+	protected void closeObject() throws Exception {
+		json.endObject();
 	}
 
   protected void composeBinary(String name, Binary element) throws Exception {
@@ -494,5 +522,13 @@ public abstract class JsonComposerBase extends XmlBase {
     }    
     
   }
-  
+
+  protected boolean anyHasExtras(List<? extends Element> list) {
+	  for (Element e : list) {
+	  	if (e.hasExtensions() || !Utilities.noString(e.getXmlId()))
+	  		return true;
+	  }
+	  return false;
+  }
+
 }

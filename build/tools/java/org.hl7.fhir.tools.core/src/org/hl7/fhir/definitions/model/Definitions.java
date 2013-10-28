@@ -70,6 +70,7 @@ public class Definitions {
 	private Map<String, ProfileDefn> profiles = new HashMap<String, ProfileDefn>();
   private Map<String, String> diagrams = new HashMap<String, String>();
   private Map<String, ValueSet> valuesets = new HashMap<String, ValueSet>();
+  private Map<String, ValueSet> codeSystems = new HashMap<String, ValueSet>();
   private Map<String, ValueSet> extraValuesets = new HashMap<String, ValueSet>();
 
   private List<Compartment> compartments = new ArrayList<Compartment>();
@@ -280,6 +281,10 @@ public class Definitions {
     return valuesets;
   }
 
+  public Map<String, ValueSet> getCodeSystems() {
+    return codeSystems;
+  }
+
   public Map<String, ValueSet> getExtraValuesets() {
     return extraValuesets;
   }
@@ -293,6 +298,10 @@ public class Definitions {
       if (c.getName().equals(n))
         return c;
     return null;
+  }
+
+  public boolean hasPrimitiveType(String name) {
+    return primitives.containsKey(name);
   }
 
   

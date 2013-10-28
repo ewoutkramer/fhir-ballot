@@ -3,12 +3,11 @@
 
  <text>
     <status value="generated"/>
-    <div xmlns="http://www.w3.org/1999/xhtml">A human readable rendering of the coverage</div>
+    <div xmlns="http://www.w3.org/1999/xhtml">A human-readable rendering of the coverage</div>
   </text>
 
  <issuer>
-  <type value="Organization"/>
-  <reference value="organization/@2"/>
+  <reference value="Organization/2"/>
 </issuer>
  
  <period> 
@@ -24,17 +23,17 @@
  
  <identifier>
     <system value="http://xyz.com/codes/identifier"/>
-    <key value="12345"/>
+    <value value="12345"/>
  </identifier>
  
  <plan>
     <system value="http://xyz.com/codes/plan"/>
-    <key value="CBI35"/>
+    <value value="CBI35"/>
  </plan>
  
  <subplan>
     <system value="http://xyz.com/codes/subplan"/>
-    <key value="123"/>
+    <value value="123"/>
  </subplan>
  
  <dependent value="0"/>

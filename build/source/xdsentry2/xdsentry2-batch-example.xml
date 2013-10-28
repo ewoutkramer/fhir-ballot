@@ -84,7 +84,7 @@
 					<use value="usual"/>
 					<label value="MRN"/>
 					<system value="http://healthintersections.com.au/xds/patients"/>
-					<key value="89765a87b"/>
+					<value value="89765a87b"/>
   			</identifier>
   			<details>
   			  <!-- These details are extracted from a standard Xds example -->
@@ -103,8 +103,7 @@
   			</details>
 				<provider>
 				  <!-- a standard example organization -->
-					<type value="Organization"/>
-					<reference value="organization/@1"/>
+					<reference value="Organization/1"/>
 				</provider>
 			</Patient>
 		</content>
@@ -167,7 +166,7 @@
         <!-- Version specific document identifier -->
         <id>
           <system value="urn:ietf:rfc:3986"/>
-          <key value="urn:oid:129.6.58.92.88336"/>
+          <value value="urn:oid:129.6.58.92.88336"/>
         </id>
         <information>
           <created value="2005-12-24T12:03:24+10:00"/>
@@ -190,14 +189,12 @@
             <display value="Clinical-Staff"/>
           </confidentiality>
           <subject>
-            <type value="Patient"/>
             <!-- a reference to the patient record - the
              server will have to replace this with the 
              correct reference -->
             <url value="cid:20130107011536-2@fhir.hl7.org"/>
           </subject>
           <author>
-            <type value="Practitioner"/>
             <reference value="#a1"/> <!-- internal reference -->
           </author>
         </information>

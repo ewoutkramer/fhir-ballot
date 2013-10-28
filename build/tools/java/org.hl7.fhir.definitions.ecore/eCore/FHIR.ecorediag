@@ -223,6 +223,14 @@
         <element xmi:type="ecore:EAttribute" href="FHIR.ecore#//BindingDefn/source"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_CL-oi6_CEeGrAaDwyEdjfA"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_2yGAgCprEeOGWb3pNhV-uQ" type="2001">
+        <element xmi:type="ecore:EAttribute" href="FHIR.ecore#//BindingDefn/v2Map"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_2yGAgSprEeOGWb3pNhV-uQ"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_4MRfgCprEeOGWb3pNhV-uQ" type="2001">
+        <element xmi:type="ecore:EAttribute" href="FHIR.ecore#//BindingDefn/v3Map"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_4MRfgSprEeOGWb3pNhV-uQ"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_CL03xa_CEeGrAaDwyEdjfA"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_CL03xq_CEeGrAaDwyEdjfA"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_CL03x6_CEeGrAaDwyEdjfA"/>
@@ -393,6 +401,14 @@
         <element xmi:type="ecore:EAttribute" href="FHIR.ecore#//DefinedCode/parent"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_c0RyodKSEeKxd9JySb-few"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_wvGjUCprEeOGWb3pNhV-uQ" type="2001">
+        <element xmi:type="ecore:EAttribute" href="FHIR.ecore#//DefinedCode/v2Map"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_wvGjUSprEeOGWb3pNhV-uQ"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_zW6TECprEeOGWb3pNhV-uQ" type="2001">
+        <element xmi:type="ecore:EAttribute" href="FHIR.ecore#//DefinedCode/v3Map"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_zW6TESprEeOGWb3pNhV-uQ"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_CMHylK_CEeGrAaDwyEdjfA"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_CMHyla_CEeGrAaDwyEdjfA"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_CMHylq_CEeGrAaDwyEdjfA"/>
@@ -553,37 +569,29 @@
   <children xmi:type="notation:Node" xmi:id="_CMbUiq_CEeGrAaDwyEdjfA" type="1005">
     <children xmi:type="notation:Node" xmi:id="_CMbUja_CEeGrAaDwyEdjfA" type="4010"/>
     <children xmi:type="notation:Node" xmi:id="_CMbUjq_CEeGrAaDwyEdjfA" type="5008">
-      <children xmi:type="notation:Node" xmi:id="_NVii0NKJEeKxd9JySb-few" type="2006">
-        <element xmi:type="ecore:EEnumLiteral" href="FHIR.ecore#//SearchType/composite"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_NVii0dKJEeKxd9JySb-few"/>
-      </children>
       <children xmi:type="notation:Node" xmi:id="_CMbUkq_CEeGrAaDwyEdjfA" type="2006">
-        <element xmi:type="ecore:EEnumLiteral" href="FHIR.ecore#//SearchType/integer"/>
+        <element xmi:type="ecore:EEnumLiteral" href="FHIR.ecore#//SearchType/number"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_CMbUk6_CEeGrAaDwyEdjfA"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_CMbUlK_CEeGrAaDwyEdjfA" type="2006">
         <element xmi:type="ecore:EEnumLiteral" href="FHIR.ecore#//SearchType/string"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_CMbUla_CEeGrAaDwyEdjfA"/>
       </children>
-      <children xmi:type="notation:Node" xmi:id="_CMbUlq_CEeGrAaDwyEdjfA" type="2006">
-        <element xmi:type="ecore:EEnumLiteral" href="FHIR.ecore#//SearchType/text"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_CMbUl6_CEeGrAaDwyEdjfA"/>
-      </children>
       <children xmi:type="notation:Node" xmi:id="_ri_XQbomEeGRTPO1UC5gIg" type="2006">
         <element xmi:type="ecore:EEnumLiteral" href="FHIR.ecore#//SearchType/date"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_ri_XQromEeGRTPO1UC5gIg"/>
       </children>
-      <children xmi:type="notation:Node" xmi:id="_CMbUmK_CEeGrAaDwyEdjfA" type="2006">
-        <element xmi:type="ecore:EEnumLiteral" href="FHIR.ecore#//SearchType/quantity"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_CMbUma_CEeGrAaDwyEdjfA"/>
+      <children xmi:type="notation:Node" xmi:id="_Aqsn4NKJEeKxd9JySb-few" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="FHIR.ecore#//SearchType/token"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_Aqsn4dKJEeKxd9JySb-few"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_CMbUmq_CEeGrAaDwyEdjfA" type="2006">
         <element xmi:type="ecore:EEnumLiteral" href="FHIR.ecore#//SearchType/reference"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_CMbUm6_CEeGrAaDwyEdjfA"/>
       </children>
-      <children xmi:type="notation:Node" xmi:id="_Aqsn4NKJEeKxd9JySb-few" type="2006">
-        <element xmi:type="ecore:EEnumLiteral" href="FHIR.ecore#//SearchType/token"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_Aqsn4dKJEeKxd9JySb-few"/>
+      <children xmi:type="notation:Node" xmi:id="_NVii0NKJEeKxd9JySb-few" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="FHIR.ecore#//SearchType/composite"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_NVii0dKJEeKxd9JySb-few"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_CMbUj6_CEeGrAaDwyEdjfA"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_CMbUkK_CEeGrAaDwyEdjfA"/>

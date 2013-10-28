@@ -29,7 +29,7 @@ package org.hl7.fhir.instance.model;
   
 */
 
-// Generated on Mon, Aug 5, 2013 12:50+1000 for FHIR v0.10
+// Generated on Mon, Oct 28, 2013 15:39+1100 for FHIR v0.12
 
 import java.util.*;
 
@@ -60,7 +60,7 @@ public class Specimen extends Resource {
         }
     }
 
-  public class HierarchicalRelationshipTypeEnumFactory implements EnumFactory {
+  public static class HierarchicalRelationshipTypeEnumFactory implements EnumFactory {
     public Enum<?> fromCode(String codeString) throws Exception {
       if (codeString == null || "".equals(codeString))
             if (codeString == null || "".equals(codeString))
@@ -80,7 +80,7 @@ public class Specimen extends Resource {
       }
     }
 
-    public class SpecimenSourceComponent extends Element {
+    public static class SpecimenSourceComponent extends BackboneElement {
         /**
          * Whether this relationship is to a parent or to a child.
          */
@@ -91,30 +91,54 @@ public class Specimen extends Resource {
          */
         protected List<ResourceReference> target = new ArrayList<ResourceReference>();
 
+      public SpecimenSourceComponent() {
+        super();
+      }
+
+      public SpecimenSourceComponent(Enumeration<HierarchicalRelationshipType> relationship) {
+        super();
+        this.relationship = relationship;
+      }
+
         public Enumeration<HierarchicalRelationshipType> getRelationship() { 
           return this.relationship;
         }
 
-        public void setRelationship(Enumeration<HierarchicalRelationshipType> value) { 
+        public SpecimenSourceComponent setRelationship(Enumeration<HierarchicalRelationshipType> value) { 
           this.relationship = value;
+          return this;
         }
 
         public HierarchicalRelationshipType getRelationshipSimple() { 
           return this.relationship == null ? null : this.relationship.getValue();
         }
 
-        public void setRelationshipSimple(HierarchicalRelationshipType value) { 
+        public SpecimenSourceComponent setRelationshipSimple(HierarchicalRelationshipType value) { 
             if (this.relationship == null)
               this.relationship = new Enumeration<HierarchicalRelationshipType>();
             this.relationship.setValue(value);
+          return this;
         }
 
         public List<ResourceReference> getTarget() { 
           return this.target;
         }
 
+    // syntactic sugar
+        public ResourceReference addTarget() { 
+          ResourceReference t = new ResourceReference();
+          this.target.add(t);
+          return t;
+        }
+
+        protected void listChildren(List<Property> childrenList) {
+          super.listChildren(childrenList);
+          childrenList.add(new Property("relationship", "code", "Whether this relationship is to a parent or to a child.", 0, java.lang.Integer.MAX_VALUE, relationship));
+          childrenList.add(new Property("target", "Resource(Specimen)", "The specimen resource that is the target of this relationship.", 0, java.lang.Integer.MAX_VALUE, target));
+        }
+
       public SpecimenSourceComponent copy(Specimen e) {
-        SpecimenSourceComponent dst = e.new SpecimenSourceComponent();
+        SpecimenSourceComponent dst = new SpecimenSourceComponent();
         dst.relationship = relationship == null ? null : relationship.copy();
         dst.target = new ArrayList<ResourceReference>();
         for (ResourceReference i : target)
@@ -124,7 +148,7 @@ public class Specimen extends Resource {
 
   }
 
-    public class SpecimenCollectionComponent extends Element {
+    public static class SpecimenCollectionComponent extends BackboneElement {
         /**
          * Person who collected the specimen.
          */
@@ -155,62 +179,101 @@ public class Specimen extends Resource {
          */
         protected CodeableConcept sourceSite;
 
+      public SpecimenCollectionComponent() {
+        super();
+      }
+
+      public SpecimenCollectionComponent(DateTime collectedTime) {
+        super();
+        this.collectedTime = collectedTime;
+      }
+
         public ResourceReference getCollector() { 
           return this.collector;
         }
 
-        public void setCollector(ResourceReference value) { 
+        public SpecimenCollectionComponent setCollector(ResourceReference value) { 
           this.collector = value;
+          return this;
         }
 
         public List<String_> getComment() { 
           return this.comment;
         }
 
+    // syntactic sugar
+        public String_ addComment() { 
+          String_ t = new String_();
+          this.comment.add(t);
+          return t;
+        }
+
+        public String_ addCommentSimple(String value) { 
+          String_ t = new String_();
+          t.setValue(value);
+          this.comment.add(t);
+          return t;
+        }
+
         public DateTime getCollectedTime() { 
           return this.collectedTime;
         }
 
-        public void setCollectedTime(DateTime value) { 
+        public SpecimenCollectionComponent setCollectedTime(DateTime value) { 
           this.collectedTime = value;
+          return this;
         }
 
         public String getCollectedTimeSimple() { 
           return this.collectedTime == null ? null : this.collectedTime.getValue();
         }
 
-        public void setCollectedTimeSimple(String value) { 
+        public SpecimenCollectionComponent setCollectedTimeSimple(String value) { 
             if (this.collectedTime == null)
               this.collectedTime = new DateTime();
             this.collectedTime.setValue(value);
+          return this;
         }
 
         public Quantity getQuantity() { 
           return this.quantity;
         }
 
-        public void setQuantity(Quantity value) { 
+        public SpecimenCollectionComponent setQuantity(Quantity value) { 
           this.quantity = value;
+          return this;
         }
 
         public CodeableConcept getMethod() { 
           return this.method;
         }
 
-        public void setMethod(CodeableConcept value) { 
+        public SpecimenCollectionComponent setMethod(CodeableConcept value) { 
           this.method = value;
+          return this;
         }
 
         public CodeableConcept getSourceSite() { 
           return this.sourceSite;
         }
 
-        public void setSourceSite(CodeableConcept value) { 
+        public SpecimenCollectionComponent setSourceSite(CodeableConcept value) { 
           this.sourceSite = value;
+          return this;
+        }
+
+        protected void listChildren(List<Property> childrenList) {
+          super.listChildren(childrenList);
+          childrenList.add(new Property("collector", "Resource(Practitioner)", "Person who collected the specimen.", 0, java.lang.Integer.MAX_VALUE, collector));
+          childrenList.add(new Property("comment", "string", "To communicate any details or issues encountered during the specimen collection procedure.", 0, java.lang.Integer.MAX_VALUE, comment));
+          childrenList.add(new Property("collectedTime", "dateTime", "Time when specimen was collected from subject - the physiologically relevant time.", 0, java.lang.Integer.MAX_VALUE, collectedTime));
+          childrenList.add(new Property("quantity", "Quantity", "The quantity of specimen collected; for instance the volume of a blood sample, or the physical measurement of an anatomic pathology sample.", 0, java.lang.Integer.MAX_VALUE, quantity));
+          childrenList.add(new Property("method", "CodeableConcept", "A coded value specifying the technique that is used to perform the procedure.", 0, java.lang.Integer.MAX_VALUE, method));
+          childrenList.add(new Property("sourceSite", "CodeableConcept", "Anatomical location from which the specimen should be collected (if subject is a patient).", 0, java.lang.Integer.MAX_VALUE, sourceSite));
         }
 
       public SpecimenCollectionComponent copy(Specimen e) {
-        SpecimenCollectionComponent dst = e.new SpecimenCollectionComponent();
+        SpecimenCollectionComponent dst = new SpecimenCollectionComponent();
         dst.collector = collector == null ? null : collector.copy();
         dst.comment = new ArrayList<String_>();
         for (String_ i : comment)
@@ -224,7 +287,7 @@ public class Specimen extends Resource {
 
   }
 
-    public class SpecimenTreatmentComponent extends Element {
+    public static class SpecimenTreatmentComponent extends BackboneElement {
         /**
          * Textual description of procedure.
          */
@@ -240,19 +303,24 @@ public class Specimen extends Resource {
          */
         protected List<ResourceReference> additive = new ArrayList<ResourceReference>();
 
+      public SpecimenTreatmentComponent() {
+        super();
+      }
+
         public String_ getDescription() { 
           return this.description;
         }
 
-        public void setDescription(String_ value) { 
+        public SpecimenTreatmentComponent setDescription(String_ value) { 
           this.description = value;
+          return this;
         }
 
         public String getDescriptionSimple() { 
           return this.description == null ? null : this.description.getValue();
         }
 
-        public void setDescriptionSimple(String value) { 
+        public SpecimenTreatmentComponent setDescriptionSimple(String value) { 
           if (value == null)
             this.description = null;
           else {
@@ -260,22 +328,38 @@ public class Specimen extends Resource {
               this.description = new String_();
             this.description.setValue(value);
           }
+          return this;
         }
 
         public CodeableConcept getProcedure() { 
           return this.procedure;
         }
 
-        public void setProcedure(CodeableConcept value) { 
+        public SpecimenTreatmentComponent setProcedure(CodeableConcept value) { 
           this.procedure = value;
+          return this;
         }
 
         public List<ResourceReference> getAdditive() { 
           return this.additive;
         }
 
+    // syntactic sugar
+        public ResourceReference addAdditive() { 
+          ResourceReference t = new ResourceReference();
+          this.additive.add(t);
+          return t;
+        }
+
+        protected void listChildren(List<Property> childrenList) {
+          super.listChildren(childrenList);
+          childrenList.add(new Property("description", "string", "Textual description of procedure.", 0, java.lang.Integer.MAX_VALUE, description));
+          childrenList.add(new Property("procedure", "CodeableConcept", "A coded value specifying the procedure used to process the specimen.", 0, java.lang.Integer.MAX_VALUE, procedure));
+          childrenList.add(new Property("additive", "Resource(Substance)", "Specimen additive.", 0, java.lang.Integer.MAX_VALUE, additive));
+        }
+
       public SpecimenTreatmentComponent copy(Specimen e) {
-        SpecimenTreatmentComponent dst = e.new SpecimenTreatmentComponent();
+        SpecimenTreatmentComponent dst = new SpecimenTreatmentComponent();
         dst.description = description == null ? null : description.copy();
         dst.procedure = procedure == null ? null : procedure.copy();
         dst.additive = new ArrayList<ResourceReference>();
@@ -286,7 +370,7 @@ public class Specimen extends Resource {
 
   }
 
-    public class SpecimenContainerComponent extends Element {
+    public static class SpecimenContainerComponent extends BackboneElement {
         /**
          * Id for container. There may be muliple; a manufacturer's bar code, lab assigned identifier, etc.
          */
@@ -317,23 +401,35 @@ public class Specimen extends Resource {
          */
         protected ResourceReference additive;
 
+      public SpecimenContainerComponent() {
+        super();
+      }
+
         public List<Identifier> getIdentifier() { 
           return this.identifier;
+        }
+
+    // syntactic sugar
+        public Identifier addIdentifier() { 
+          Identifier t = new Identifier();
+          this.identifier.add(t);
+          return t;
         }
 
         public String_ getDescription() { 
           return this.description;
         }
 
-        public void setDescription(String_ value) { 
+        public SpecimenContainerComponent setDescription(String_ value) { 
           this.description = value;
+          return this;
         }
 
         public String getDescriptionSimple() { 
           return this.description == null ? null : this.description.getValue();
         }
 
-        public void setDescriptionSimple(String value) { 
+        public SpecimenContainerComponent setDescriptionSimple(String value) { 
           if (value == null)
             this.description = null;
           else {
@@ -341,42 +437,57 @@ public class Specimen extends Resource {
               this.description = new String_();
             this.description.setValue(value);
           }
+          return this;
         }
 
         public CodeableConcept getType() { 
           return this.type;
         }
 
-        public void setType(CodeableConcept value) { 
+        public SpecimenContainerComponent setType(CodeableConcept value) { 
           this.type = value;
+          return this;
         }
 
         public Quantity getCapacity() { 
           return this.capacity;
         }
 
-        public void setCapacity(Quantity value) { 
+        public SpecimenContainerComponent setCapacity(Quantity value) { 
           this.capacity = value;
+          return this;
         }
 
         public Quantity getSpecimenQuantity() { 
           return this.specimenQuantity;
         }
 
-        public void setSpecimenQuantity(Quantity value) { 
+        public SpecimenContainerComponent setSpecimenQuantity(Quantity value) { 
           this.specimenQuantity = value;
+          return this;
         }
 
         public ResourceReference getAdditive() { 
           return this.additive;
         }
 
-        public void setAdditive(ResourceReference value) { 
+        public SpecimenContainerComponent setAdditive(ResourceReference value) { 
           this.additive = value;
+          return this;
+        }
+
+        protected void listChildren(List<Property> childrenList) {
+          super.listChildren(childrenList);
+          childrenList.add(new Property("identifier", "Identifier", "Id for container. There may be muliple; a manufacturer's bar code, lab assigned identifier, etc.", 0, java.lang.Integer.MAX_VALUE, identifier));
+          childrenList.add(new Property("description", "string", "Textual description of container.", 0, java.lang.Integer.MAX_VALUE, description));
+          childrenList.add(new Property("type", "CodeableConcept", "The type of container associated with the specimen (eg slide, aliquot, etc).", 0, java.lang.Integer.MAX_VALUE, type));
+          childrenList.add(new Property("capacity", "Quantity", "The capacity (volume or other measure the container may contain.", 0, java.lang.Integer.MAX_VALUE, capacity));
+          childrenList.add(new Property("specimenQuantity", "Quantity", "The quantity of specimen in the container; may be volume, dimensions, or other appropriate measurements, depending on the specimen type.", 0, java.lang.Integer.MAX_VALUE, specimenQuantity));
+          childrenList.add(new Property("additive", "Resource(Substance)", "Additive associated with the container.", 0, java.lang.Integer.MAX_VALUE, additive));
         }
 
       public SpecimenContainerComponent copy(Specimen e) {
-        SpecimenContainerComponent dst = e.new SpecimenContainerComponent();
+        SpecimenContainerComponent dst = new SpecimenContainerComponent();
         dst.identifier = new ArrayList<Identifier>();
         for (Identifier i : identifier)
           dst.identifier.add(i.copy());
@@ -435,51 +546,79 @@ public class Specimen extends Resource {
      */
     protected List<SpecimenContainerComponent> container = new ArrayList<SpecimenContainerComponent>();
 
+    public Specimen() {
+      super();
+    }
+
+    public Specimen(ResourceReference subject, SpecimenCollectionComponent collection) {
+      super();
+      this.subject = subject;
+      this.collection = collection;
+    }
+
     public Identifier getIdentifier() { 
       return this.identifier;
     }
 
-    public void setIdentifier(Identifier value) { 
+    public Specimen setIdentifier(Identifier value) { 
       this.identifier = value;
+      return this;
     }
 
     public CodeableConcept getType() { 
       return this.type;
     }
 
-    public void setType(CodeableConcept value) { 
+    public Specimen setType(CodeableConcept value) { 
       this.type = value;
+      return this;
     }
 
     public List<SpecimenSourceComponent> getSource() { 
       return this.source;
     }
 
+    // syntactic sugar
+    public SpecimenSourceComponent addSource() { 
+      SpecimenSourceComponent t = new SpecimenSourceComponent();
+      this.source.add(t);
+      return t;
+    }
+
     public ResourceReference getSubject() { 
       return this.subject;
     }
 
-    public void setSubject(ResourceReference value) { 
+    public Specimen setSubject(ResourceReference value) { 
       this.subject = value;
+      return this;
     }
 
     public List<Identifier> getAccessionIdentifier() { 
       return this.accessionIdentifier;
     }
 
+    // syntactic sugar
+    public Identifier addAccessionIdentifier() { 
+      Identifier t = new Identifier();
+      this.accessionIdentifier.add(t);
+      return t;
+    }
+
     public DateTime getReceivedTime() { 
       return this.receivedTime;
     }
 
-    public void setReceivedTime(DateTime value) { 
+    public Specimen setReceivedTime(DateTime value) { 
       this.receivedTime = value;
+      return this;
     }
 
     public String getReceivedTimeSimple() { 
       return this.receivedTime == null ? null : this.receivedTime.getValue();
     }
 
-    public void setReceivedTimeSimple(String value) { 
+    public Specimen setReceivedTimeSimple(String value) { 
       if (value == null)
         this.receivedTime = null;
       else {
@@ -487,23 +626,52 @@ public class Specimen extends Resource {
           this.receivedTime = new DateTime();
         this.receivedTime.setValue(value);
       }
+      return this;
     }
 
     public SpecimenCollectionComponent getCollection() { 
       return this.collection;
     }
 
-    public void setCollection(SpecimenCollectionComponent value) { 
+    public Specimen setCollection(SpecimenCollectionComponent value) { 
       this.collection = value;
+      return this;
     }
 
     public List<SpecimenTreatmentComponent> getTreatment() { 
       return this.treatment;
     }
 
+    // syntactic sugar
+    public SpecimenTreatmentComponent addTreatment() { 
+      SpecimenTreatmentComponent t = new SpecimenTreatmentComponent();
+      this.treatment.add(t);
+      return t;
+    }
+
     public List<SpecimenContainerComponent> getContainer() { 
       return this.container;
     }
+
+    // syntactic sugar
+    public SpecimenContainerComponent addContainer() { 
+      SpecimenContainerComponent t = new SpecimenContainerComponent();
+      this.container.add(t);
+      return t;
+    }
+
+      protected void listChildren(List<Property> childrenList) {
+        super.listChildren(childrenList);
+        childrenList.add(new Property("identifier", "Identifier", "Id for specimen.", 0, java.lang.Integer.MAX_VALUE, identifier));
+        childrenList.add(new Property("type", "CodeableConcept", "The type of the specimen. This is sometimes called the 'matrix'.", 0, java.lang.Integer.MAX_VALUE, type));
+        childrenList.add(new Property("source", "", "Parent specimen from which the focal specimen was a component.", 0, java.lang.Integer.MAX_VALUE, source));
+        childrenList.add(new Property("subject", "Resource(Patient|Group|Device|Substance)", "The subject of the report.", 0, java.lang.Integer.MAX_VALUE, subject));
+        childrenList.add(new Property("accessionIdentifier", "Identifier", "The identifier(s) assigned by the lab when accessioning specimen(s). This is not necessarily the same as the specimen identifier, depending on local lab procedures.", 0, java.lang.Integer.MAX_VALUE, accessionIdentifier));
+        childrenList.add(new Property("receivedTime", "dateTime", "Time when specimen was received for processing or testing.", 0, java.lang.Integer.MAX_VALUE, receivedTime));
+        childrenList.add(new Property("collection", "", "Details concerning the specimen collection.", 0, java.lang.Integer.MAX_VALUE, collection));
+        childrenList.add(new Property("treatment", "", "Details concerning treatment and processing steps for the specimen.", 0, java.lang.Integer.MAX_VALUE, treatment));
+        childrenList.add(new Property("container", "", "The container holding the specimen. May be recursive; ie blood in tube in tray in rack.", 0, java.lang.Integer.MAX_VALUE, container));
+      }
 
       public Specimen copy() {
         Specimen dst = new Specimen();

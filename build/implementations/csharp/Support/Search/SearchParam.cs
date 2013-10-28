@@ -39,6 +39,8 @@ using System.Text;
 
 namespace Hl7.Fhir.Support.Search
 {
+    //TODO: does this support chained parameters with modifiers?
+    //e.g. subject:patient.organization:organization?
     public class SearchParam
     {
         /// <summary>
@@ -124,6 +126,7 @@ namespace Hl7.Fhir.Support.Search
             string name = pair[0];
             string modifier = pair.Length == 2 ? pair[1] : null;
 
+            //TODO: Don't split on , within strings
             var qryValues = qryValue.Split(',');
 
             var values = qryValues.Select(s => new UntypedParamValue(s));

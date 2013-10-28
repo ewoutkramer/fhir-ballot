@@ -11,19 +11,12 @@ import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
-import javax.xml.namespace.NamespaceContext;
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathExpressionException;
-import javax.xml.xpath.XPathFactory;
-import javax.xml.xpath.XPathFactoryConfigurationException;
 
 import org.hl7.fhir.instance.formats.XmlParser;
 import org.hl7.fhir.instance.model.Address;
 import org.hl7.fhir.instance.model.AtomEntry;
 import org.hl7.fhir.instance.model.AtomFeed;
 import org.hl7.fhir.instance.model.Attachment;
-import org.hl7.fhir.instance.model.Choice;
 import org.hl7.fhir.instance.model.CodeableConcept;
 import org.hl7.fhir.instance.model.Coding;
 import org.hl7.fhir.instance.model.Contact;
@@ -35,8 +28,8 @@ import org.hl7.fhir.instance.model.Profile;
 import org.hl7.fhir.instance.model.Profile.BindingConformance;
 import org.hl7.fhir.instance.model.Profile.ConstraintSeverity;
 import org.hl7.fhir.instance.model.Profile.ElementComponent;
+import org.hl7.fhir.instance.model.Profile.ElementDefinitionBindingComponent;
 import org.hl7.fhir.instance.model.Profile.ElementDefinitionConstraintComponent;
-import org.hl7.fhir.instance.model.Profile.ProfileBindingComponent;
 import org.hl7.fhir.instance.model.Profile.ProfileStructureComponent;
 import org.hl7.fhir.instance.model.Profile.TypeRefComponent;
 import org.hl7.fhir.instance.model.Quantity;
@@ -492,25 +485,25 @@ public class InstanceValidator extends BaseValidator {
     if (system != null && code != null) {
       if (checkCode(errors, path, code, system, display)) 
         if (context != null && context.getDefinition().getBinding() != null) {
-          ProfileBindingComponent binding = getBinding(profile, context.getDefinition().getBindingSimple());
-          if (warning(errors, "code-unknown", path, binding != null, "Binding "+context.getDefinition().getBindingSimple()+" not resolved")) {
+          ElementDefinitionBindingComponent binding = context.getDefinition().getBinding();
+          if (warning(errors, "code-unknown", path, binding != null, "Binding for "+path+" missing")) {
             if (binding.getReference() != null && binding.getReference() instanceof ResourceReference) {
               ValueSet vs = resolveBindingReference(binding.getReference());
               if (warning(errors, "code-unknown", path, vs != null, "ValueSet "+describeReference(binding.getReference())+" not found")) {
                 try {
                   vs = cache.getExpander().expand(vs);
-                  if (warning(errors, "code-unknown", path, vs != null, "Unable to expand value set for "+context.getDefinition().getBindingSimple())) {
-                    warning(errors, "code-unknown", path, codeInExpansion(vs, system, code), "Code {"+system+"}"+code+" is not in value set "+context.getDefinition().getBindingSimple()+" ("+vs.getIdentifierSimple()+")");
+                  if (warning(errors, "code-unknown", path, vs != null, "Unable to expand value set for "+describeReference(binding.getReference()))) {
+                    warning(errors, "code-unknown", path, codeInExpansion(vs, system, code), "Code {"+system+"}"+code+" is not in value set "+describeReference(binding.getReference())+" ("+vs.getIdentifierSimple()+")");
                   }
                 } catch (Exception e) {
                   if (e.getMessage() == null)
-                    warning(errors, "code-unknown", path, false, "Exception opening value set "+vs.getIdentifierSimple()+" for "+context.getDefinition().getBindingSimple()+": --Null--");
+                    warning(errors, "code-unknown", path, false, "Exception opening value set "+vs.getIdentifierSimple()+" for "+describeReference(binding.getReference())+": --Null--");
                   else if (!e.getMessage().contains("unable to find value set http://snomed.info/id"))
                     hint(errors, "code-unknown", path, suppressLoincSnomedMessages, "Snomed value set - not validated");
                   else if (!e.getMessage().contains("unable to find value set http://loinc.org"))
                     hint(errors, "code-unknown", path, suppressLoincSnomedMessages, "Loinc value set - not validated");
                   else
-                    warning(errors, "code-unknown", path, false, "Exception opening value set "+vs.getIdentifierSimple()+" for "+context.getDefinition().getBindingSimple()+": "+e.getMessage());
+                    warning(errors, "code-unknown", path, false, "Exception opening value set "+vs.getIdentifierSimple()+" for "+describeReference(binding.getReference())+": "+e.getMessage());
                 }
               }
             } else if (binding.getReference() != null)
@@ -554,14 +547,14 @@ public class InstanceValidator extends BaseValidator {
 
   private void checkCodeableConcept(List<ValidationMessage> errors, String path, Element element, Profile profile, ElementComponent context) {
     if (context != null && context.getDefinition().getBinding() != null) {
-      ProfileBindingComponent binding = getBinding(profile, context.getDefinition().getBindingSimple());
-      if (warning(errors, "code-unknown", path, binding != null, "Binding "+context.getDefinition().getBindingSimple()+" not resolved (cc)")) {
+      ElementDefinitionBindingComponent binding = context.getDefinition().getBinding();
+      if (warning(errors, "code-unknown", path, binding != null, "Binding for "+path+" missing (cc)")) {
         if (binding.getReference() != null && binding.getReference() instanceof ResourceReference) {
           ValueSet vs = resolveBindingReference(binding.getReference());
           if (warning(errors, "code-unknown", path, vs != null, "ValueSet "+describeReference(binding.getReference())+" not found")) {
             try {
               vs = cache.getExpander().expand(vs);
-              if (warning(errors, "code-unknown", path, binding != null, "Unable to expand value set for "+context.getDefinition().getBindingSimple())) {
+              if (warning(errors, "code-unknown", path, binding != null, "Unable to expand value set for "+describeReference(binding.getReference()))) {
                 boolean found = false;
                 boolean any = false;
                 Element c = XMLUtil.getFirstChild(element);
@@ -576,22 +569,22 @@ public class InstanceValidator extends BaseValidator {
                   c = XMLUtil.getNextSibling(c);
                 }
                 if (!any && binding.getConformanceSimple() == BindingConformance.required)
-                  warning(errors, "code-unknown", path, found, "No code provided, and value set "+context.getDefinition().getBindingSimple()+" ("+vs.getIdentifierSimple()+") is required");
+                  warning(errors, "code-unknown", path, found, "No code provided, and value set "+describeReference(binding.getReference())+" ("+vs.getIdentifierSimple()+") is required");
                 if (any)
                   if (binding.getConformanceSimple() == BindingConformance.example)
-                    hint(errors, "code-unknown", path, found, "None of the codes are in the example value set "+context.getDefinition().getBindingSimple()+" ("+vs.getIdentifierSimple()+")");
+                    hint(errors, "code-unknown", path, found, "None of the codes are in the example value set "+describeReference(binding.getReference())+" ("+vs.getIdentifierSimple()+")");
                   else 
-                    warning(errors, "code-unknown", path, found, "None of the codes are in the expected value set "+context.getDefinition().getBindingSimple()+" ("+vs.getIdentifierSimple()+")");
+                    warning(errors, "code-unknown", path, found, "None of the codes are in the expected value set "+describeReference(binding.getReference())+" ("+vs.getIdentifierSimple()+")");
               }
             } catch (Exception e) {
               if (e.getMessage() == null) {
-                warning(errors, "code-unknown", path, false, "Exception opening value set "+vs.getIdentifierSimple()+" for "+context.getDefinition().getBindingSimple()+": --Null--");
+                warning(errors, "code-unknown", path, false, "Exception opening value set "+vs.getIdentifierSimple()+" for "+describeReference(binding.getReference())+": --Null--");
               } else if (!e.getMessage().contains("unable to find value set http://snomed.info/id")) {
                 hint(errors, "code-unknown", path, suppressLoincSnomedMessages, "Snomed value set - not validated");
               } else if (!e.getMessage().contains("unable to find value set http://loinc.org")) { 
                 hint(errors, "code-unknown", path, suppressLoincSnomedMessages, "Loinc value set - not validated");
               } else
-                warning(errors, "code-unknown", path, false, "Exception opening value set "+vs.getIdentifierSimple()+" for "+context.getDefinition().getBindingSimple()+": "+e.getMessage());
+                warning(errors, "code-unknown", path, false, "Exception opening value set "+vs.getIdentifierSimple()+" for "+describeReference(binding.getReference())+": "+e.getMessage());
             }
           }
         } else if (binding.getReference() != null)
@@ -612,13 +605,6 @@ public class InstanceValidator extends BaseValidator {
     return "??";
   }
 
-  private ProfileBindingComponent getBinding(Profile profile, String name) {
-    for (ProfileBindingComponent b : profile.getBinding()) {
-      if (b.getNameSimple().equals(name))
-        return b;
-    }
-    return null;
-  }
 
   private boolean checkCode(List<ValidationMessage> errors, String path, String code, String system, String display) {
     if (system.startsWith("http://hl7.org/fhir")) {
@@ -810,12 +796,8 @@ public class InstanceValidator extends BaseValidator {
   }
 
 	private void checkBinding(List<ValidationMessage> errors, String path, Element focus, Profile profile, ElementComponent elementDefn, String type) {
-	  String bn = elementDefn.getDefinition().getBindingSimple();
-	  ProfileBindingComponent bc = null;
-	  for (ProfileBindingComponent b : profile.getBinding()) {
-	  	if (b.getNameSimple().equals(bn))
-	  		bc = b;
-	  }
+	  ElementDefinitionBindingComponent bc = elementDefn.getDefinition().getBinding();
+
 	  if (bc != null && bc.getReference() != null && bc.getReference() instanceof ResourceReference) {
 	  	ValueSet vs = resolveValueSetReference(profile, (ResourceReference) bc.getReference());
 	  	if (vs == null)
@@ -948,8 +930,6 @@ public class InstanceValidator extends BaseValidator {
 				checkAttachment(errors, path, focus, (Attachment) fixed);
 			else if (fixed instanceof Identifier)
 				checkIdentifier(errors, path, focus, (Identifier) fixed);
-			else if (fixed instanceof Choice)
-				checkChoice(errors, path, focus, (Choice) fixed);
 			else if (fixed instanceof Coding)
 				checkCoding(errors, path, focus, (Coding) fixed);
 			else if (fixed instanceof HumanName)
@@ -1022,27 +1002,16 @@ public class InstanceValidator extends BaseValidator {
 	  checkFixedValue(errors, path+".use", XMLUtil.getNamedChild(focus, "use"), fixed.getUse(), "use");
 	  checkFixedValue(errors, path+".label", XMLUtil.getNamedChild(focus, "label"), fixed.getLabel(), "label");
 	  checkFixedValue(errors, path+".system", XMLUtil.getNamedChild(focus, "system"), fixed.getSystem(), "system");
-	  checkFixedValue(errors, path+".key", XMLUtil.getNamedChild(focus, "key"), fixed.getKey(), "key");
+	  checkFixedValue(errors, path+".value", XMLUtil.getNamedChild(focus, "value"), fixed.getValue(), "value");
 	  checkFixedValue(errors, path+".period", XMLUtil.getNamedChild(focus, "period"), fixed.getPeriod(), "period");
 	  checkFixedValue(errors, path+".assigner", XMLUtil.getNamedChild(focus, "assigner"), fixed.getAssigner(), "assigner");
-  }
-
-	private void checkChoice(List<ValidationMessage> errors, String path, Element focus, Choice fixed) {
-	  checkFixedValue(errors, path+".code", XMLUtil.getNamedChild(focus, "code"), fixed.getCode(), "code");
-	  checkFixedValue(errors, path+".isOrdered", XMLUtil.getNamedChild(focus, "isOrdered"), fixed.getIsOrdered(), "isOrdered");
-	  
-		List<Element> options = new ArrayList<Element>();
-		XMLUtil.getNamedChildren(focus,  "option", options);
-		if (rule(errors, "value", path, options.size() == fixed.getOption().size(), "Expected "+Integer.toString(fixed.getOption().size())+" but found "+Integer.toString(options.size())+" option elements")) {
-			for (int i = 0; i < options.size(); i++) 
-				checkFixedValue(errors, path+".option", options.get(i), fixed.getOption().get(i), "option");			
-		}	  
   }
 
 	private void checkCoding(List<ValidationMessage> errors, String path, Element focus, Coding fixed) {
 	  checkFixedValue(errors, path+".system", XMLUtil.getNamedChild(focus, "system"), fixed.getSystem(), "system");
 	  checkFixedValue(errors, path+".code", XMLUtil.getNamedChild(focus, "code"), fixed.getCode(), "code");
 	  checkFixedValue(errors, path+".display", XMLUtil.getNamedChild(focus, "display"), fixed.getDisplay(), "display");	  
+	  checkFixedValue(errors, path+".primary", XMLUtil.getNamedChild(focus, "primary"), fixed.getPrimary(), "primary");	  
   }
 
 	private void checkHumanName(List<ValidationMessage> errors, String path, Element focus, HumanName fixed) {
@@ -1075,7 +1044,6 @@ public class InstanceValidator extends BaseValidator {
 
 	private void checkCodeableConcept(List<ValidationMessage> errors, String path, Element focus, CodeableConcept fixed) {
 		checkFixedValue(errors, path+".text", XMLUtil.getNamedChild(focus, "text"), fixed.getText(), "text");
-		checkFixedValue(errors, path+".primary", XMLUtil.getNamedChild(focus, "primary"), fixed.getPrimary(), "primary");
 		List<Element> codings = new ArrayList<Element>();
 		XMLUtil.getNamedChildren(focus,  "coding", codings);
 		if (rule(errors, "value", path, codings.size() == fixed.getCoding().size(), "Expected "+Integer.toString(fixed.getCoding().size())+" but found "+Integer.toString(codings.size())+" coding elements")) {

@@ -1,22 +1,18 @@
 package org.hl7.fhir.instance.utils;
 
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.hl7.fhir.instance.model.AtomEntry;
 import org.hl7.fhir.instance.model.Code;
-import org.hl7.fhir.instance.model.String_;
 import org.hl7.fhir.instance.model.Uri;
 import org.hl7.fhir.instance.model.ValueSet;
 import org.hl7.fhir.instance.model.ValueSet.ConceptSetComponent;
 import org.hl7.fhir.instance.model.ValueSet.ConceptSetFilterComponent;
 import org.hl7.fhir.instance.model.ValueSet.FilterOperator;
 import org.hl7.fhir.instance.model.ValueSet.ValueSetComposeComponent;
-import org.hl7.fhir.instance.model.ValueSet.ValueSetDefineComponent;
 import org.hl7.fhir.instance.model.ValueSet.ValueSetDefineConceptComponent;
 import org.hl7.fhir.instance.model.ValueSet.ValueSetExpansionContainsComponent;
 
@@ -41,7 +37,7 @@ public class ValueSetExpanderSimple implements ValueSetExpander {
   
   public ValueSet expand(ValueSet source) throws Exception {
     focus = source.copy();
-    focus.setExpansion(focus.new ValueSetExpansionComponent());
+    focus.setExpansion(new ValueSet.ValueSetExpansionComponent());
     focus.getExpansion().setTimestampSimple(Calendar.getInstance());
     
   	
@@ -74,9 +70,9 @@ public class ValueSetExpanderSimple implements ValueSetExpander {
 	private void importValueSet(String value) throws Exception {
 	  if (value == null)
 	  	throw new Exception("unable to find value set with no identity");
-	  ValueSet vs = valuesets.get(value.toString());
+	  ValueSet vs = valuesets.get(value);
 	  if (vs == null)
-		  	throw new Exception("unable to find value set "+value.toString());
+		  	throw new Exception("Unable to find imported value set "+value);
 	  vs = factory.getExpander().expand(vs);
 	  for (ValueSetExpansionContainsComponent c : vs.getExpansion().getContains()) {
 	  	addCode(c.getSystemSimple(), c.getCodeSimple(), c.getDisplaySimple());
@@ -84,6 +80,11 @@ public class ValueSetExpanderSimple implements ValueSetExpander {
   }
 
 	private void includeCodes(ConceptSetComponent inc) throws Exception {
+    if (inc.getSystemSimple().equals("http://snomed.info/id"))
+      throw new Exception("Snomed Expansion is not yet supported (which release?)");
+    if (inc.getSystemSimple().equals("http://loinc.org"))
+      throw new Exception("LOINC Expansion is not yet supported (todo)");
+	    
 	  ValueSet cs = codesystems.get(inc.getSystemSimple());
 	  if (cs == null)
 	  	throw new Exception("unable to find value set "+inc.getSystemSimple().toString());
@@ -180,7 +181,7 @@ public class ValueSetExpanderSimple implements ValueSetExpander {
   }
 
 	private void addCode(String system, String code, String display) {
-		ValueSetExpansionContainsComponent n = focus.new ValueSetExpansionContainsComponent();
+		ValueSetExpansionContainsComponent n = new ValueSet.ValueSetExpansionContainsComponent();
 		n.setSystemSimple(system);
 	  n.setCodeSimple(code);
 	  n.setDisplaySimple(display);

@@ -118,15 +118,20 @@ namespace Hl7.Fhir.Serializers
             if(entry is ResourceEntry)
             {
                 ResourceEntry re = (ResourceEntry)entry;
-                if (re.Content != null)
+                if (re.Resource != null)
                     result.Add(new XElement(BundleXmlParser.XATOMNS + BundleXmlParser.XATOM_CONTENT,
                         new XAttribute(BundleXmlParser.XATOM_CONTENT_TYPE, "text/xml"),
-                        FhirSerializer.SerializeResourceAsXElement(re.Content, summary)));
+                        FhirSerializer.SerializeResourceAsXElement(re.Resource, summary)));
 
                 // Note: this is a read-only property, so it is serialized but never parsed
                 if (entry.Summary != null)
+                {
+                    var xelem = XElement.Parse(entry.Summary);
+                    xelem.Name = XNamespace.Get(Util.XHTMLNS) + xelem.Name.LocalName;
+
                     result.Add(new XElement(BundleXmlParser.XATOMNS + BundleXmlParser.XATOM_SUMMARY,
-                            new XAttribute(BundleXmlParser.XATOM_CONTENT_TYPE, "xhtml"), XElement.Parse(entry.Summary)));
+                            new XAttribute(BundleXmlParser.XATOM_CONTENT_TYPE, "xhtml"), xelem));
+                }
             }
 
             return result;

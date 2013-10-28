@@ -6,7 +6,7 @@ public enum ResourceType {
     Organization,
     Group,
     ValueSet,
-    Coverage,
+    ImmunizationRecommendation,
     MedicationDispense,
     DeviceLog,
     MedicationPrescription,
@@ -16,14 +16,17 @@ public enum ResourceType {
     OperationOutcome,
     Conformance,
     Media,
+    Other,
     Profile,
     DocumentReference,
     Immunization,
     OrderResponse,
+    ConceptMap,
     ImagingStudy,
     Practitioner,
     CarePlan,
     Provenance,
+    DeviceData,
     Device,
     Query,
     Order,
@@ -31,18 +34,17 @@ public enum ResourceType {
     Substance,
     DiagnosticReport,
     Medication,
+    DocumentManifest,
     MedicationAdministration,
     Encounter,
     SecurityEvent,
     List,
-    Picture,
     Document,
     Message,
     FamilyHistory,
     Location,
     AllergyIntolerance,
     Observation,
-    ImmunizationProfile,
     RelatedPerson,
     Specimen,
     DeviceObservation,
@@ -51,6 +53,7 @@ public enum ResourceType {
     AdverseReaction,
     DiagnosticOrder,
     Appointment,
+    AssessmentDefinition,
     InterestOfCare,
     Binary;
 
@@ -66,8 +69,8 @@ public enum ResourceType {
       return "group";
     case ValueSet:
       return "valueset";
-    case Coverage:
-      return "coverage";
+    case ImmunizationRecommendation:
+      return "immunizationrecommendation";
     case MedicationDispense:
       return "medicationdispense";
     case DeviceLog:
@@ -86,6 +89,8 @@ public enum ResourceType {
       return "conformance";
     case Media:
       return "media";
+    case Other:
+      return "other";
     case Profile:
       return "profile";
     case DocumentReference:
@@ -94,6 +99,8 @@ public enum ResourceType {
       return "immunization";
     case OrderResponse:
       return "orderresponse";
+    case ConceptMap:
+      return "conceptmap";
     case ImagingStudy:
       return "imagingstudy";
     case Practitioner:
@@ -102,6 +109,8 @@ public enum ResourceType {
       return "careplan";
     case Provenance:
       return "provenance";
+    case DeviceData:
+      return "devicedata";
     case Device:
       return "device";
     case Query:
@@ -116,6 +125,8 @@ public enum ResourceType {
       return "diagnosticreport";
     case Medication:
       return "medication";
+    case DocumentManifest:
+      return "documentmanifest";
     case MedicationAdministration:
       return "medicationadministration";
     case Encounter:
@@ -124,8 +135,6 @@ public enum ResourceType {
       return "securityevent";
     case List:
       return "list";
-    case Picture:
-      return "picture";
     case Document:
       return "document";
     case Message:
@@ -138,8 +147,6 @@ public enum ResourceType {
       return "allergyintolerance";
     case Observation:
       return "observation";
-    case ImmunizationProfile:
-      return "immunizationprofile";
     case RelatedPerson:
       return "relatedperson";
     case Specimen:
@@ -156,6 +163,8 @@ public enum ResourceType {
       return "diagnosticorder";
     case Appointment:
       return "appointment";
+    case AssessmentDefinition:
+      return "assessmentdefinition";
     case InterestOfCare:
       return "interestofcare";
     case Binary:

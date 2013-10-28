@@ -172,16 +172,26 @@ namespace Hl7.Fhir.Client
                         where TResource : Resource, new()
         {
             if (entry == null) throw new ArgumentNullException("entry");
-            if (entry.Content == null) throw new ArgumentException("Entry does not contain a Resource to update", "entry");
+            if (entry.Resource == null) throw new ArgumentException("Entry does not contain a Resource to update", "entry");
             if (entry.Id == null) throw new ArgumentException("Entry needs a non-null entry.id to send the update to", "entry");
             if (versionAware && entry.SelfLink == null) throw new ArgumentException("When requesting version-aware updates, Entry.SelfLink may not be null.", "entry");
 
-            string contentType = ContentType.BuildContentType(PreferredFormat, false);
+            string contentType = null;
+            byte[] data = null;
 
-
-            byte[] data = PreferredFormat == ContentType.ResourceFormat.Xml ?
-                FhirSerializer.SerializeResourceToXmlBytes(entry.Content) :
-                FhirSerializer.SerializeResourceToJsonBytes(entry.Content);
+            if (entry.Resource is Binary)
+            {
+                var bin = entry.Resource as Binary;
+                data = bin.Content;
+                contentType = bin.ContentType;
+            }
+            else
+            {
+                data = PreferredFormat == ContentType.ResourceFormat.Xml ?
+                    FhirSerializer.SerializeResourceToXmlBytes(entry.Resource) :
+                    FhirSerializer.SerializeResourceToJsonBytes(entry.Resource);
+                contentType = ContentType.BuildContentType(PreferredFormat, false);
+            }
 
             var req = createRequest(entry.Id, false);
 
@@ -244,11 +254,22 @@ namespace Hl7.Fhir.Client
             if (collectionEndpoint == null) throw new ArgumentNullException("collectionEndpoint");
             if (resource == null) throw new ArgumentNullException("resource");
 
-            string contentType = ContentType.BuildContentType(PreferredFormat, false);
+            string contentType = null;
+            byte[] data = null;
 
-            byte[] data = PreferredFormat == ContentType.ResourceFormat.Xml ?
-                FhirSerializer.SerializeResourceToXmlBytes(resource) :
-                FhirSerializer.SerializeResourceToJsonBytes(resource);
+            if (resource is Binary)
+            {
+                var bin = resource as Binary;
+                data = bin.Content;
+                contentType = bin.ContentType;
+            }
+            else
+            {
+                data = PreferredFormat == ContentType.ResourceFormat.Xml ?
+                    FhirSerializer.SerializeResourceToXmlBytes(resource) :
+                    FhirSerializer.SerializeResourceToJsonBytes(resource);
+                contentType = ContentType.BuildContentType(PreferredFormat, false);
+            }
 
             var req = createRequest(collectionEndpoint, false);
             req.Method = "POST";
@@ -268,6 +289,22 @@ namespace Hl7.Fhir.Client
             var rl = new ResourceLocation(Endpoint,collection);
 
             return Create<TResource>(rl.ToUri(), resource, tags);
+        }
+
+        public ResourceEntry<TResource> Create<TResource>(TResource resource, string id, IEnumerable<Tag> tags = null) where TResource : Resource, new()
+        {
+            if (Endpoint == null) throw new InvalidOperationException("Endpoint must be provided using either the Endpoint property or the FhirClient constructor");
+            if (resource == null) throw new ArgumentNullException("resource");
+
+            var rl = new ResourceLocation(Endpoint);
+            rl.Collection = ResourceLocation.GetCollectionNameForResource(typeof(TResource));
+            rl.Id = id;
+
+            var re = new ResourceEntry<TResource>();
+            re.Id = rl.ToUri();
+            re.Resource = resource;
+
+            return Update<TResource>(re);
         }
 
 
@@ -363,14 +400,14 @@ namespace Hl7.Fhir.Client
         public OperationOutcome Validate<TResource>(ResourceEntry<TResource> entry) where TResource : Resource, new()
         {
             if (entry == null) throw new ArgumentNullException("entry");
-            if (entry.Content == null) throw new ArgumentException("Entry does not contain a Resource to validate", "entry");
+            if (entry.Resource == null) throw new ArgumentException("Entry does not contain a Resource to validate", "entry");
             if (entry.Id == null) throw new ArgumentException("Entry needs a non-null entry.id to use for validation", "entry");
 
             string contentType = ContentType.BuildContentType(PreferredFormat, false);
 
             byte[] data = PreferredFormat == ContentType.ResourceFormat.Xml ?
-                FhirSerializer.SerializeResourceToXmlBytes(entry.Content) :
-                FhirSerializer.SerializeResourceToJsonBytes(entry.Content);
+                FhirSerializer.SerializeResourceToXmlBytes(entry.Resource) :
+                FhirSerializer.SerializeResourceToJsonBytes(entry.Resource);
 
             var rl = new ResourceLocation(entry.Id);
             rl.Operation = ResourceLocation.RESTOPER_VALIDATE;
@@ -411,6 +448,11 @@ namespace Hl7.Fhir.Client
             if (endpoint == null) throw new ArgumentNullException("endpoint");
 
             var rl = new ResourceLocation(endpoint);
+
+            // Since there is confusion between using /resource/?param, /resource?param, use
+            // the /resource/search?param instead
+            if(rl.Collection != null)
+                rl.Operation = ResourceLocation.RESTOPER_SEARCH;
 
             if( count.HasValue )
                 rl.AddParam(Util.SEARCH_PARAM_COUNT, count.Value.ToString());
@@ -578,8 +620,6 @@ namespace Hl7.Fhir.Client
         }
 
 
-        public ContentType.ResourceFormat PreferredFormat { get; set; }
-
 
 
         public IEnumerable<Tag> GetTags()
@@ -624,8 +664,10 @@ namespace Hl7.Fhir.Client
             rl.VersionId = version;
 
             var data = HttpUtil.TagListBody(tags, PreferredFormat);
+            
             var req = createRequest(rl.ToUri(), true);
             req.Method = "POST";
+            req.ContentType = ContentType.BuildContentType(PreferredFormat, false);
             prepareRequest(req, data);
 
             return doRequest(req, HttpStatusCode.OK, () => tagListFromResponse());
@@ -647,14 +689,28 @@ namespace Hl7.Fhir.Client
             var data = HttpUtil.TagListBody(tags, PreferredFormat);
             var req = createRequest(rl.ToUri(), true);
             req.Method = "DELETE";
+            req.ContentType = ContentType.BuildContentType(PreferredFormat, false);
             prepareRequest(req, data);
 
             doRequest(req, HttpStatusCode.OK, () => true);
         }
 
+        public ContentType.ResourceFormat PreferredFormat { get; set; }
+        public bool UseFormatParam { get; set; }
+        
+
         private HttpWebRequest createRequest(Uri location, bool forBundle)
         {
-            var req = (HttpWebRequest)HttpWebRequest.Create(location);
+            Uri endpoint = location;
+
+            if (UseFormatParam)
+            {
+                var rl = new ResourceLocation(location);
+                rl.SetParam(Util.RESTPARAM_FORMAT, ContentType.BuildFormatParam(PreferredFormat));
+                endpoint = rl.ToUri();
+            }
+
+            var req = (HttpWebRequest)HttpWebRequest.Create(endpoint);
             var agent =  "FhirClient for FHIR " + Model.ModelInfo.Version;
             req.Method = "GET";
 
@@ -664,12 +720,8 @@ namespace Hl7.Fhir.Client
             req.UserAgent = agent;
 #endif
 
-            if (PreferredFormat == ContentType.ResourceFormat.Xml)
-                req.Accept = ContentType.BuildContentType(ContentType.ResourceFormat.Xml, forBundle);
-            else if (PreferredFormat == ContentType.ResourceFormat.Json)
-                req.Accept = ContentType.BuildContentType(ContentType.ResourceFormat.Json, forBundle);
-            else
-                throw new ArgumentException("PreferrredFormat was set to an unsupported seralization format");
+            if (!UseFormatParam)
+                req.Accept = ContentType.BuildContentType(PreferredFormat, forBundle);
 
             return req;
         }
@@ -693,18 +745,26 @@ namespace Hl7.Fhir.Client
 
         private ResourceEntry<T> resourceEntryFromResponse<T>() where T : Resource, new()
         {
+            string resourceText = null;
+            byte[] data = null;
+
+            if (typeof(T).IsAssignableFrom(typeof(Binary)))
+                data = LastResponseDetails.Body;
+            else
+                resourceText = LastResponseDetails.BodyAsString();
+
             // Initialize a resource entry from the received data. Note: Location overrides ContentLocation
-            ResourceEntry result = HttpUtil.SingleResourceResponse(LastResponseDetails.BodyAsString(),
-                    LastResponseDetails.ContentType, LastResponseDetails.ResponseUri.ToString(), 
-                    LastResponseDetails.Location ?? LastResponseDetails.ContentLocation, 
+            ResourceEntry result = HttpUtil.SingleResourceResponse(resourceText, data,
+                    LastResponseDetails.ContentType, LastResponseDetails.ResponseUri.ToString(),
+                    LastResponseDetails.Location ?? LastResponseDetails.ContentLocation,
                     LastResponseDetails.Category, LastResponseDetails.LastModified);
 
-            if (result.Content is T)
+            if (result.Resource is T)
                 return (ResourceEntry<T>)result;
             else
                 throw new FhirOperationException(
                     String.Format("Received a resource of type {0}, expected a {1} resource",
-                                    result.Content.GetType().Name, typeof(T).Name));
+                                    result.Resource.GetType().Name, typeof(T).Name));
         }
 
 
@@ -746,7 +806,7 @@ namespace Hl7.Fhir.Client
                     }
 
                     if (outcome != null)
-                        throw new FhirOperationException("Operation failed with status code " + LastResponseDetails.Result, outcome.Content);                        
+                        throw new FhirOperationException("Operation failed with status code " + LastResponseDetails.Result, outcome.Resource);                        
                     else
                         throw new FhirOperationException("Operation failed with status code " + LastResponseDetails.Result);
                 }

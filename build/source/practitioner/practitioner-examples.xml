@@ -8,8 +8,8 @@
   <updated>2012-05-29T23:45:32Z</updated>
   <entry>
     <title>healthcare practitioner</title>
-    <id>http://hl7.org/fhir/practitioner/@13</id>
-    <link rel="self" href="http://hl7.org/fhir/practitioner/@13/history/@1"/>
+    <id>http://hl7.org/fhir/Practitioner/13</id>
+    <link rel="self" href="http://hl7.org/fhir/Practitioner/13/history/1"/>
     <updated>2012-05-29T23:45:32Z</updated>
     <author>
       <name>Grahame Grieve</name>
@@ -24,7 +24,7 @@
         <identifier>
           <label value="SSN"/>
           <system value="http://hl7.org/fhir/sid/us-ssn"/>
-          <key value="333333333"/>
+          <value value="333333333"/>
         </identifier>
 
         <name>
@@ -50,8 +50,7 @@
         </gender>
 
         <organization>
-          <type value="Organization"/>
-          <reference value="organization/@hl7"/>
+          <reference value="Organization/hl7"/>
         </organization>
       </Practitioner>
     </content>
@@ -61,8 +60,8 @@
   </entry>
   <entry>
     <title>assigned practitioner</title>
-    <id>http://hl7.org/fhir/practitioner/@14</id>
-    <link rel="self" href="http://hl7.org/fhir/practitioner/@14/history/@1"/>
+    <id>http://hl7.org/fhir/Practitioner/14</id>
+    <link rel="self" href="http://hl7.org/fhir/Practitioner/14/history/1"/>
     <updated>2012-05-29T23:45:32Z</updated>
     <author>
       <name>Grahame Grieve</name>
@@ -77,7 +76,7 @@
         <identifier>
           <label value="SSN"/>
           <system value="http://hl7.org/fhir/sid/us-ssn"/>
-          <key value="33344444"/>
+          <value value="33344444"/>
         </identifier>
 
         <name>
@@ -103,8 +102,7 @@
           </coding>
         </gender>
         <organization>
-          <type value="Organization"/>
-          <reference value="organization/@hl7"/>
+          <reference value="Organization/hl7"/>
         </organization>
       </Practitioner>
     </content>
@@ -115,8 +113,8 @@
   </entry>
   <entry>
     <title>physician</title>
-    <id>http://hl7.org/fhir/practitioner/@15</id>
-    <link rel="self" href="http://hl7.org/fhir/practitioner/@15/history/@1"/>
+    <id>http://hl7.org/fhir/Practitioner/15</id>
+    <link rel="self" href="http://hl7.org/fhir/Practitioner/15/history/1"/>
     <updated>2012-05-29T23:45:32Z</updated>
     <author>
       <name>Grahame Grieve</name>
@@ -131,7 +129,7 @@
         <identifier>
           <label value="SSN"/>
           <system value="http://hl7.org/fhir/sid/us-ssn"/>
-          <key value="444444444"/>
+          <value value="444444444"/>
         </identifier>
 
         <name>
@@ -157,8 +155,7 @@
         </gender>
 
         <organization>
-          <type value="Organization"/>
-          <reference value="organization/@hl7"/>
+          <reference value="Organization/hl7"/>
         </organization>
       </Practitioner>
     </content>
@@ -169,8 +166,8 @@
   </entry>
   <entry>
     <title>primary care physician</title>
-    <id>http://hl7.org/fhir/practitioner/@16</id>
-    <link rel="self" href="http://hl7.org/fhir/practitioner/@16/history/@1"/>
+    <id>http://hl7.org/fhir/Practitioner/16</id>
+    <link rel="self" href="http://hl7.org/fhir/Practitioner/16/history/1"/>
     <updated>2012-05-29T23:45:32Z</updated>
     <author>
       <name>Grahame Grieve</name>
@@ -185,7 +182,7 @@
         <identifier>
           <label value="SSN"/>
           <system value="http://hl7.org/fhir/sid/us-ssn"/>
-          <key value="555555555"/>
+          <value value="555555555"/>
         </identifier>
 
         <name>
@@ -211,8 +208,7 @@
         </gender>
 
         <organization>
-          <type value="Organization"/>
-          <reference value="organization/@hl7"/>
+          <reference value="Organization/hl7"/>
         </organization>
       </Practitioner>
     </content>
@@ -223,8 +219,8 @@
   </entry>
   <entry>
     <title>admitting physician</title>
-    <id>http://hl7.org/fhir/practitioner/@17</id>
-    <link rel="self" href="http://hl7.org/fhir/practitioner/@17/history/@1"/>
+    <id>http://hl7.org/fhir/Practitioner/17</id>
+    <link rel="self" href="http://hl7.org/fhir/Practitioner/17/history/1"/>
     <updated>2012-05-29T23:45:32Z</updated>
     <author>
       <name>Grahame Grieve</name>
@@ -239,7 +235,7 @@
         <identifier>
           <label value="SSN"/>
           <system value="http://hl7.org/fhir/sid/us-ssn"/>
-          <key value="666666666"/>
+          <value value="666666666"/>
         </identifier>
 
         <name>
@@ -265,8 +261,7 @@
         </gender>
 
         <organization>
-          <type value="Organization"/>
-          <reference value="organization/@hl7"/>
+          <reference value="Organization/hl7"/>
         </organization>
       </Practitioner>
     </content>
@@ -276,8 +271,8 @@
   </entry>
   <entry>
     <title>attending physician</title>
-    <id>http://hl7.org/fhir/practitioner/@18</id>
-    <link rel="self" href="http://hl7.org/fhir/practitioner/@18/history/@1"/>
+    <id>http://hl7.org/fhir/Practitioner/18</id>
+    <link rel="self" href="http://hl7.org/fhir/Practitioner/18/history/1"/>
     <updated>2012-05-29T23:45:32Z</updated>
     <author>
       <name>Grahame Grieve</name>
@@ -292,7 +287,7 @@
         <identifier>
           <label value="SSN"/>
           <system value="http://hl7.org/fhir/sid/us-ssn"/>
-          <key value="777777777"/>
+          <value value="777777777"/>
         </identifier>
 
         <name>
@@ -318,8 +313,7 @@
         </gender>
 
         <organization>
-          <type value="Organization"/>
-          <reference value="organization/@hl7"/>
+          <reference value="Organization/hl7"/>
         </organization>
       </Practitioner>
     </content>
@@ -330,8 +324,8 @@
   </entry>
   <entry>
     <title>referring physician</title>
-    <id>http://hl7.org/fhir/practitioner/@19</id>
-    <link rel="self" href="http://hl7.org/fhir/practitioner/@19/history/@1"/>
+    <id>http://hl7.org/fhir/Practitioner/19</id>
+    <link rel="self" href="http://hl7.org/fhir/Practitioner/19/history/1"/>
     <updated>2012-05-29T23:45:32Z</updated>
     <author>
       <name>Grahame Grieve</name>
@@ -346,7 +340,7 @@
         <identifier>
           <label value="SSN"/>
           <system value="http://hl7.org/fhir/sid/us-ssn"/>
-          <key value="888888888"/>
+          <value value="888888888"/>
         </identifier>
 
         <name>
@@ -372,8 +366,7 @@
         </gender>
 
         <organization>
-          <type value="Organization"/>
-          <reference value="organization/@hl7"/>
+          <reference value="Organization/hl7"/>
         </organization>
       </Practitioner>
     </content>
@@ -383,8 +376,8 @@
   </entry>
   <entry>
     <title>intern</title>
-    <id>http://hl7.org/fhir/practitioner/@20</id>
-    <link rel="self" href="http://hl7.org/fhir/practitioner/@20/history/@1"/>
+    <id>http://hl7.org/fhir/Practitioner/20</id>
+    <link rel="self" href="http://hl7.org/fhir/Practitioner/20/history/1"/>
     <updated>2012-05-29T23:45:32Z</updated>
     <author>
       <name>Grahame Grieve</name>
@@ -399,7 +392,7 @@
         <identifier>
           <label value="SSN"/>
           <system value="http://hl7.org/fhir/sid/us-ssn"/>
-          <key value="888222222"/>
+          <value value="888222222"/>
         </identifier>
 
         <name>
@@ -425,8 +418,7 @@
         </gender>
 
         <organization>
-          <type value="Organization"/>
-          <reference value="organization/@hl7"/>
+          <reference value="Organization/hl7"/>
         </organization>
       </Practitioner>
     </content>
@@ -437,8 +429,8 @@
   </entry>
   <entry>
     <title>resident</title>
-    <id>http://hl7.org/fhir/practitioner/@21</id>
-    <link rel="self" href="http://hl7.org/fhir/practitioner/@21/history/@1"/>
+    <id>http://hl7.org/fhir/Practitioner/21</id>
+    <link rel="self" href="http://hl7.org/fhir/Practitioner/21/history/1"/>
     <updated>2012-05-29T23:45:32Z</updated>
     <author>
       <name>Grahame Grieve</name>
@@ -453,7 +445,7 @@
         <identifier>
           <label value="SSN"/>
           <system value="http://hl7.org/fhir/sid/us-ssn"/>
-          <key value="888333333"/>
+          <value value="888333333"/>
         </identifier>
 
         <name>
@@ -479,8 +471,7 @@
         </gender>
 
         <organization>
-          <type value="Organization"/>
-          <reference value="organization/@hl7"/>
+          <reference value="Organization/hl7"/>
         </organization>
       </Practitioner>
     </content>
@@ -491,8 +482,8 @@
   </entry>
   <entry>
     <title>chief of staff</title>
-    <id>http://hl7.org/fhir/practitioner/@22</id>
-    <link rel="self" href="http://hl7.org/fhir/practitioner/@22/history/@1"/>
+    <id>http://hl7.org/fhir/Practitioner/22</id>
+    <link rel="self" href="http://hl7.org/fhir/Practitioner/22/history/1"/>
     <updated>2012-05-29T23:45:32Z</updated>
     <author>
       <name>Grahame Grieve</name>
@@ -507,7 +498,7 @@
         <identifier>
           <label value="SSN"/>
           <system value="http://hl7.org/fhir/sid/us-ssn"/>
-          <key value="888444444"/>
+          <value value="888444444"/>
         </identifier>
 
         <name>
@@ -533,8 +524,7 @@
         </gender>
 
         <organization>
-          <type value="Organization"/>
-          <reference value="organization/@hl7"/>
+          <reference value="Organization/hl7"/>
         </organization>
       </Practitioner>
     </content>
@@ -545,8 +535,8 @@
   </entry>
   <entry>
     <title>authenticator</title>
-    <id>http://hl7.org/fhir/practitioner/@23</id>
-    <link rel="self" href="http://hl7.org/fhir/practitioner/@23/history/@1"/>
+    <id>http://hl7.org/fhir/Practitioner/23</id>
+    <link rel="self" href="http://hl7.org/fhir/Practitioner/23/history/1"/>
     <updated>2012-05-29T23:45:32Z</updated>
     <author>
       <name>Grahame Grieve</name>
@@ -561,7 +551,7 @@
         <identifier>
           <label value="SSN"/>
           <system value="http://hl7.org/fhir/sid/us-ssn"/>
-          <key value="999999999"/>
+          <value value="999999999"/>
         </identifier>
 
         <name>
@@ -587,8 +577,7 @@
         </gender>
         
         <organization>
-          <type value="Organization"/>
-          <reference value="organization/@hl7"/>
+          <reference value="Organization/hl7"/>
         </organization>
       </Practitioner>
     </content>
@@ -599,8 +588,8 @@
   </entry>
   <entry>
     <title>specialist</title>
-    <id>http://hl7.org/fhir/practitioner/@24</id>
-    <link rel="self" href="http://hl7.org/fhir/practitioner/@24/history/@1"/>
+    <id>http://hl7.org/fhir/Practitioner/24</id>
+    <link rel="self" href="http://hl7.org/fhir/Practitioner/24/history/1"/>
     <updated>2012-05-29T23:45:32Z</updated>
     <author>
       <name>Grahame Grieve</name>
@@ -615,7 +604,7 @@
         <identifier>
           <label value="SSN"/>
           <system value="http://hl7.org/fhir/sid/us-ssn"/>
-          <key value="222333333"/>
+          <value value="222333333"/>
         </identifier>
 
         <name>
@@ -641,8 +630,7 @@
         </gender>
 
         <organization>
-          <type value="Organization"/>
-          <reference value="organization/@hl7"/>
+          <reference value="Organization/hl7"/>
         </organization>
       </Practitioner>
     </content>
@@ -653,8 +641,8 @@
   </entry>
   <entry>
     <title>allergist/immunologist</title>
-    <id>http://hl7.org/fhir/practitioner/@25</id>
-    <link rel="self" href="http://hl7.org/fhir/practitioner/@25/history/@1"/>
+    <id>http://hl7.org/fhir/Practitioner/25</id>
+    <link rel="self" href="http://hl7.org/fhir/Practitioner/25/history/1"/>
     <updated>2012-05-29T23:45:32Z</updated>
     <author>
       <name>Grahame Grieve</name>
@@ -669,7 +657,7 @@
         <identifier>
           <label value="SSN"/>
           <system value="http://hl7.org/fhir/sid/us-ssn"/>
-          <key value="222223333"/>
+          <value value="222223333"/>
         </identifier>
 
         <name>
@@ -695,8 +683,7 @@
         </gender>
 
         <organization>
-          <type value="Organization"/>
-          <reference value="organization/@hl7"/>
+          <reference value="Organization/hl7"/>
         </organization>
       </Practitioner>
     </content>
@@ -707,8 +694,8 @@
   </entry>
   <entry>
     <title>anesthesiologist</title>
-    <id>http://hl7.org/fhir/practitioner/@26</id>
-    <link rel="self" href="http://hl7.org/fhir/practitioner/@26/history/@1"/>
+    <id>http://hl7.org/fhir/Practitioner/26</id>
+    <link rel="self" href="http://hl7.org/fhir/Practitioner/26/history/1"/>
     <updated>2012-05-29T23:45:32Z</updated>
     <author>
       <name>Grahame Grieve</name>
@@ -723,7 +710,7 @@
         <identifier>
           <label value="SSN"/>
           <system value="http://hl7.org/fhir/sid/us-ssn"/>
-          <key value="222666666"/>
+          <value value="222666666"/>
         </identifier>
 
         <name>
@@ -749,8 +736,7 @@
         </gender>
 
         <organization>
-          <type value="Organization"/>
-          <reference value="organization/@hl7"/>
+          <reference value="Organization/hl7"/>
         </organization>
       </Practitioner>
     </content>
@@ -761,8 +747,8 @@
   </entry>
   <entry>
     <title>cardiologist</title>
-    <id>http://hl7.org/fhir/practitioner/@27</id>
-    <link rel="self" href="http://hl7.org/fhir/practitioner/@27/history/@1"/>
+    <id>http://hl7.org/fhir/Practitioner/27</id>
+    <link rel="self" href="http://hl7.org/fhir/Practitioner/27/history/1"/>
     <updated>2012-05-29T23:45:32Z</updated>
     <author>
       <name>Grahame Grieve</name>
@@ -777,7 +763,7 @@
         <identifier>
           <label value="SSN"/>
           <system value="http://hl7.org/fhir/sid/us-ssn"/>
-          <key value="222334444"/>
+          <value value="222334444"/>
         </identifier>
 
         <name>
@@ -803,8 +789,7 @@
         </gender>
 
         <organization>
-          <type value="Organization"/>
-          <reference value="organization/@hl7"/>
+          <reference value="Organization/hl7"/>
         </organization>
       </Practitioner>
     </content>
@@ -815,8 +800,8 @@
   </entry>
   <entry>
     <title>cardiovascular surgeon</title>
-    <id>http://hl7.org/fhir/practitioner/@28</id>
-    <link rel="self" href="http://hl7.org/fhir/practitioner/@28/history/@1"/>
+    <id>http://hl7.org/fhir/Practitioner/28</id>
+    <link rel="self" href="http://hl7.org/fhir/Practitioner/28/history/1"/>
     <updated>2012-05-29T23:45:32Z</updated>
     <author>
       <name>Grahame Grieve</name>
@@ -831,7 +816,7 @@
         <identifier>
           <label value="SSN"/>
           <system value="http://hl7.org/fhir/sid/us-ssn"/>
-          <key value="222335555"/>
+          <value value="222335555"/>
         </identifier>
 
         <name>
@@ -857,8 +842,7 @@
         </gender>
 
         <organization>
-          <type value="Organization"/>
-          <reference value="organization/@hl7"/>
+          <reference value="Organization/hl7"/>
         </organization>
       </Practitioner>
     </content>
@@ -868,8 +852,8 @@
   </entry>
   <entry>
     <title>dermatologist</title>
-    <id>http://hl7.org/fhir/practitioner/@29</id>
-    <link rel="self" href="http://hl7.org/fhir/practitioner/@29/history/@1"/>
+    <id>http://hl7.org/fhir/Practitioner/29</id>
+    <link rel="self" href="http://hl7.org/fhir/Practitioner/29/history/1"/>
     <updated>2012-05-29T23:45:32Z</updated>
     <author>
       <name>Grahame Grieve</name>
@@ -884,7 +868,7 @@
         <identifier>
           <label value="SSN"/>
           <system value="http://hl7.org/fhir/sid/us-ssn"/>
-          <key value="222336666"/>
+          <value value="222336666"/>
         </identifier>
 
         <name>
@@ -910,8 +894,7 @@
         </gender>
 
         <organization>
-          <type value="Organization"/>
-          <reference value="organization/@hl7"/>
+          <reference value="Organization/hl7"/>
         </organization>
       </Practitioner>
     </content>
@@ -922,8 +905,8 @@
   </entry>
   <entry>
     <title>emergency medicine specialist</title>
-    <id>http://hl7.org/fhir/practitioner/@30</id>
-    <link rel="self" href="http://hl7.org/fhir/practitioner/@30/history/@1"/>
+    <id>http://hl7.org/fhir/Practitioner/30</id>
+    <link rel="self" href="http://hl7.org/fhir/Practitioner/30/history/1"/>
     <updated>2012-05-29T23:45:32Z</updated>
     <author>
       <name>Grahame Grieve</name>
@@ -938,7 +921,7 @@
         <identifier>
           <label value="SSN"/>
           <system value="http://hl7.org/fhir/sid/us-ssn"/>
-          <key value="222337777"/>
+          <value value="222337777"/>
         </identifier>
 
         <name>
@@ -964,8 +947,7 @@
         </gender>
 
         <organization>
-          <type value="Organization"/>
-          <reference value="organization/@hl7"/>
+          <reference value="Organization/hl7"/>
         </organization>
       </Practitioner>
     </content>
@@ -976,8 +958,8 @@
   </entry>
   <entry>
     <title>endocrinologist</title>
-    <id>http://hl7.org/fhir/practitioner/@31</id>
-    <link rel="self" href="http://hl7.org/fhir/practitioner/@31/history/@1"/>
+    <id>http://hl7.org/fhir/Practitioner/31</id>
+    <link rel="self" href="http://hl7.org/fhir/Practitioner/31/history/1"/>
     <updated>2012-05-29T23:45:32Z</updated>
     <author>
       <name>Grahame Grieve</name>
@@ -992,7 +974,7 @@
         <identifier>
           <label value="SSN"/>
           <system value="http://hl7.org/fhir/sid/us-ssn"/>
-          <key value="222338888"/>
+          <value value="222338888"/>
         </identifier>
 
         <name>
@@ -1018,8 +1000,7 @@
         </gender>
 
         <organization>
-          <type value="Organization"/>
-          <reference value="organization/@hl7"/>
+          <reference value="Organization/hl7"/>
         </organization>
       </Practitioner>
     </content>
@@ -1030,8 +1011,8 @@
   </entry>
   <entry>
     <title>family practitioner</title>
-    <id>http://hl7.org/fhir/practitioner/@32</id>
-    <link rel="self" href="http://hl7.org/fhir/practitioner/@32/history/@1"/>
+    <id>http://hl7.org/fhir/Practitioner/32</id>
+    <link rel="self" href="http://hl7.org/fhir/Practitioner/32/history/1"/>
     <updated>2012-05-29T23:45:32Z</updated>
     <author>
       <name>Grahame Grieve</name>
@@ -1046,7 +1027,7 @@
         <identifier>
           <label value="SSN"/>
           <system value="http://hl7.org/fhir/sid/us-ssn"/>
-          <key value="222339999"/>
+          <value value="222339999"/>
         </identifier>
 
         <name>
@@ -1072,8 +1053,7 @@
         </gender>
 
         <organization>
-          <type value="Organization"/>
-          <reference value="organization/@hl7"/>
+          <reference value="Organization/hl7"/>
         </organization>
       </Practitioner>
     </content>
@@ -1083,8 +1063,8 @@
   </entry>
   <entry>
     <title>gastroenterologist</title>
-    <id>http://hl7.org/fhir/practitioner/@33</id>
-    <link rel="self" href="http://hl7.org/fhir/practitioner/@33/history/@1"/>
+    <id>http://hl7.org/fhir/Practitioner/33</id>
+    <link rel="self" href="http://hl7.org/fhir/Practitioner/33/history/1"/>
     <updated>2012-05-29T23:45:32Z</updated>
     <author>
       <name>Grahame Grieve</name>
@@ -1099,7 +1079,7 @@
         <identifier>
           <label value="SSN"/>
           <system value="http://hl7.org/fhir/sid/us-ssn"/>
-          <key value="222442222"/>
+          <value value="222442222"/>
         </identifier>
 
         <name>
@@ -1125,8 +1105,7 @@
         </gender>
 
         <organization>
-          <type value="Organization"/>
-          <reference value="organization/@hl7"/>
+          <reference value="Organization/hl7"/>
         </organization>
       </Practitioner>
     </content>
@@ -1136,8 +1115,8 @@
   </entry>
   <entry>
     <title>geriatrician</title>
-    <id>http://hl7.org/fhir/practitioner/@34</id>
-    <link rel="self" href="http://hl7.org/fhir/practitioner/@34/history/@1"/>
+    <id>http://hl7.org/fhir/Practitioner/34</id>
+    <link rel="self" href="http://hl7.org/fhir/Practitioner/34/history/1"/>
     <updated>2012-05-29T23:45:32Z</updated>
     <author>
       <name>Grahame Grieve</name>
@@ -1152,7 +1131,7 @@
         <identifier>
           <label value="SSN"/>
           <system value="http://hl7.org/fhir/sid/us-ssn"/>
-          <key value="222443333"/>
+          <value value="222443333"/>
         </identifier>
 
         <name>
@@ -1178,8 +1157,7 @@
         </gender>
 
         <organization>
-          <type value="Organization"/>
-          <reference value="organization/@hl7"/>
+          <reference value="Organization/hl7"/>
         </organization>
       </Practitioner>
     </content>
@@ -1190,8 +1168,8 @@
   </entry>
   <entry>
     <title>hematologist</title>
-    <id>http://hl7.org/fhir/practitioner/@35</id>
-    <link rel="self" href="http://hl7.org/fhir/practitioner/@35/history/@1"/>
+    <id>http://hl7.org/fhir/Practitioner/35</id>
+    <link rel="self" href="http://hl7.org/fhir/Practitioner/35/history/1"/>
     <updated>2012-05-29T23:45:32Z</updated>
     <author>
       <name>Grahame Grieve</name>
@@ -1206,7 +1184,7 @@
         <identifier>
           <label value="SSN"/>
           <system value="http://hl7.org/fhir/sid/us-ssn"/>
-          <key value="222443344"/>
+          <value value="222443344"/>
         </identifier>
 
         <name>
@@ -1232,8 +1210,7 @@
         </gender>
 
         <organization>
-          <type value="Organization"/>
-          <reference value="organization/@hl7"/>
+          <reference value="Organization/hl7"/>
         </organization>
       </Practitioner>
     </content>
@@ -1244,8 +1221,8 @@
   </entry>
   <entry>
     <title>infectious disease specialist</title>
-    <id>http://hl7.org/fhir/practitioner/@36</id>
-    <link rel="self" href="http://hl7.org/fhir/practitioner/@36/history/@1"/>
+    <id>http://hl7.org/fhir/Practitioner/36</id>
+    <link rel="self" href="http://hl7.org/fhir/Practitioner/36/history/1"/>
     <updated>2012-05-29T23:45:32Z</updated>
     <author>
       <name>Grahame Grieve</name>
@@ -1260,7 +1237,7 @@
         <identifier>
           <label value="SSN"/>
           <system value="http://hl7.org/fhir/sid/us-ssn"/>
-          <key value="222445555"/>
+          <value value="222445555"/>
         </identifier>
 
         <name>
@@ -1286,8 +1263,7 @@
         </gender>
 
         <organization>
-          <type value="Organization"/>
-          <reference value="organization/@hl7"/>
+          <reference value="Organization/hl7"/>
         </organization>
       </Practitioner>
     </content>
@@ -1298,8 +1274,8 @@
   </entry>
   <entry>
     <title>internist</title>
-    <id>http://hl7.org/fhir/practitioner/@37</id>
-    <link rel="self" href="http://hl7.org/fhir/practitioner/@37/history/@1"/>
+    <id>http://hl7.org/fhir/Practitioner/37</id>
+    <link rel="self" href="http://hl7.org/fhir/Practitioner/37/history/1"/>
     <updated>2012-05-29T23:45:32Z</updated>
     <author>
       <name>Grahame Grieve</name>
@@ -1314,7 +1290,7 @@
         <identifier>
           <label value="SSN"/>
           <system value="http://hl7.org/fhir/sid/us-ssn"/>
-          <key value="222446666"/>
+          <value value="222446666"/>
         </identifier>
 
         <name>
@@ -1340,8 +1316,7 @@
         </gender>
 
         <organization>
-          <type value="Organization"/>
-          <reference value="organization/@hl7"/>
+          <reference value="Organization/hl7"/>
         </organization>
       </Practitioner>
     </content>
@@ -1351,8 +1326,8 @@
   </entry>
   <entry>
     <title>nephrologist</title>
-    <id>http://hl7.org/fhir/practitioner/@38</id>
-    <link rel="self" href="http://hl7.org/fhir/practitioner/@38/history/@1"/>
+    <id>http://hl7.org/fhir/Practitioner/38</id>
+    <link rel="self" href="http://hl7.org/fhir/Practitioner/38/history/1"/>
     <updated>2012-05-29T23:45:32Z</updated>
     <author>
       <name>Grahame Grieve</name>
@@ -1367,7 +1342,7 @@
         <identifier>
           <label value="SSN"/>
           <system value="http://hl7.org/fhir/sid/us-ssn"/>
-          <key value="222447777"/>
+          <value value="222447777"/>
         </identifier>
 
         <name>
@@ -1393,8 +1368,7 @@
         </gender>
 
         <organization>
-          <type value="Organization"/>
-          <reference value="organization/@hl7"/>
+          <reference value="Organization/hl7"/>
         </organization>
       </Practitioner>
     </content>
@@ -1404,8 +1378,8 @@
   </entry>
   <entry>
     <title>neurologist</title>
-    <id>http://hl7.org/fhir/practitioner/@39</id>
-    <link rel="self" href="http://hl7.org/fhir/practitioner/@39/history/@1"/>
+    <id>http://hl7.org/fhir/Practitioner/39</id>
+    <link rel="self" href="http://hl7.org/fhir/Practitioner/39/history/1"/>
     <updated>2012-05-29T23:45:32Z</updated>
     <author>
       <name>Grahame Grieve</name>
@@ -1420,7 +1394,7 @@
         <identifier>
           <label value="SSN"/>
           <system value="http://hl7.org/fhir/sid/us-ssn"/>
-          <key value="222448888"/>
+          <value value="222448888"/>
         </identifier>
 
         <name>
@@ -1446,8 +1420,7 @@
         </gender>
 
         <organization>
-          <type value="Organization"/>
-          <reference value="organization/@hl7"/>
+          <reference value="Organization/hl7"/>
         </organization>
       </Practitioner>
     </content>
@@ -1457,8 +1430,8 @@
   </entry>
   <entry>
     <title>neurosurgeon</title>
-    <id>http://hl7.org/fhir/practitioner/@40</id>
-    <link rel="self" href="http://hl7.org/fhir/practitioner/@40/history/@1"/>
+    <id>http://hl7.org/fhir/Practitioner/40</id>
+    <link rel="self" href="http://hl7.org/fhir/Practitioner/40/history/1"/>
     <updated>2012-05-29T23:45:32Z</updated>
     <author>
       <name>Grahame Grieve</name>
@@ -1473,7 +1446,7 @@
         <identifier>
           <label value="SSN"/>
           <system value="http://hl7.org/fhir/sid/us-ssn"/>
-          <key value="222449999"/>
+          <value value="222449999"/>
         </identifier>
 
         <name>
@@ -1499,8 +1472,7 @@
         </gender>
 
         <organization>
-          <type value="Organization"/>
-          <reference value="organization/@hl7"/>
+          <reference value="Organization/hl7"/>
         </organization>
       </Practitioner>
     </content>
@@ -1511,8 +1483,8 @@
   </entry>
   <entry>
     <title>OB/GYN</title>
-    <id>http://hl7.org/fhir/practitioner/@41</id>
-    <link rel="self" href="http://hl7.org/fhir/practitioner/@41/history/@1"/>
+    <id>http://hl7.org/fhir/Practitioner/41</id>
+    <link rel="self" href="http://hl7.org/fhir/Practitioner/41/history/1"/>
     <updated>2012-05-29T23:45:32Z</updated>
     <author>
       <name>Grahame Grieve</name>
@@ -1527,7 +1499,7 @@
         <identifier>
           <label value="SSN"/>
           <system value="http://hl7.org/fhir/sid/us-ssn"/>
-          <key value="222552222"/>
+          <value value="222552222"/>
         </identifier>
 
         <name>
@@ -1553,8 +1525,7 @@
         </gender>
 
         <organization>
-          <type value="Organization"/>
-          <reference value="organization/@hl7"/>
+          <reference value="Organization/hl7"/>
         </organization>
       </Practitioner>
     </content>
@@ -1564,8 +1535,8 @@
   </entry>
   <entry>
     <title>oncologist</title>
-    <id>http://hl7.org/fhir/practitioner/@42</id>
-    <link rel="self" href="http://hl7.org/fhir/practitioner/@42/history/@1"/>
+    <id>http://hl7.org/fhir/Practitioner/42</id>
+    <link rel="self" href="http://hl7.org/fhir/Practitioner/42/history/1"/>
     <updated>2012-05-29T23:45:32Z</updated>
     <author>
       <name>Grahame Grieve</name>
@@ -1580,7 +1551,7 @@
         <identifier>
           <label value="SSN"/>
           <system value="http://hl7.org/fhir/sid/us-ssn"/>
-          <key value="222553333"/>
+          <value value="222553333"/>
         </identifier>
 
         <name>
@@ -1606,8 +1577,7 @@
         </gender>
 
         <organization>
-          <type value="Organization"/>
-          <reference value="organization/@hl7"/>
+          <reference value="Organization/hl7"/>
         </organization>
       </Practitioner>
     </content>
@@ -1617,8 +1587,8 @@
   </entry>
   <entry>
     <title>ophthalmologist</title>
-    <id>http://hl7.org/fhir/practitioner/@43</id>
-    <link rel="self" href="http://hl7.org/fhir/practitioner/@43/history/@1"/>
+    <id>http://hl7.org/fhir/Practitioner/43</id>
+    <link rel="self" href="http://hl7.org/fhir/Practitioner/43/history/1"/>
     <updated>2012-05-29T23:45:32Z</updated>
     <author>
       <name>Grahame Grieve</name>
@@ -1633,7 +1603,7 @@
         <identifier>
           <label value="SSN"/>
           <system value="http://hl7.org/fhir/sid/us-ssn"/>
-          <key value="222554444"/>
+          <value value="222554444"/>
         </identifier>
 
         <name>
@@ -1659,8 +1629,7 @@
         </gender>
 
         <organization>
-          <type value="Organization"/>
-          <reference value="organization/@hl7"/>
+          <reference value="Organization/hl7"/>
         </organization>
       </Practitioner>
     </content>
@@ -1671,8 +1640,8 @@
   </entry>
   <entry>
     <title>orthopedic surgeon</title>
-    <id>http://hl7.org/fhir/practitioner/@44</id>
-    <link rel="self" href="http://hl7.org/fhir/practitioner/@44/history/@1"/>
+    <id>http://hl7.org/fhir/Practitioner/44</id>
+    <link rel="self" href="http://hl7.org/fhir/Practitioner/44/history/1"/>
     <updated>2012-05-29T23:45:32Z</updated>
     <author>
       <name>Grahame Grieve</name>
@@ -1687,7 +1656,7 @@
         <identifier>
           <label value="SSN"/>
           <system value="http://hl7.org/fhir/sid/us-ssn"/>
-          <key value="222555545"/>
+          <value value="222555545"/>
         </identifier>
 
         <name>
@@ -1713,8 +1682,7 @@
         </gender>
 
         <organization>
-          <type value="Organization"/>
-          <reference value="organization/@hl7"/>
+          <reference value="Organization/hl7"/>
         </organization>
       </Practitioner>
     </content>
@@ -1725,8 +1693,8 @@
   </entry>
   <entry>
     <title>otolaryngologist (ENT)</title>
-    <id>http://hl7.org/fhir/practitioner/@45</id>
-    <link rel="self" href="http://hl7.org/fhir/practitioner/@45/history/@1"/>
+    <id>http://hl7.org/fhir/Practitioner/45</id>
+    <link rel="self" href="http://hl7.org/fhir/Practitioner/45/history/1"/>
     <updated>2012-05-29T23:45:32Z</updated>
     <author>
       <name>Grahame Grieve</name>
@@ -1741,7 +1709,7 @@
         <identifier>
           <label value="SSN"/>
           <system value="http://hl7.org/fhir/sid/us-ssn"/>
-          <key value="222556666"/>
+          <value value="222556666"/>
         </identifier>
 
         <name>
@@ -1767,8 +1735,7 @@
         </gender>
 
         <organization>
-          <type value="Organization"/>
-          <reference value="organization/@hl7"/>
+          <reference value="Organization/hl7"/>
         </organization>
       </Practitioner>
     </content>
@@ -1778,8 +1745,8 @@
   </entry>
   <entry>
     <title>pathologist</title>
-    <id>http://hl7.org/fhir/practitioner/@46</id>
-    <link rel="self" href="http://hl7.org/fhir/practitioner/@46/history/@1"/>
+    <id>http://hl7.org/fhir/Practitioner/46</id>
+    <link rel="self" href="http://hl7.org/fhir/Practitioner/46/history/1"/>
     <updated>2012-05-29T23:45:32Z</updated>
     <author>
       <name>Grahame Grieve</name>
@@ -1794,7 +1761,7 @@
         <identifier>
           <label value="SSN"/>
           <system value="http://hl7.org/fhir/sid/us-ssn"/>
-          <key value="222444444"/>
+          <value value="222444444"/>
         </identifier>
 
         <name>
@@ -1820,8 +1787,7 @@
         </gender>
 
         <organization>
-          <type value="Organization"/>
-          <reference value="organization/@hl7"/>
+          <reference value="Organization/hl7"/>
         </organization>
       </Practitioner>
     </content>
@@ -1831,8 +1797,8 @@
   </entry>
   <entry>
     <title>pediatrician</title>
-    <id>http://hl7.org/fhir/practitioner/@47</id>
-    <link rel="self" href="http://hl7.org/fhir/practitioner/@47/history/@1"/>
+    <id>http://hl7.org/fhir/Practitioner/47</id>
+    <link rel="self" href="http://hl7.org/fhir/Practitioner/47/history/1"/>
     <updated>2012-05-29T23:45:32Z</updated>
     <author>
       <name>Grahame Grieve</name>
@@ -1847,7 +1813,7 @@
         <identifier>
           <label value="SSN"/>
           <system value="http://hl7.org/fhir/sid/us-ssn"/>
-          <key value="222557777"/>
+          <value value="222557777"/>
         </identifier>
 
         <name>
@@ -1873,8 +1839,7 @@
         </gender>
 
         <organization>
-          <type value="Organization"/>
-          <reference value="organization/@hl7"/>
+          <reference value="Organization/hl7"/>
         </organization>
       </Practitioner>
     </content>
@@ -1885,8 +1850,8 @@
   </entry>
   <entry>
     <title>plastic surgeon</title>
-    <id>http://hl7.org/fhir/practitioner/@48</id>
-    <link rel="self" href="http://hl7.org/fhir/practitioner/@48/history/@1"/>
+    <id>http://hl7.org/fhir/Practitioner/48</id>
+    <link rel="self" href="http://hl7.org/fhir/Practitioner/48/history/1"/>
     <updated>2012-05-29T23:45:32Z</updated>
     <author>
       <name>Grahame Grieve</name>
@@ -1901,7 +1866,7 @@
         <identifier>
           <label value="SSN"/>
           <system value="http://hl7.org/fhir/sid/us-ssn"/>
-          <key value="222558888"/>
+          <value value="222558888"/>
         </identifier>
 
         <name>
@@ -1927,8 +1892,7 @@
         </gender>
 
         <organization>
-          <type value="Organization"/>
-          <reference value="organization/@hl7"/>
+          <reference value="Organization/hl7"/>
         </organization>
       </Practitioner>
     </content>
@@ -1939,8 +1903,8 @@
   </entry>
   <entry>
     <title>psychiatrist</title>
-    <id>http://hl7.org/fhir/practitioner/@49</id>
-    <link rel="self" href="http://hl7.org/fhir/practitioner/@49/history/@1"/>
+    <id>http://hl7.org/fhir/Practitioner/49</id>
+    <link rel="self" href="http://hl7.org/fhir/Practitioner/49/history/1"/>
     <updated>2012-05-29T23:45:32Z</updated>
     <author>
       <name>Grahame Grieve</name>
@@ -1955,7 +1919,7 @@
         <identifier>
           <label value="SSN"/>
           <system value="http://hl7.org/fhir/sid/us-ssn"/>
-          <key value="222559999"/>
+          <value value="222559999"/>
         </identifier>
 
         <name>
@@ -1981,8 +1945,7 @@
         </gender>
 
         <organization>
-          <type value="Organization"/>
-          <reference value="organization/@hl7"/>
+          <reference value="Organization/hl7"/>
         </organization>
       </Practitioner>
     </content>
@@ -1993,8 +1956,8 @@
   </entry>
   <entry>
     <title>pulmonologist</title>
-    <id>http://hl7.org/fhir/practitioner/@50</id>
-    <link rel="self" href="http://hl7.org/fhir/practitioner/@50/history/@1"/>
+    <id>http://hl7.org/fhir/Practitioner/50</id>
+    <link rel="self" href="http://hl7.org/fhir/Practitioner/50/history/1"/>
     <updated>2012-05-29T23:45:32Z</updated>
     <author>
       <name>Grahame Grieve</name>
@@ -2009,7 +1972,7 @@
         <identifier>
           <label value="SSN"/>
           <system value="http://hl7.org/fhir/sid/us-ssn"/>
-          <key value="222662222"/>
+          <value value="222662222"/>
         </identifier>
 
         <name>
@@ -2035,8 +1998,7 @@
         </gender>
 
         <organization>
-          <type value="Organization"/>
-          <reference value="organization/@hl7"/>
+          <reference value="Organization/hl7"/>
         </organization>
       </Practitioner>
     </content>
@@ -2047,8 +2009,8 @@
   </entry>
   <entry>
     <title>radiologist</title>
-    <id>http://hl7.org/fhir/practitioner/@51</id>
-    <link rel="self" href="http://hl7.org/fhir/practitioner/@51/history/@1"/>
+    <id>http://hl7.org/fhir/Practitioner/51</id>
+    <link rel="self" href="http://hl7.org/fhir/Practitioner/51/history/1"/>
     <updated>2012-05-29T23:45:32Z</updated>
     <author>
       <name>Grahame Grieve</name>
@@ -2063,7 +2025,7 @@
         <identifier>
           <label value="SSN"/>
           <system value="http://hl7.org/fhir/sid/us-ssn"/>
-          <key value="222555555"/>
+          <value value="222555555"/>
         </identifier>
 
         <name>
@@ -2089,8 +2051,7 @@
         </gender>
 
         <organization>
-          <type value="Organization"/>
-          <reference value="organization/@hl7"/>
+          <reference value="Organization/hl7"/>
         </organization>
       </Practitioner>
     </content>
@@ -2101,8 +2062,8 @@
   </entry>
   <entry>
     <title>rheumatologist</title>
-    <id>http://hl7.org/fhir/practitioner/@52</id>
-    <link rel="self" href="http://hl7.org/fhir/practitioner/@52/history/@1"/>
+    <id>http://hl7.org/fhir/Practitioner/52</id>
+    <link rel="self" href="http://hl7.org/fhir/Practitioner/52/history/1"/>
     <updated>2012-05-29T23:45:32Z</updated>
     <author>
       <name>Grahame Grieve</name>
@@ -2117,7 +2078,7 @@
         <identifier>
           <label value="SSN"/>
           <system value="http://hl7.org/fhir/sid/us-ssn"/>
-          <key value="222663333"/>
+          <value value="222663333"/>
         </identifier>
 
         <name>
@@ -2143,8 +2104,7 @@
         </gender>
 
         <organization>
-          <type value="Organization"/>
-          <reference value="organization/@hl7"/>
+          <reference value="Organization/hl7"/>
         </organization>
       </Practitioner>
     </content>
@@ -2155,8 +2115,8 @@
   </entry>
   <entry>
     <title>surgeon</title>
-    <id>http://hl7.org/fhir/practitioner/@53</id>
-    <link rel="self" href="http://hl7.org/fhir/practitioner/@53/history/@1"/>
+    <id>http://hl7.org/fhir/Practitioner/53</id>
+    <link rel="self" href="http://hl7.org/fhir/Practitioner/53/history/1"/>
     <updated>2012-05-29T23:45:32Z</updated>
     <author>
       <name>Grahame Grieve</name>
@@ -2171,7 +2131,7 @@
         <identifier>
           <label value="SSN"/>
           <system value="http://hl7.org/fhir/sid/us-ssn"/>
-          <key value="222777777"/>
+          <value value="222777777"/>
         </identifier>
 
         <name>
@@ -2197,8 +2157,7 @@
         </gender>
 
         <organization>
-          <type value="Organization"/>
-          <reference value="organization/@hl7"/>
+          <reference value="Organization/hl7"/>
         </organization>
       </Practitioner>
     </content>
@@ -2208,8 +2167,8 @@
   </entry>
   <entry>
     <title>urologist</title>
-    <id>http://hl7.org/fhir/practitioner/@54</id>
-    <link rel="self" href="http://hl7.org/fhir/practitioner/@54/history/@1"/>
+    <id>http://hl7.org/fhir/Practitioner/54</id>
+    <link rel="self" href="http://hl7.org/fhir/Practitioner/54/history/1"/>
     <updated>2012-05-29T23:45:32Z</updated>
     <author>
       <name>Grahame Grieve</name>
@@ -2224,7 +2183,7 @@
         <identifier>
           <label value="SSN"/>
           <system value="http://hl7.org/fhir/sid/us-ssn"/>
-          <key value="222664444"/>
+          <value value="222664444"/>
         </identifier>
 
         <name>
@@ -2250,8 +2209,7 @@
         </gender>
 
         <organization>
-          <type value="Organization"/>
-          <reference value="organization/@hl7"/>
+          <reference value="Organization/hl7"/>
         </organization>
       </Practitioner>
     </content>
@@ -2262,8 +2220,8 @@
   </entry>
   <entry>
     <title>physician assistant</title>
-    <id>http://hl7.org/fhir/practitioner/@55</id>
-    <link rel="self" href="http://hl7.org/fhir/practitioner/@55/history/@1"/>
+    <id>http://hl7.org/fhir/Practitioner/55</id>
+    <link rel="self" href="http://hl7.org/fhir/Practitioner/55/history/1"/>
     <updated>2012-05-29T23:45:32Z</updated>
     <author>
       <name>Grahame Grieve</name>
@@ -2278,7 +2236,7 @@
         <identifier>
           <label value="SSN"/>
           <system value="http://hl7.org/fhir/sid/us-ssn"/>
-          <key value="222665555"/>
+          <value value="222665555"/>
         </identifier>
 
         <name>
@@ -2304,8 +2262,7 @@
         </gender>
 
         <organization>
-          <type value="Organization"/>
-          <reference value="organization/@hl7"/>
+          <reference value="Organization/hl7"/>
         </organization>
       </Practitioner>
     </content>
@@ -2316,8 +2273,8 @@
   </entry>
   <entry>
     <title>registered nurse</title>
-    <id>http://hl7.org/fhir/practitioner/@56</id>
-    <link rel="self" href="http://hl7.org/fhir/practitioner/@56/history/@1"/>
+    <id>http://hl7.org/fhir/Practitioner/56</id>
+    <link rel="self" href="http://hl7.org/fhir/Practitioner/56/history/1"/>
     <updated>2012-05-29T23:45:32Z</updated>
     <author>
       <name>Grahame Grieve</name>
@@ -2332,7 +2289,7 @@
         <identifier>
           <label value="SSN"/>
           <system value="http://hl7.org/fhir/sid/us-ssn"/>
-          <key value="222888888"/>
+          <value value="222888888"/>
         </identifier>
 
         <name>
@@ -2358,8 +2315,7 @@
         </gender>
 
         <organization>
-          <type value="Organization"/>
-          <reference value="organization/@hl7"/>
+          <reference value="Organization/hl7"/>
         </organization>
       </Practitioner>
     </content>
@@ -2370,8 +2326,8 @@
   </entry>
   <entry>
     <title>nursing assistant</title>
-    <id>http://hl7.org/fhir/practitioner/@57</id>
-    <link rel="self" href="http://hl7.org/fhir/practitioner/@57/history/@1"/>
+    <id>http://hl7.org/fhir/Practitioner/57</id>
+    <link rel="self" href="http://hl7.org/fhir/Practitioner/57/history/1"/>
     <updated>2012-05-29T23:45:32Z</updated>
     <author>
       <name>Grahame Grieve</name>
@@ -2386,7 +2342,7 @@
         <identifier>
           <label value="SSN"/>
           <system value="http://hl7.org/fhir/sid/us-ssn"/>
-          <key value="222999999"/>
+          <value value="222999999"/>
         </identifier>
 
         <name>
@@ -2412,8 +2368,7 @@
         </gender>
 
         <organization>
-          <type value="Organization"/>
-          <reference value="organization/@hl7"/>
+          <reference value="Organization/hl7"/>
         </organization>
       </Practitioner>
     </content>
@@ -2424,8 +2379,8 @@
   </entry>
   <entry>
     <title>chiropractor</title>
-    <id>http://hl7.org/fhir/practitioner/@58</id>
-    <link rel="self" href="http://hl7.org/fhir/practitioner/@58/history/@1"/>
+    <id>http://hl7.org/fhir/Practitioner/58</id>
+    <link rel="self" href="http://hl7.org/fhir/Practitioner/58/history/1"/>
     <updated>2012-05-29T23:45:32Z</updated>
     <author>
       <name>Grahame Grieve</name>
@@ -2440,7 +2395,7 @@
         <identifier>
           <label value="SSN"/>
           <system value="http://hl7.org/fhir/sid/us-ssn"/>
-          <key value="222666666"/>
+          <value value="222666666"/>
         </identifier>
 
         <name>
@@ -2466,8 +2421,7 @@
         </gender>
 
         <organization>
-          <type value="Organization"/>
-          <reference value="organization/@hl7"/>
+          <reference value="Organization/hl7"/>
         </organization>
       </Practitioner>
     </content>
@@ -2477,8 +2431,8 @@
   </entry>
   <entry>
     <title>dentist</title>
-    <id>http://hl7.org/fhir/practitioner/@59</id>
-    <link rel="self" href="http://hl7.org/fhir/practitioner/@59/history/@1"/>
+    <id>http://hl7.org/fhir/Practitioner/59</id>
+    <link rel="self" href="http://hl7.org/fhir/Practitioner/59/history/1"/>
     <updated>2012-05-29T23:45:32Z</updated>
     <author>
       <name>Grahame Grieve</name>
@@ -2493,7 +2447,7 @@
         <identifier>
           <label value="SSN"/>
           <system value="http://hl7.org/fhir/sid/us-ssn"/>
-          <key value="222667777"/>
+          <value value="222667777"/>
         </identifier>
 
         <name>
@@ -2519,8 +2473,7 @@
         </gender>
 
         <organization>
-          <type value="Organization"/>
-          <reference value="organization/@hl7"/>
+          <reference value="Organization/hl7"/>
         </organization>
       </Practitioner>
     </content>
@@ -2531,8 +2484,8 @@
   </entry>
   <entry>
     <title>orthodontist</title>
-    <id>http://hl7.org/fhir/practitioner/@60</id>
-    <link rel="self" href="http://hl7.org/fhir/practitioner/@60/history/@1"/>
+    <id>http://hl7.org/fhir/Practitioner/60</id>
+    <link rel="self" href="http://hl7.org/fhir/Practitioner/60/history/1"/>
     <updated>2012-05-29T23:45:32Z</updated>
     <author>
       <name>Grahame Grieve</name>
@@ -2547,7 +2500,7 @@
         <identifier>
           <label value="SSN"/>
           <system value="http://hl7.org/fhir/sid/us-ssn"/>
-          <key value="222668888"/>
+          <value value="222668888"/>
         </identifier>
 
         <name>
@@ -2573,8 +2526,7 @@
         </gender>
 
         <organization>
-          <type value="Organization"/>
-          <reference value="organization/@hl7"/>
+          <reference value="Organization/hl7"/>
         </organization>
       </Practitioner>
     </content>
@@ -2584,8 +2536,8 @@
   </entry>
   <entry>
     <title>optometrist</title>
-    <id>http://hl7.org/fhir/practitioner/@61</id>
-    <link rel="self" href="http://hl7.org/fhir/practitioner/@61/history/@1"/>
+    <id>http://hl7.org/fhir/Practitioner/61</id>
+    <link rel="self" href="http://hl7.org/fhir/Practitioner/61/history/1"/>
     <updated>2012-05-29T23:45:32Z</updated>
     <author>
       <name>Grahame Grieve</name>
@@ -2600,7 +2552,7 @@
         <identifier>
           <label value="SSN"/>
           <system value="http://hl7.org/fhir/sid/us-ssn"/>
-          <key value="222669999"/>
+          <value value="222669999"/>
         </identifier>
 
         <name>
@@ -2626,8 +2578,7 @@
         </gender>
 
         <organization>
-          <type value="Organization"/>
-          <reference value="organization/@hl7"/>
+          <reference value="Organization/hl7"/>
         </organization>
       </Practitioner>
     </content>
@@ -2638,8 +2589,8 @@
   </entry>
   <entry>
     <title>pharmacist</title>
-    <id>http://hl7.org/fhir/practitioner/@62</id>
-    <link rel="self" href="http://hl7.org/fhir/practitioner/@62/history/@1"/>
+    <id>http://hl7.org/fhir/Practitioner/62</id>
+    <link rel="self" href="http://hl7.org/fhir/Practitioner/62/history/1"/>
     <updated>2012-05-29T23:45:32Z</updated>
     <author>
       <name>Grahame Grieve</name>
@@ -2654,7 +2605,7 @@
         <identifier>
           <label value="SSN"/>
           <system value="http://hl7.org/fhir/sid/us-ssn"/>
-          <key value="333222222"/>
+          <value value="333222222"/>
         </identifier>
 
         <name>
@@ -2678,8 +2629,7 @@
           </coding>
         </gender>
         <organization>
-          <type value="Organization"/>
-          <reference value="organization/@hl7"/>
+          <reference value="Organization/hl7"/>
         </organization>
       </Practitioner>
     </content>
@@ -2690,8 +2640,8 @@
   </entry>
   <entry>
     <title>podiatrist</title>
-    <id>http://hl7.org/fhir/practitioner/@63</id>
-    <link rel="self" href="http://hl7.org/fhir/practitioner/@63/history/@1"/>
+    <id>http://hl7.org/fhir/Practitioner/63</id>
+    <link rel="self" href="http://hl7.org/fhir/Practitioner/63/history/1"/>
     <updated>2012-05-29T23:45:32Z</updated>
     <author>
       <name>Grahame Grieve</name>
@@ -2706,7 +2656,7 @@
         <identifier>
           <label value="SSN"/>
           <system value="http://hl7.org/fhir/sid/us-ssn"/>
-          <key value="222772222"/>
+          <value value="222772222"/>
         </identifier>
 
         <name>
@@ -2732,8 +2682,7 @@
           </coding>
         </gender>
         <organization>
-          <type value="Organization"/>
-          <reference value="organization/@hl7"/>
+          <reference value="Organization/hl7"/>
         </organization>
       </Practitioner>
     </content>
@@ -2743,8 +2692,8 @@
   </entry>
   <entry>
     <title>psychologist</title>
-    <id>http://hl7.org/fhir/practitioner/@64</id>
-    <link rel="self" href="http://hl7.org/fhir/practitioner/@64/history/@1"/>
+    <id>http://hl7.org/fhir/Practitioner/64</id>
+    <link rel="self" href="http://hl7.org/fhir/Practitioner/64/history/1"/>
     <updated>2012-05-29T23:45:32Z</updated>
     <author>
       <name>Grahame Grieve</name>
@@ -2759,7 +2708,7 @@
         <identifier>
           <label value="SSN"/>
           <system value="http://hl7.org/fhir/sid/us-ssn"/>
-          <key value="222773333"/>
+          <value value="222773333"/>
         </identifier>
 
         <name>
@@ -2785,8 +2734,7 @@
         </gender>
 
         <organization>
-          <type value="Organization"/>
-          <reference value="organization/@hl7"/>
+          <reference value="Organization/hl7"/>
         </organization>
       </Practitioner>
     </content>
@@ -2797,8 +2745,8 @@
   </entry>
   <entry>
     <title>lab technician</title>
-    <id>http://hl7.org/fhir/practitioner/@65</id>
-    <link rel="self" href="http://hl7.org/fhir/practitioner/@65/history/@1"/>
+    <id>http://hl7.org/fhir/Practitioner/65</id>
+    <link rel="self" href="http://hl7.org/fhir/Practitioner/65/history/1"/>
     <updated>2012-05-29T23:45:32Z</updated>
     <author>
       <name>Grahame Grieve</name>
@@ -2813,7 +2761,7 @@
         <identifier>
           <label value="SSN"/>
           <system value="http://hl7.org/fhir/sid/us-ssn"/>
-          <key value="333444444"/>
+          <value value="333444444"/>
         </identifier>
 
         <name>
@@ -2839,8 +2787,7 @@
         </gender>
 
         <organization>
-          <type value="Organization"/>
-          <reference value="organization/@hl7"/>
+          <reference value="Organization/hl7"/>
         </organization>
       </Practitioner>
     </content>
@@ -2850,8 +2797,8 @@
   </entry>
   <entry>
     <title>dietician</title>
-    <id>http://hl7.org/fhir/practitioner/@66</id>
-    <link rel="self" href="http://hl7.org/fhir/practitioner/@66/history/@1"/>
+    <id>http://hl7.org/fhir/Practitioner/66</id>
+    <link rel="self" href="http://hl7.org/fhir/Practitioner/66/history/1"/>
     <updated>2012-05-29T23:45:32Z</updated>
     <author>
       <name>Grahame Grieve</name>
@@ -2866,7 +2813,7 @@
         <identifier>
           <label value="SSN"/>
           <system value="http://hl7.org/fhir/sid/us-ssn"/>
-          <key value="333555555"/>
+          <value value="333555555"/>
         </identifier>
 
         <name>
@@ -2891,8 +2838,7 @@
           </coding>
         </gender>
         <organization>
-          <type value="Organization"/>
-          <reference value="organization/@hl7"/>
+          <reference value="Organization/hl7"/>
         </organization>
       </Practitioner>
     </content>
@@ -2902,8 +2848,8 @@
   </entry>
   <entry>
     <title>social worker</title>
-    <id>http://hl7.org/fhir/practitioner/@67</id>
-    <link rel="self" href="http://hl7.org/fhir/practitioner/@67/history/@1"/>
+    <id>http://hl7.org/fhir/Practitioner/67</id>
+    <link rel="self" href="http://hl7.org/fhir/Practitioner/67/history/1"/>
     <updated>2012-05-29T23:45:32Z</updated>
     <author>
       <name>Grahame Grieve</name>
@@ -2917,7 +2863,7 @@
         <identifier>
           <label value="SSN"/>
           <system value="http://hl7.org/fhir/sid/us-ssn"/>
-          <key value="000111111"/>
+          <value value="000111111"/>
         </identifier>
 
         <name>
@@ -2942,8 +2888,7 @@
           </coding>
         </gender>
         <organization>
-          <type value="Organization"/>
-          <reference value="organization/@hl7"/>
+          <reference value="Organization/hl7"/>
         </organization>
       </Practitioner>
     </content>
@@ -2953,8 +2898,8 @@
   </entry>
   <entry>
     <title>occupational therapist</title>
-    <id>http://hl7.org/fhir/practitioner/@68</id>
-    <link rel="self" href="http://hl7.org/fhir/practitioner/@68/history/@1"/>
+    <id>http://hl7.org/fhir/Practitioner/68</id>
+    <link rel="self" href="http://hl7.org/fhir/Practitioner/68/history/1"/>
     <updated>2012-05-29T23:45:32Z</updated>
     <author>
       <name>Grahame Grieve</name>
@@ -2969,7 +2914,7 @@
         <identifier>
           <label value="SSN"/>
           <system value="http://hl7.org/fhir/sid/us-ssn"/>
-          <key value="222776666"/>
+          <value value="222776666"/>
         </identifier>
 
         <name>
@@ -2995,8 +2940,7 @@
         </gender>
 
         <organization>
-          <type value="Organization"/>
-          <reference value="organization/@hl7"/>
+          <reference value="Organization/hl7"/>
         </organization>
       </Practitioner>
     </content>
@@ -3007,8 +2951,8 @@
   </entry>
   <entry>
     <title>physical therapist</title>
-    <id>http://hl7.org/fhir/practitioner/@69</id>
-    <link rel="self" href="http://hl7.org/fhir/practitioner/@69/history/@1"/>
+    <id>http://hl7.org/fhir/Practitioner/69</id>
+    <link rel="self" href="http://hl7.org/fhir/Practitioner/69/history/1"/>
     <updated>2012-05-29T23:45:32Z</updated>
     <author>
       <name>Grahame Grieve</name>
@@ -3023,7 +2967,7 @@
         <identifier>
           <label value="SSN"/>
           <system value="http://hl7.org/fhir/sid/us-ssn"/>
-          <key value="222778888"/>
+          <value value="222778888"/>
         </identifier>
 
         <name>
@@ -3049,8 +2993,7 @@
         </gender>
 
         <organization>
-          <type value="Organization"/>
-          <reference value="organization/@hl7"/>
+          <reference value="Organization/hl7"/>
         </organization>
       </Practitioner>
     </content>
@@ -3061,8 +3004,8 @@
   </entry>
   <entry>
     <title>transcriptionist</title>
-    <id>http://hl7.org/fhir/practitioner/@70</id>
-    <link rel="self" href="http://hl7.org/fhir/practitioner/@70/history/@1"/>
+    <id>http://hl7.org/fhir/Practitioner/70</id>
+    <link rel="self" href="http://hl7.org/fhir/Practitioner/70/history/1"/>
     <updated>2012-05-29T23:45:32Z</updated>
     <author>
       <name>Grahame Grieve</name>
@@ -3077,7 +3020,7 @@
         <identifier>
           <label value="SSN"/>
           <system value="http://hl7.org/fhir/sid/us-ssn"/>
-          <key value="333777777"/>
+          <value value="333777777"/>
         </identifier>
 
         <name>
@@ -3103,8 +3046,7 @@
         </gender>
 
         <organization>
-          <type value="Organization"/>
-          <reference value="organization/@hl7"/>
+          <reference value="Organization/hl7"/>
         </organization>
       </Practitioner>
     </content>

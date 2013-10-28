@@ -34,6 +34,20 @@
         <td>This is provided for when the source code system doesn't actually provide a definition (there are many such). Providing an definition for a code should not be done where the underlying code system provides a definition</td>
       </tr>
       <tr>
+        <td>deprecated</td>
+        <td>ValueSet.define.concept</td>
+        <td>boolean</td>
+        <td>0..1</td>
+        <td>Whether the concept has been deprecated</td>
+      </tr>
+      <tr>
+        <td>parentCode</td>
+        <td>ValueSet.define.concept</td>
+        <td>code</td>
+        <td>0..*</td>
+        <td>Additional parent for this concept</td>
+      </tr>
+      <tr>
         <td>issue-source</td>
         <td>OperationOutcome</td>
         <td>string</td>
@@ -98,6 +112,7 @@
 
   <extensionDefn> 
     <code value="comment"/>
+    <display value="Comment"/>
     <contextType value="resource"/>
     <context value="ValueSet.compose.include.code"/>
     <definition>
@@ -116,6 +131,7 @@
   
   <extensionDefn> 
     <code value="display"/>
+    <display value="Display"/>
     <contextType value="resource"/>
     <context value="ValueSet.compose.include.code"/>
     <definition>
@@ -134,6 +150,7 @@
 
   <extensionDefn> 
     <code value="definition"/>
+    <display value="Definition"/>
     <contextType value="resource"/>
     <context value="ValueSet.compose.include.code"/>
     <definition>
@@ -151,7 +168,44 @@
   </extensionDefn>
   
   <extensionDefn> 
+    <code value="deprecated"/>
+    <display value="Dreprecated"/>
+    <contextType value="resource"/>
+    <context value="ValueSet.define.concept"/>
+    <definition>
+      <short value="Whether the concept has been deprecated"/>
+      <formal value="Set to true of the concept has been deprecated (still can be used, but soon to be withdrawn)"/>
+      <requirements value="Some code systems deprecate codes"/>
+      <min value="0"/>
+      <max value="1"/>
+      <type> 
+        <code value="boolean"/>      
+      </type>
+      <isModifier value="false"/> <!-- no, cause you can still use the code -->
+    </definition> 
+  </extensionDefn>
+  
+  <extensionDefn> 
+    <code value="parentCode"/>
+    <display value="parent code"/>
+    <contextType value="resource"/>
+    <context value="ValueSet.define.concept"/>
+    <definition>
+      <short value="Additional parent for this concept"/>
+      <formal value="Refers to another code defined within the code system that identifies a concept that is also a parent of this code.  I.e. The referenced concept subsumes the extended concept.  Because meaning is inferred from hierarchy as well as definition, the presence of this extension modifies the meaning of the extended concept."/>
+      <requirements value="For when the code system being defined is poly-heirarchical"/>
+      <min value="0"/>
+      <max value="*"/>
+      <type> 
+        <code value="code"/>      
+      </type>
+      <isModifier value="true"/>
+    </definition> 
+  </extensionDefn>
+  
+  <extensionDefn> 
     <code value="issue-source"/>
+    <display value="Source of Issue"/>
     <contextType value="resource"/>
     <context value="OperationOutcome"/>
     <definition>
@@ -164,17 +218,15 @@
         <code value="code"/>      
       </type>
       <isModifier value="false"/>
-      <binding value="OperationOutcomeSource"/>
+      <binding>
+        <name value="OperationOutcomeSource"/>
+        <isExtensible value="true"/>
+        <conformance value="preferred"/>
+        <referenceResource>
+          <reference value="#v1"/>
+        </referenceResource>
+      </binding>
     </definition> 
   </extensionDefn>
 
-  <binding>
-    <name value="OperationOutcomeSource"/>
-    <isExtensible value="true"/>
-    <conformance value="preferred"/>
-    <referenceResource>
-      <type value="ValueSet"/>
-      <reference value="#v1"/>
-    </referenceResource>
-  </binding>
 </Profile>

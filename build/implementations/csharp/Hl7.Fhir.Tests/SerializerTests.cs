@@ -70,11 +70,11 @@ namespace Hl7.Fhir.Tests
                     LocalId = "3141",
                     Use = Identifier.IdentifierUse.Official,
                     Label = "SSN",
-                    System = new Uri("http://hl7.org/fhir/sid/us-ssn"),
-                    Key = "000111111",
+                    System = new Uri("http://hl7.org/fhir/sid/us-ssn"),                    
+                    Value = "000111111",
                     Period = new Period() { StartElement = new FhirDateTime(2001, 1, 2), 
                         EndElement = new FhirDateTime(2010, 3, 4) },
-                    Assigner = new ResourceReference { Type = "Organization", 
+                    Assigner = new ResourceReference { 
                                     Reference = "organization/@123",
                                         Display = "HL7, Inc" }
                 };
@@ -85,16 +85,16 @@ namespace Hl7.Fhir.Tests
                         @"<use value=""official"" />" +
                         @"<label value=""SSN"" />" +
                         @"<system value=""http://hl7.org/fhir/sid/us-ssn"" />" +
-                        @"<key value=""000111111"" />" +
+                        @"<value value=""000111111"" />" +
                         @"<period><start value=""2001-01-02"" /><end value=""2010-03-04"" /></period>" +
-                        @"<assigner><type value=""Organization"" /><reference value=""organization/@123"" /><display value=""HL7, Inc"" /></assigner>" +
+                        @"<assigner><reference value=""organization/@123"" /><display value=""HL7, Inc"" /></assigner>" +
                      @"</element>", FhirSerializer.SerializeElementAsXml(id));
 
             Assert.AreEqual(
                 @"{""_id"":""3141"",""use"":{""value"":""official""},""label"":{""value"":""SSN""}," +
                 @"""system"":{""value"":""http://hl7.org/fhir/sid/us-ssn""},""key"":{""value"":""000111111""}," +
                 @"""period"":{""start"":{""value"":""2001-01-02""},""end"":{""value"":""2010-03-04""}}," +
-                @"""assigner"":{""type"":{""value"":""Organization""},""reference"":{""value"":""organization/@123""}," +
+                @"""assigner"":{""reference"":{""value"":""organization/@123""}," +
                 @"""display"":{""value"":""HL7, Inc""}}}", FhirSerializer.SerializeElementAsJson(id));
         }
 
@@ -143,37 +143,37 @@ namespace Hl7.Fhir.Tests
 
 
 
-        [TestMethod]
-        public void LetsDoJson()
-        {
-            string xmlString =
-               @"<Patient xmlns='http://hl7.org/fhir'>
-                    <name>
-                        <use value='official' />  
-                        <given value='Regina' />
-                        <prefix value='Dr.'>
-                        <extension>
-                            <url value='http://hl7.org/fhir/profile/@iso-20190' />
-                            <valueCoding>
-                                <system value='urn:oid:2.16.840.1.113883.5.1122' />       
-                                <code value='AC' />
-                            </valueCoding>
-                        </extension>
-                        </prefix>
-                    </name>
-                    <text>
-                        <status value='generated' />
-                        <div xmlns='http://www.w3.org/1999/xhtml'>Whatever</div>
-                    </text>
-                </Patient>";
+//        [TestMethod]
+//        public void LetsDoJson()
+//        {
+//            string xmlString =
+//               @"<Patient xmlns='http://hl7.org/fhir'>
+//                    <name>
+//                        <use value='official' />  
+//                        <given value='Regina' />
+//                        <prefix value='Dr.'>
+//                        <extension>
+//                            <url value='http://hl7.org/fhir/profile/@iso-20190' />
+//                            <valueCoding>
+//                                <system value='urn:oid:2.16.840.1.113883.5.1122' />       
+//                                <code value='AC' />
+//                            </valueCoding>
+//                        </extension>
+//                        </prefix>
+//                    </name>
+//                    <text>
+//                        <status value='generated' />
+//                        <div xmlns='http://www.w3.org/1999/xhtml'>Whatever</div>
+//                    </text>
+//                </Patient>";
 
-            ErrorList list = new ErrorList();
-            Patient p = (Patient)FhirParser.ParseResourceFromXml(xmlString, list);
-            p.Name[0].GivenElement[0].Value = "Rex";
-            string json = FhirSerializer.SerializeResourceToJson(p);
+//            ErrorList list = new ErrorList();
+//            Patient p = (Patient)FhirParser.ParseResourceFromXml(xmlString, list);
+//            p.Name[0].GivenElement[0].Value = "Rex";
+//            string json = FhirSerializer.SerializeResourceToJson(p);
 
-            Debug.WriteLine(json);
-        }
+//            Debug.WriteLine(json);
+//        }
 
         [TestMethod]
         public void SummaryResource()
@@ -208,7 +208,7 @@ namespace Hl7.Fhir.Tests
             Patient p = new Patient()
             {
                 LocalId = "Ab4",
-                Identifier = new List<Identifier> { new Identifier { Key = "3141" } },
+                Identifier = new List<Identifier> { new Identifier { Value = "3141" } },
                 BirthDateElement = new FhirDateTime(1972, 11, 30),
                 Name = new List<HumanName> { name },
                 Text = new Narrative()
@@ -225,7 +225,7 @@ namespace Hl7.Fhir.Tests
                 @"<Patient id=""Ab4"" xmlns=""http://hl7.org/fhir"">" +
                 @"<text><status value=""generated"" /><div xmlns='http://www.w3.org/1999/xhtml'>Patient 3141 - Wouter Gert, nov. 30th, 1972</div></text>" +
                 @"<contained><List><mode value=""snapshot"" /></List></contained>" +
-                @"<identifier><key value=""3141"" /></identifier>" +
+                @"<identifier><value value=""3141"" /></identifier>" +
                 @"<name>" +
                     @"<family value=""van der"">" +
                         @"<extension><url value=""http://hl7.org/fhir/profile/@iso-21090#name-qualifier"" /><valueCode value=""VV"" /></extension>" +
@@ -237,7 +237,7 @@ namespace Hl7.Fhir.Tests
                  @"""text"":{""status"":{""value"":""generated""},""div"":""<div xmlns='http://www.w3.org/1999/xhtml'>" +
                     @"Patient 3141 - Wouter Gert, nov. 30th, 1972</div>""},"+
                  @"""contained"":[{""List"":{""mode"":{""value"":""snapshot""}}}],"+
-                @"""identifier"":[{""key"":{""value"":""3141""}}]," +
+                @"""identifier"":[{""value"":{""value"":""3141""}}]," +
                 @"""name"":[{""family"":[{""value"":""van der""," +
                     @"""extension"":[{""url"":{""value"":""http://hl7.org/fhir/profile/@iso-21090#name-qualifier""},""valueCode"":{""value"":""VV""}}]}," +
                     @"{""value"":""Vlies""}],""given"":[{""value"":""Wouter""},{""value"":""Gert""}]}],""birthDate"":{""value"":""1972-11-30""}" +
@@ -245,81 +245,6 @@ namespace Hl7.Fhir.Tests
         }
 
 
-        [TestMethod]
-        public void SerializeAndDeserializeTagList()
-        {
-            IList<Tag> tl = new List<Tag>();
-
-            tl.Add(new Tag { Label = "No!", Uri = new Uri("http://www.nu.nl/tags") });
-            tl.Add(new Tag { Label = "Maybe", Uri = new Uri("http://www.furore.com/tags") });
-
-            string json = FhirSerializer.SerializeTagListToJson(tl);
-            Assert.AreEqual(jsonTagList, json);
-
-            string xml = FhirSerializer.SerializeTagListToXml(tl);
-            Assert.AreEqual(xmlTagList, xml);
-
-            ErrorList errors = new ErrorList();
-            tl = FhirParser.ParseTagListFromXml(xml,errors);
-            Assert.IsTrue(errors.Count == 0, errors.ToString());
-            verifyTagList(tl);
-
-            tl = FhirParser.ParseTagListFromJson(json, errors);
-            Assert.IsTrue(errors.Count == 0, errors.ToString());
-            verifyTagList(tl);
-        }
-
-        [TestMethod]
-        public void CatchTagListParseErrors()
-        {
-            ErrorList errors = new ErrorList();
-            var tl = FhirParser.ParseTagListFromXml(xmlTagListE1, errors);
-            Assert.IsTrue(errors.Count != 0, errors.ToString());
-            errors.Clear();
-            tl = FhirParser.ParseTagListFromXml(xmlTagListE2, errors);
-            Assert.IsTrue(errors.Count != 0, errors.ToString());
-            errors.Clear();
-
-            tl = FhirParser.ParseTagListFromJson(jsonTagListE1, errors);
-            Assert.IsTrue(errors.Count != 0, errors.ToString());
-            errors.Clear();
-            tl = FhirParser.ParseTagListFromJson(jsonTagListE2, errors);
-            Assert.IsTrue(errors.Count != 0, errors.ToString());
-            errors.Clear();
-
-        }
-
-
-        private static void verifyTagList(IList<Tag> tl)
-        {
-            Assert.AreEqual(2, tl.Count);
-            Assert.AreEqual("No!", tl[0].Label);
-            Assert.AreEqual("http://www.nu.nl/tags", tl[0].Uri.ToString());
-            Assert.AreEqual("Maybe", tl[1].Label);
-            Assert.AreEqual("http://www.furore.com/tags", tl[1].Uri.ToString());
-        }
-
-        private string jsonTagList = @"{""taglist"":{""category"":[" +
-            @"{""term"":""http://www.nu.nl/tags"",""label"":""No!"",""scheme"":""http://hl7.org/fhir/tag""}," +
-            @"{""term"":""http://www.furore.com/tags"",""label"":""Maybe"",""scheme"":""http://hl7.org/fhir/tag""}]}}";
-
-        private string jsonTagListE1 = @"{""Xtaglist"":{""category"":[" +
-            @"{""term"":""http://www.nu.nl/tags"",""label"":""No!"",""scheme"":""http://hl7.org/fhir/tag""}," +
-            @"{""term"":""http://www.furore.com/tags"",""label"":""Maybe"",""scheme"":""http://hl7.org/fhir/tag""}]}}";
-        private string jsonTagListE2 = @"{""taglist"":{""Xcategory"":[" +
-            @"{""term"":""http://www.nu.nl/tags"",""label"":""No!"",""scheme"":""http://hl7.org/fhir/tag""}," +
-            @"{""term"":""http://www.furore.com/tags"",""label"":""Maybe"",""scheme"":""http://hl7.org/fhir/tag""}]}}";
-
-
-        private string xmlTagList = @"<?xml version=""1.0"" encoding=""utf-16""?><taglist xmlns=""http://hl7.org/fhir"">" +
-            @"<category term=""http://www.nu.nl/tags"" label=""No!"" scheme=""http://hl7.org/fhir/tag"" />" +
-            @"<category term=""http://www.furore.com/tags"" label=""Maybe"" scheme=""http://hl7.org/fhir/tag"" /></taglist>";
-        private string xmlTagListE1 = @"<?xml version=""1.0"" encoding=""utf-16""?><Xtaglist xmlns=""http://hl7.org/fhir"">" +
-            @"<category term=""http://www.nu.nl/tags"" label=""No!"" scheme=""http://hl7.org/fhir/tag"" />" +
-            @"<category term=""http://www.furore.com/tags"" label=""Maybe"" scheme=""http://hl7.org/fhir/tag"" /></taglist>";
-        private string xmlTagListE2 = @"<?xml version=""1.0"" encoding=""utf-16""?><taglist xmlns=""http://hl7.org/fhir"">" +
-            @"<category term=""http://www.nu.nl/tags"" label=""No!"" scheme=""http://hl7.org/fhir/tag"" />" +
-            @"<categoryX term=""http://www.furore.com/tags"" label=""Maybe"" scheme=""http://hl7.org/fhir/tag"" /></taglist>";
-
+       
     }
 }

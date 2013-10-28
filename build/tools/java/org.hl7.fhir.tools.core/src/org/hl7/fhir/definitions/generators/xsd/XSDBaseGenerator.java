@@ -120,9 +120,30 @@ public class XSDBaseGenerator {
     write("      <xs:documentation>The base element used for all FHIR elements and resources - allows for them to be extended with extensions</xs:documentation>\r\n");
     write("    </xs:annotation>\r\n");
     write("    <xs:sequence>\r\n");
-    write("      <xs:element name=\"extension\" type=\"Extension\" minOccurs=\"0\" maxOccurs=\"unbounded\"/>\r\n");
+    write("      <xs:element name=\"extension\" type=\"Extension\" minOccurs=\"0\" maxOccurs=\"unbounded\">\r\n");
+    write("        <xs:annotation>\r\n");
+    write("          <xs:documentation>An extension - additional local content. The extension URL defines it's meaning</xs:documentation>\r\n");
+    write("        </xs:annotation>\r\n");
+    write("      </xs:element>\r\n");
     write("    </xs:sequence>\r\n");
     write("    <xs:attribute name=\"id\" type=\"id-primitive\"/>\r\n");
+    write("  </xs:complexType>\r\n");
+    write("\r\n");    
+    write("  <xs:complexType name=\"BackboneElement\">\r\n");
+    write("    <xs:annotation>\r\n");
+    write("      <xs:documentation>An element defined in a FHIR resources - can have modifierExtension elements</xs:documentation>\r\n");
+    write("    </xs:annotation>\r\n");
+    write("    <xs:complexContent>\r\n");
+    write("      <xs:extension base=\"Element\">\r\n");
+    write("        <xs:sequence>\r\n");
+    write("          <xs:element name=\"modifierExtension\" type=\"Extension\" minOccurs=\"0\" maxOccurs=\"unbounded\">\r\n");
+    write("            <xs:annotation>\r\n");
+    write("              <xs:documentation>An extension that modifies the meaning of the element that contains it - additional local content. The extension URL defines it's meaning</xs:documentation>\r\n");
+    write("            </xs:annotation>\r\n");
+    write("          </xs:element>\r\n");
+    write("        </xs:sequence>\r\n");
+    write("      </xs:extension>\r\n");
+    write("    </xs:complexContent>\r\n");
     write("  </xs:complexType>\r\n");
     write("\r\n");    
   }
@@ -140,7 +161,7 @@ public class XSDBaseGenerator {
     write("      <xs:documentation>The base resource declaration used for all FHIR resource types - adds Narrative and xml:lang</xs:documentation>\r\n");
     write("    </xs:annotation>\r\n");
     write("    <xs:complexContent>\r\n");
-    write("      <xs:extension base=\"Element\">\r\n");
+    write("      <xs:extension base=\"BackboneElement\">\r\n");
     write("        <xs:sequence>\r\n");
     write("          <xs:element name=\"language\" type=\"code\" minOccurs=\"0\" maxOccurs=\"1\">\r\n");
     write("            <xs:annotation>\r\n");
@@ -228,18 +249,38 @@ public class XSDBaseGenerator {
     for (DefinedCode cd : definitions.getPrimitives().values()) {
       if (cd instanceof PrimitiveType) {
         PrimitiveType pt = (PrimitiveType) cd;
-        write("  <xs:simpleType name=\"" + pt.getCode() + "-primitive\">\r\n");
-        if (pt.getSchemaType().contains(",")) {
-          write("    <xs:union memberTypes=\""+pt.getSchemaType().replace(",", "")+"\"/>\r\n");
-        } else if (pt.getSchemaType().equals("string")) {
+        // two very special cases due to schema weirdness
+        if (cd.getCode().equals("date")) {
+          write("<xs:simpleType name=\"date-primitive\">\r\n");
+          write("  <xs:restriction>\r\n");
+          write("    <xs:simpleType>\r\n");
+          write("      <xs:union memberTypes=\"xs:gYear xs:gYearMonth xs:date\"/>\r\n");
+          write("    </xs:simpleType>\r\n");
+          write("    <xs:pattern value=\"\\d{4}(\\-\\d{2}(\\-\\d{2})?)?(Z|(\\+|\\-)\\d{2}:\\d{2})?\"/>\r\n");
+          write("  </xs:restriction>\r\n");
+          write("</xs:simpleType>\r\n");
+        } else if (cd.getCode().equals("dateTime")) {
+          write("<xs:simpleType name=\"dateTime-primitive\">\r\n");
+          write("  <xs:restriction>\r\n");
+          write("    <xs:simpleType>\r\n");
+          write("      <xs:union memberTypes=\"xs:gYear xs:gYearMonth xs:date xs:dateTime\"/>\r\n");
+          write("    </xs:simpleType>\r\n");
+          write("    <xs:pattern value=\"\\d{4}(\\-\\d{2}(\\-\\d{2}(T\\d{2}(:\\d{2}(:\\d{2}(\\.\\d+)?)?)?)?)?)?(Z|(\\+|\\-)\\d{2}:\\d{2})?\"/>\r\n");
+          write("  </xs:restriction>\r\n");
+          write("</xs:simpleType>\r\n");          
+        } else {
+          write("  <xs:simpleType name=\"" + pt.getCode() + "-primitive\">\r\n");
+          if (pt.getSchemaType().contains(",")) {
+            write("    <xs:union memberTypes=\""+pt.getSchemaType().replace(",", "")+"\"/>\r\n");
+          } else if (pt.getSchemaType().equals("string")) {
             write("    <xs:restriction base=\"xs:"+pt.getSchemaType()+"\">\r\n");
             write("      <xs:minLength value=\"1\"/>\r\n");
             write("    </xs:restriction>\r\n");
-        } else {
-          write("    <xs:restriction base=\"xs:"+pt.getSchemaType()+"\"/>\r\n");
+          } else {
+            write("    <xs:restriction base=\"xs:"+pt.getSchemaType()+"\"/>\r\n");
+          }
+          write("  </xs:simpleType>\r\n");
         }
-        write("  </xs:simpleType>\r\n");
-
         write("  <xs:complexType name=\"" + pt.getCode() + "\">\r\n");
         write("    <xs:annotation>\r\n");
         write("      <xs:documentation>"+Utilities.escapeXml(pt.getDefinition())+"</xs:documentation>\r\n");

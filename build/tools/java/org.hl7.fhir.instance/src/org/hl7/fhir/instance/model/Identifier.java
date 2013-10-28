@@ -29,7 +29,9 @@ package org.hl7.fhir.instance.model;
   
 */
 
-// Generated on Mon, Aug 5, 2013 12:50+1000 for FHIR v0.10
+// Generated on Mon, Oct 28, 2013 15:39+1100 for FHIR v0.12
+
+import java.util.*;
 
 /**
  * A technical identifier - identifies some entity uniquely and unambiguously.
@@ -40,6 +42,7 @@ public class Identifier extends Type {
         usual, // the identifier recommended for display and use in real-world interactions.
         official, // the identifier considered to be most trusted for the identification of this item.
         temp, // A temporary identifier.
+        secondary, // An identifier that was assigned in secondary use - it serves to identify the object in a relative context, but cannot be consistently assigned to the same object again in a different context.
         Null; // added to help the parsers
         public static IdentifierUse fromCode(String codeString) throws Exception {
             if (codeString == null || "".equals(codeString))
@@ -50,6 +53,8 @@ public class Identifier extends Type {
           return official;
         if ("temp".equals(codeString))
           return temp;
+        if ("secondary".equals(codeString))
+          return secondary;
         throw new Exception("Unknown IdentifierUse code '"+codeString+"'");
         }
         public String toCode() {
@@ -57,12 +62,13 @@ public class Identifier extends Type {
             case usual: return "usual";
             case official: return "official";
             case temp: return "temp";
+            case secondary: return "secondary";
             default: return "?";
           }
         }
     }
 
-  public class IdentifierUseEnumFactory implements EnumFactory {
+  public static class IdentifierUseEnumFactory implements EnumFactory {
     public Enum<?> fromCode(String codeString) throws Exception {
       if (codeString == null || "".equals(codeString))
             if (codeString == null || "".equals(codeString))
@@ -73,6 +79,8 @@ public class Identifier extends Type {
           return IdentifierUse.official;
         if ("temp".equals(codeString))
           return IdentifierUse.temp;
+        if ("secondary".equals(codeString))
+          return IdentifierUse.secondary;
         throw new Exception("Unknown IdentifierUse code '"+codeString+"'");
         }
     public String toCode(Enum<?> code) throws Exception {
@@ -82,17 +90,19 @@ public class Identifier extends Type {
         return "official";
       if (code == IdentifierUse.temp)
         return "temp";
+      if (code == IdentifierUse.secondary)
+        return "secondary";
       return "?";
       }
     }
 
     /**
-     * Identifies the use for this identifier, if known.
+     * usual | official | temp | secondary (If known).
      */
     protected Enumeration<IdentifierUse> use;
 
     /**
-     * A label for the identifier that can be displayed to a human so they can recognise the identifier.
+     * A label for the identifier that can be displayed to a human so they can recognize the identifier.
      */
     protected String_ label;
 
@@ -104,7 +114,7 @@ public class Identifier extends Type {
     /**
      * The portion of the identifier typically displayed to the user and which is unique within the context of the system.
      */
-    protected String_ key;
+    protected String_ value;
 
     /**
      * Time period during which identifier was valid for use.
@@ -116,19 +126,24 @@ public class Identifier extends Type {
      */
     protected ResourceReference assigner;
 
+    public Identifier() {
+      super();
+    }
+
     public Enumeration<IdentifierUse> getUse() { 
       return this.use;
     }
 
-    public void setUse(Enumeration<IdentifierUse> value) { 
+    public Identifier setUse(Enumeration<IdentifierUse> value) { 
       this.use = value;
+      return this;
     }
 
     public IdentifierUse getUseSimple() { 
       return this.use == null ? null : this.use.getValue();
     }
 
-    public void setUseSimple(IdentifierUse value) { 
+    public Identifier setUseSimple(IdentifierUse value) { 
       if (value == null)
         this.use = null;
       else {
@@ -136,21 +151,23 @@ public class Identifier extends Type {
           this.use = new Enumeration<IdentifierUse>();
         this.use.setValue(value);
       }
+      return this;
     }
 
     public String_ getLabel() { 
       return this.label;
     }
 
-    public void setLabel(String_ value) { 
+    public Identifier setLabel(String_ value) { 
       this.label = value;
+      return this;
     }
 
     public String getLabelSimple() { 
       return this.label == null ? null : this.label.getValue();
     }
 
-    public void setLabelSimple(String value) { 
+    public Identifier setLabelSimple(String value) { 
       if (value == null)
         this.label = null;
       else {
@@ -158,21 +175,23 @@ public class Identifier extends Type {
           this.label = new String_();
         this.label.setValue(value);
       }
+      return this;
     }
 
     public Uri getSystem() { 
       return this.system;
     }
 
-    public void setSystem(Uri value) { 
+    public Identifier setSystem(Uri value) { 
       this.system = value;
+      return this;
     }
 
     public String getSystemSimple() { 
       return this.system == null ? null : this.system.getValue();
     }
 
-    public void setSystemSimple(String value) { 
+    public Identifier setSystemSimple(String value) { 
       if (value == null)
         this.system = null;
       else {
@@ -180,52 +199,67 @@ public class Identifier extends Type {
           this.system = new Uri();
         this.system.setValue(value);
       }
+      return this;
     }
 
-    public String_ getKey() { 
-      return this.key;
+    public String_ getValue() { 
+      return this.value;
     }
 
-    public void setKey(String_ value) { 
-      this.key = value;
+    public Identifier setValue(String_ value) { 
+      this.value = value;
+      return this;
     }
 
-    public String getKeySimple() { 
-      return this.key == null ? null : this.key.getValue();
+    public String getValueSimple() { 
+      return this.value == null ? null : this.value.getValue();
     }
 
-    public void setKeySimple(String value) { 
+    public Identifier setValueSimple(String value) { 
       if (value == null)
-        this.key = null;
+        this.value = null;
       else {
-        if (this.key == null)
-          this.key = new String_();
-        this.key.setValue(value);
+        if (this.value == null)
+          this.value = new String_();
+        this.value.setValue(value);
       }
+      return this;
     }
 
     public Period getPeriod() { 
       return this.period;
     }
 
-    public void setPeriod(Period value) { 
+    public Identifier setPeriod(Period value) { 
       this.period = value;
+      return this;
     }
 
     public ResourceReference getAssigner() { 
       return this.assigner;
     }
 
-    public void setAssigner(ResourceReference value) { 
+    public Identifier setAssigner(ResourceReference value) { 
       this.assigner = value;
+      return this;
     }
+
+      protected void listChildren(List<Property> childrenList) {
+        super.listChildren(childrenList);
+        childrenList.add(new Property("use", "code", "usual | official | temp | secondary (If known).", 0, java.lang.Integer.MAX_VALUE, use));
+        childrenList.add(new Property("label", "string", "A label for the identifier that can be displayed to a human so they can recognize the identifier.", 0, java.lang.Integer.MAX_VALUE, label));
+        childrenList.add(new Property("system", "uri", "Establishes the namespace in which set of possible id values is unique.", 0, java.lang.Integer.MAX_VALUE, system));
+        childrenList.add(new Property("value", "string", "The portion of the identifier typically displayed to the user and which is unique within the context of the system.", 0, java.lang.Integer.MAX_VALUE, value));
+        childrenList.add(new Property("period", "Period", "Time period during which identifier was valid for use.", 0, java.lang.Integer.MAX_VALUE, period));
+        childrenList.add(new Property("assigner", "Resource(Organization)", "Organization that issued/manages the identifier.", 0, java.lang.Integer.MAX_VALUE, assigner));
+      }
 
       public Identifier copy() {
         Identifier dst = new Identifier();
         dst.use = use == null ? null : use.copy();
         dst.label = label == null ? null : label.copy();
         dst.system = system == null ? null : system.copy();
-        dst.key = key == null ? null : key.copy();
+        dst.value = value == null ? null : value.copy();
         dst.period = period == null ? null : period.copy();
         dst.assigner = assigner == null ? null : assigner.copy();
         return dst;

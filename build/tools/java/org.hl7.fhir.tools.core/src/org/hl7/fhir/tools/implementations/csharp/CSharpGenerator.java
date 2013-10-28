@@ -198,32 +198,34 @@ public class CSharpGenerator extends BaseGenerator implements PlatformGenerator 
 		String parsersSupportDir = "Parsers.Support" + sl;
 		String serializersSupportDir = "Serializers.Support" + sl;
 		String supportDir = "Support" + sl;
+	//	String supportSearchDir = supportDir + "Search" + sl;
 		
 		ZipGenerator zip = new ZipGenerator(destDir + CSHARP_FILENAME);
-		zip.addFiles(implDir+modelDir, modelDir, ".cs");
-		zip.addFiles(implDir+parsersDir, parsersDir, ".cs");
-		zip.addFiles(implDir+serializersDir, serializersDir, ".cs");
-		zip.addFiles(implDir+modelSupportDir, modelSupportDir, ".cs");
-		zip.addFiles(implDir+parsersSupportDir, parsersSupportDir, ".cs");
-		zip.addFiles(implDir+serializersSupportDir, serializersSupportDir, ".cs");
-		zip.addFiles(implDir+supportDir, supportDir, ".cs");
-		zip.addFiles(implDir+"Client"+sl, "Client"+sl, ".cs");
-		zip.addFiles(implDir+"Properties" + sl, "Properties"+sl, ".cs");
-		zip.addFiles(implDir, "", ".csproj");
-		zip.addFiles(implDir, "", ".sln");
-		zip.addFiles(implDir, "", "Local.testsettings");
-		zip.addFiles(implDir, "", "Hl7.Fhir.vsmdi");
+		zip.addFiles(implDir+modelDir, modelDir, ".cs", null);
+		zip.addFiles(implDir+parsersDir, parsersDir, ".cs", null);
+		zip.addFiles(implDir+serializersDir, serializersDir, ".cs", null);
+		zip.addFolder(implDir+modelSupportDir, modelSupportDir, false);
+		zip.addFolder(implDir+parsersSupportDir, parsersSupportDir, false);
+		zip.addFolder(implDir+serializersSupportDir, serializersSupportDir, false);
+		zip.addFolder(implDir+supportDir, supportDir, false);
+		//zip.addFiles(implDir+supportSearchDir,supportSearchDir, ".cs", null);
+		zip.addFolder(implDir+"Client"+sl, "Client"+sl, false);
+		zip.addFiles(implDir+"Properties" + sl, "Properties"+sl, ".cs", null);
+		zip.addFiles(implDir, "", ".csproj", null);
+		zip.addFiles(implDir, "", ".sln", null);
+		zip.addFiles(implDir, "", "Local.testsettings", null);
+		zip.addFiles(implDir, "", "Hl7.Fhir.vsmdi", null);
 		// Include supporting libraries
 		String librariesDir = "Libraries" + sl;
 		String winRTLibrariesDir = librariesDir + "WinRT" + sl;
-		zip.addFiles(implDir+librariesDir, librariesDir, ".dll");
-		zip.addFiles(implDir+winRTLibrariesDir, winRTLibrariesDir , ".dll");
+		zip.addFiles(implDir+librariesDir, librariesDir, ".dll", null);
+		zip.addFiles(implDir+winRTLibrariesDir, winRTLibrariesDir , ".dll", null);
 		
 		// Include test project
 		String testProjectDir = "Hl7.Fhir.Tests" + sl;
-		zip.addFiles(implDir+testProjectDir, testProjectDir, ".cs");
-		zip.addFiles(implDir+testProjectDir + "Properties" + sl, testProjectDir+"Properties"+sl, ".cs");
-		zip.addFiles(implDir+testProjectDir, testProjectDir, ".csproj");
+		zip.addFiles(implDir+testProjectDir, testProjectDir, ".cs", null);
+		zip.addFiles(implDir+testProjectDir + "Properties" + sl, testProjectDir+"Properties"+sl, ".cs", null);
+		zip.addFiles(implDir+testProjectDir, testProjectDir, ".csproj", null);
 		
 		zip.close();		
 	}
@@ -277,7 +279,7 @@ public boolean doesCompile() {
       char sl = File.separatorChar;
       ZipGenerator zip = new ZipGenerator(csharpZip);
       zip.addFromZip(tempZip);
-      zip.addFolder( assemblyDirectory + sl, "bin" + sl);
+      zip.addFolder( assemblyDirectory + sl, "bin" + sl, false);
       zip.close();
     }
     catch( Exception e)

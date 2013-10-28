@@ -2,6 +2,7 @@ package org.hl7.fhir.instance.model;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Calendar;
 
 import org.hl7.fhir.instance.model.Contact.ContactSystem;
 import org.hl7.fhir.instance.model.Narrative.NarrativeStatus;
@@ -135,9 +136,8 @@ public class Factory {
 	  return cc;
   }
 
-	public static ResourceReference makeResourceReference(String type, String url) throws Exception {
+	public static ResourceReference makeResourceReference(String url) throws Exception {
 	  ResourceReference rr = new ResourceReference();
-	  rr.setTypeSimple(type);
 	  rr.setReferenceSimple(url);
 	  return rr;
   }
@@ -153,6 +153,12 @@ public class Factory {
     n.setStatusSimple(status);
     n.setDiv(new XhtmlParser().parseFragment("<div>"+Utilities.escapeXml(html)+"</div>"));
     return n;
-  }
-  
+ }
+
+ public Instant nowInstant() {
+	 Instant instant = new Instant();
+	 instant.setValue(Calendar.getInstance());
+	 return instant;
+ }
+ 
 }

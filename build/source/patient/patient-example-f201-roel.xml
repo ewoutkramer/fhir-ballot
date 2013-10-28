@@ -6,7 +6,7 @@
         <use value="official"/>
         <label value="BSN"/>
         <system value="urn:oid:2.16.840.1.113883.2.4.6.3"/>
-        <key value="123456789"/>
+        <value value="123456789"/>
     </identifier>
     <!--Demographics-->
     <identifier>
@@ -14,7 +14,7 @@
         <use value="official"/>
         <label value="BSN"/>
         <system value="urn:oid:2.16.840.1.113883.2.4.6.3"/>
-        <key value="123456789"/>
+        <value value="123456789"/>
     </identifier>
     <name>
         <!--The name associated with the individual (fictive)-->
@@ -111,11 +111,10 @@
                 <display value="Dutch"/>
             </coding>
     </communication>
-    <provider>
-        <type value="Organization"/>
-        <reference value="organization/@f201"/>
+    <managingOrganization>
+        <reference value="Organization/f201"/>
         <display value="AUMC"/>
-    </provider>
+    </managingOrganization>
 
     <!--Indicates that the patient is not part of a multiple birth -->
     <active value="true"/>

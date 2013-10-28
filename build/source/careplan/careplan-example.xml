@@ -14,8 +14,7 @@
     <contained>
       <Condition id="p1">
         <subject>
-          <type value="Patient"></type>
-          <reference value="patient/@example"/>
+          <reference value="Patient/example"/>
           <display value="Peter James Chalmers"/>
         </subject>
         <code>
@@ -37,8 +36,7 @@
       </Practitioner>
     </contained>
     <patient>
-        <type value="Patient"></type>
-        <reference value="patient/@example"/>
+        <reference value="Patient/example"/>
         <display value="Peter James Chalmers"/>
     </patient>
     <status value="active"/>
@@ -46,7 +44,6 @@
       <end value ="2013-01-01"/>
     </period>
     <concern>
-        <type value="Condition"></type>
         <reference value="#p1"/>
         <display value="obesity"/>
     </concern>
@@ -55,8 +52,7 @@
             <text value='responsiblePerson'></text>
         </role>
         <member>
-          <type value="Patient"></type>
-          <reference value="patient/@example"/>
+          <reference value="Patient/example"/>
           <display value="Peter James Chalmers"/>
         </member>
     </participant>
@@ -65,7 +61,6 @@
             <text value='adviser'></text>
         </role>
         <member>
-            <type value="Practitioner"></type>
             <reference value="#pr1"/>
             <display value="Dorothy Dietition"/>
         </member>
@@ -74,11 +69,12 @@
       <description value="Target weight is 80 kg. Note: be nice if this could be coded"/>
     </goal>
     <activity>
+        <prohibited value="false"></prohibited>
+      <simple>
         <category value="observation"></category>
         <code>
             <text value="a code for weight measurement"></text>
         </code>
-        <prohibited value="false"></prohibited>
         <timingSchedule>
             <repeat>
                 <frequency value="1" />
@@ -87,10 +83,10 @@
             </repeat>
         </timingSchedule>
         <performer>
-          <type value="Patient"></type>
-          <reference value="patient/@example"/>
+          <reference value="Patient/example"/>
           <display value="Peter James Chalmers"/>
         </performer>
+      </simple>
     </activity>
 </CarePlan>
 

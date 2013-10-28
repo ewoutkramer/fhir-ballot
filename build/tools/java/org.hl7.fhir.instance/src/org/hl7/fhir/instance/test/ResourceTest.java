@@ -32,9 +32,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 
-import org.hl7.fhir.instance.formats.AtomComposer;
 import org.hl7.fhir.instance.formats.JsonComposer;
 import org.hl7.fhir.instance.formats.JsonParser;
+import org.hl7.fhir.instance.formats.Parser;
 import org.hl7.fhir.instance.formats.XmlComposer;
 import org.hl7.fhir.instance.formats.XmlParser;
 import org.hl7.fhir.instance.formats.ParserBase.ResourceOrFeed;
@@ -43,6 +43,7 @@ import org.hl7.fhir.instance.model.Resource;
 public class ResourceTest {
 
   private File source;
+  private boolean json;
 
   public File getSource() {
     return source;
@@ -54,9 +55,12 @@ public class ResourceTest {
   
   public void test() throws Exception {
     
-    XmlParser xml = new XmlParser();
-    xml.setAllowUnknownContent(false);
-    ResourceOrFeed rf = xml.parseGeneral(new FileInputStream(source));
+    Parser p;
+    if (isJson())
+      p = new JsonParser();
+    else
+      p = new XmlParser(false);
+    ResourceOrFeed rf = p.parseGeneral(new FileInputStream(source));
 
     FileOutputStream out = new FileOutputStream(source.getAbsoluteFile()+".out.json");
     JsonComposer json1 = new JsonComposer();
@@ -70,7 +74,7 @@ public class ResourceTest {
     
     out = new FileOutputStream(source.getAbsoluteFile()+".out.xml");
     if (rf.getFeed() != null) {
-      AtomComposer atom = new AtomComposer(); 
+    	XmlComposer atom = new XmlComposer(); 
       atom.compose(out, rf.getFeed(), true);
     } else {
       XmlComposer xml1 = new XmlComposer();
@@ -78,5 +82,13 @@ public class ResourceTest {
     }
     
     
+  }
+
+  public boolean isJson() {
+    return json;
+  }
+
+  public void setJson(boolean json) {
+    this.json = json;
   }
 }
